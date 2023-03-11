@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .App-logo {
@@ -35,4 +35,54 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.box-shadow{
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
+}
+
+.mt-1{
+  margin-top: 10px;
+}
+
+.mt-2{
+  margin-top: 20px;
+}
+
+.mt-3{
+  margin-top: 30px;
+}
+
+.mt-4{
+  margin-top: 40px;
+}
+
+.centered{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.centered-text{
+  text-align: center;
+}
+
+p{
+  margin: 0;
+}
+
+hr{
+  margin: 0;  
+}
+
+img{
+  display: block;
+}
+
+button{
+  all: unset;
+  cursor: pointer;
+}
+
+.block{
+  display: block;
 }

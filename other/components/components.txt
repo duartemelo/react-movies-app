@@ -1,0 +1,23 @@
+App
+	Menu
+		MenuSection
+      ImageContaner
+      IsolatedText
+		Divider
+		MenuSection
+			IsolatedText
+			Button
+      Button
+		MenuSection
+			Button
+	Content
+    Nav
+		  Input
+      ImageContainer
+		Content
+			ContentItem
+        ImageContainer
+        TextContainer
+          IsolatedText
+          Rating 
+ 
