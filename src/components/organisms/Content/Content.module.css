@@ -1,0 +1,9 @@
+.content-container{
+  width: calc(90% - var(--menu-width));
+  height: calc(100% - 80px);
+  /* background-color: red; */
+  position: absolute;
+  top: 50%;
+  left: calc(50% + var(--menu-width));
+  transform: translate(calc(-50% - var(--menu-width)/2), calc(-50% - 80px/2));
+}

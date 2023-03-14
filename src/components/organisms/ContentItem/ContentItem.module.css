@@ -1,0 +1,9 @@
+.content-item{
+  width: fit-content;
+  float: left;
+
+}
+
+.content-item:not(:first-child){
+  margin-left: 65px;
+}

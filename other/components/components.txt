@@ -13,8 +13,7 @@ App
 	Content
     Nav
 		  Input
-      ImageContainer
-		Content
+		ContentItems
 			ContentItem
         ImageContainer
         TextContainer

@@ -17,7 +17,6 @@ const Menu = () => {
           width="130px"
           borderRadius="5px"
           centered
-          boxShadow
           className="centered box-shadow"
         />
         <IsolatedText

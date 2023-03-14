@@ -1,0 +1,29 @@
+.search-bar{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  border: none;
+  background-color: #eee;
+  color: #232323;
+  font-size: 12px;
+  width: 315px;
+  height: 30px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.search-bar::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #9a9a9a;
+  opacity: 1; /* Firefox */
+}
+
+.search-bar:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #9a9a9a
+}
+
+.search-bar::-ms-input-placeholder { /* Microsoft Edge */
+  color: #9a9a9a
+}
+
+*:focus {
+  outline: none;
+}
