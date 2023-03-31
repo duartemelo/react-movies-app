@@ -17,7 +17,15 @@ const ContentItem = (props) => {
         zIndex="999"
       />
       <TextContainer>
-        <IsolatedText className="centered-text mt-1" fontSize="12px" fontWeight="600">Spider-Man: No Way Home</IsolatedText>
+        <IsolatedText
+          className="centered-text mt-1"
+          fontSize="12px"
+          fontWeight="600"
+          paddingLeft="15px"
+          paddingRight="15px"
+        >
+          {props.text}
+        </IsolatedText>
       </TextContainer>
     </div>
   );

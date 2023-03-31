@@ -1,13 +1,14 @@
 import './App.css';
-import Menu from './components/organisms/Menu/Menu';
 import Content from "./components/organisms/Content/Content";
 import './variables.css';
+import ContentLayout from './layouts/ContentLayout/ContentLayout';
 
 function App() {
   return (
     <div className="App">
-      <Menu/>
-      <Content/>
+      <ContentLayout>
+        <Content/>
+      </ContentLayout>
     </div>
   );
 }

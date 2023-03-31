@@ -1,9 +1,4 @@
 .content-item{
   width: fit-content;
-  float: left;
-
-}
-
-.content-item:not(:first-child){
-  margin-left: 65px;
+  flex-basis: 25%;   /* <-- Added in lieu of the width */
 }
