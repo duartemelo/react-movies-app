@@ -1,4 +1,3 @@
 .content-item{
-  width: fit-content;
   flex-basis: 25%;   /* <-- Added in lieu of the width */
 }

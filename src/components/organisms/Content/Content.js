@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ContentItem from "../ContentItem/ContentItem";
 import classes from "./Content.module.css";
-import { getTrendingFilms } from "../../../api/api";
+import { getPopularFilms, getTrendingFilms } from "../../../api/api";
 import { useLocation } from "react-router-dom";
+import SpinnerContainer from "../../molecules/SpinnerContainer/SpinnerContainer";
 
 const Content = () => {
   const [loading, setLoading] = useState(true);
@@ -11,10 +12,29 @@ const Content = () => {
 
   const location = useLocation();
 
-
   useEffect(() => {
     console.log(location.pathname);
     console.log("get film");
+    if (location.pathname === "/popular"){
+      handleGetPopularFilms();
+    } else if (location.pathname === "/trending"){
+      handleGetTrendingFilms();
+    }
+  }, [location])
+
+  const handleGetPopularFilms = () => {
+    getPopularFilms(1).then((response) => {
+      setError('');
+      console.log(response.data);
+      setFilms(response.data.results);
+    }).catch((err) => {
+      setError("There was an error gathering information.")
+    }).finally(() => {
+      setLoading(false);
+    });
+  }
+
+  const handleGetTrendingFilms = () =>{
     getTrendingFilms(1).then((response) => {
       setError('');
       console.log(response.data);
@@ -24,11 +44,11 @@ const Content = () => {
     }).finally(() => {
       setLoading(false);
     });
-  }, [location])
+  }
 
   if (loading) {
-    // TODO: make loadingPage component
-    return <h1>Loading</h1>;
+    // TODO: fix on styling and margin bug
+    return <SpinnerContainer/>;
   }
 
   if (error !== ''){
