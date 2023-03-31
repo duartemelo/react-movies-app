@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ImageContainer from "../../atoms/ImageContainer/ImageContainer";
 import MenuSection from "../../molecules/MenuSection/MenuSection";
 import classes from "./Menu.module.css";
@@ -6,8 +6,20 @@ import image from "../../../assets/img/profile-image.jpg";
 import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import Divider from "../../atoms/Divider/Divider";
 import Button from "../../atoms/Button/Button";
+import { useLocation } from "react-router-dom";
 
 const Menu = () => {
+  const location = useLocation();
+  console.log(location.pathname);
+
+  const getButtonClasses = (buttonText, classNames) => {
+    if (location.pathname.replace("/", "") === buttonText.toLowerCase()) {
+      return `${classNames} active`;
+    } else {
+      return classNames;
+    }
+  };
+
   return (
     <div className={classes["menu-container"]}>
       <MenuSection className={"mt-4"}>
@@ -41,22 +53,64 @@ const Menu = () => {
           Discover
         </IsolatedText>
         <Button
-          className="centered block mt-1 box-shadow"
-          backgroundColor="var(--white)"
-          color="var(--blue)"
+          className={getButtonClasses(
+            "Trending",
+            "centered block mt-1 box-shadow"
+          )}
+          backgroundColor={
+            getButtonClasses(
+              "Trending",
+              "centered block mt-1 box-shadow"
+            ).includes("active")
+              ? "var(--white)"
+              : "var(--blue"
+          }
+          color={
+            getButtonClasses(
+              "Trending",
+              "centered block mt-1 box-shadow"
+            ).includes("active")
+              ? "var(--blue)"
+              : "var(--white"
+          }
         >
           Trending
         </Button>
         <Button
-          className="centered block mt-1 box-shadow"
-          backgroundColor="var(--blue)"
-          color="var(--white)"
+          className={getButtonClasses(
+            "Popular",
+            "centered block mt-1 box-shadow"
+          )}
+          backgroundColor={
+            getButtonClasses(
+              "Popular",
+              "centered block mt-1 box-shadow"
+            ).includes("active")
+              ? "var(--white)"
+              : "var(--blue"
+          }
+          color={
+            getButtonClasses(
+              "Popular",
+              "centered block mt-1 box-shadow"
+            ).includes("active")
+              ? "var(--blue)"
+              : "var(--white"
+          }
         >
           Popular
         </Button>
       </MenuSection>
-      <MenuSection style={{position: "absolute", bottom: "30px", width: "100%"}}>
-        <Button className="centered block box-shadow" backgroundColor="var(--white)" color="var(--blue)">Logout</Button>
+      <MenuSection
+        style={{ position: "absolute", bottom: "30px", width: "100%" }}
+      >
+        <Button
+          className="centered block box-shadow"
+          backgroundColor="var(--white)"
+          color="var(--blue)"
+        >
+          Logout
+        </Button>
       </MenuSection>
     </div>
   );

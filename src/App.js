@@ -1,14 +1,11 @@
 import './App.css';
-import Content from "./components/organisms/Content/Content";
 import './variables.css';
-import ContentLayout from './layouts/ContentLayout/ContentLayout';
+import AppRoutes from './routes/routes';
 
 function App() {
   return (
     <div className="App">
-      <ContentLayout>
-        <Content/>
-      </ContentLayout>
+      <AppRoutes/>
     </div>
   );
 }

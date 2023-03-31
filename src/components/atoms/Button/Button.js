@@ -28,8 +28,8 @@ const Button = (props) => {
     <button
       className={`${props.className} ${classes["default-button"]}`}
       style={styleObj}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={props.className.includes('active') ? null : handleMouseEnter}
+      onMouseLeave={props.className.includes('active') ? null : handleMouseLeave}
     >
       {props.children}
     </button>
