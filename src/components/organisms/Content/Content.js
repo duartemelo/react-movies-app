@@ -6,17 +6,17 @@ import { getTrendingFilms } from "../../../api/api";
 const Content = () => {
   const [loading, setLoading] = useState(true);
   const [films, setFilms] = useState([]);
-
-
+  const [error, setError] = useState('');
 
 
   useEffect(() => {
     console.log("get film");
     getTrendingFilms(1).then((response) => {
+      setError('');
       console.log(response.data);
       setFilms(response.data.results);
     }).catch((err) => {
-      console.log(err);
+      setError("There was an error gathering information.")
     }).finally(() => {
       setLoading(false);
     })
@@ -28,7 +28,13 @@ const Content = () => {
   }, [])
 
   if (loading) {
+    // TODO: make loadingPage component
     return <h1>Loading</h1>;
+  }
+
+  if (error !== ''){
+    // TODO: make error component
+    return <h1>Error</h1>;
   }
 
   const renderedFilms = films.map((film) => 
