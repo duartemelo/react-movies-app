@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ContentItem from "../ContentItem/ContentItem";
 import classes from "./Content.module.css";
-import image from "../../../assets/img/profile-image.jpg";
-import { getFilm, getTrendingFilms } from "../../../api/api";
+import { getTrendingFilms } from "../../../api/api";
 
 const Content = () => {
   const [loading, setLoading] = useState(true);
