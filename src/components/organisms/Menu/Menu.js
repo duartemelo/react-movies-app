@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ImageContainer from "../../atoms/ImageContainer/ImageContainer";
 import MenuSection from "../../molecules/MenuSection/MenuSection";
 import classes from "./Menu.module.css";
@@ -6,15 +6,15 @@ import image from "../../../assets/img/profile-image.jpg";
 import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import Divider from "../../atoms/Divider/Divider";
 import Button from "../../atoms/Button/Button";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Menu = () => {
   const location = useLocation();
-  console.log(location.pathname);
+  const navigate = useNavigate();
 
   const getButtonClasses = (buttonText, classNames) => {
     if (location.pathname.replace("/", "") === buttonText.toLowerCase()) {
-      return `${classNames} active`;
+      return `${classNames} primary no-animate`;
     } else {
       return classNames;
     }
@@ -57,22 +57,8 @@ const Menu = () => {
             "Trending",
             "centered block mt-1 box-shadow"
           )}
-          backgroundColor={
-            getButtonClasses(
-              "Trending",
-              "centered block mt-1 box-shadow"
-            ).includes("active")
-              ? "var(--white)"
-              : "var(--blue"
-          }
-          color={
-            getButtonClasses(
-              "Trending",
-              "centered block mt-1 box-shadow"
-            ).includes("active")
-              ? "var(--blue)"
-              : "var(--white"
-          }
+          
+          onClick={() => navigate('/trending')}
         >
           Trending
         </Button>
@@ -81,22 +67,7 @@ const Menu = () => {
             "Popular",
             "centered block mt-1 box-shadow"
           )}
-          backgroundColor={
-            getButtonClasses(
-              "Popular",
-              "centered block mt-1 box-shadow"
-            ).includes("active")
-              ? "var(--white)"
-              : "var(--blue"
-          }
-          color={
-            getButtonClasses(
-              "Popular",
-              "centered block mt-1 box-shadow"
-            ).includes("active")
-              ? "var(--blue)"
-              : "var(--white"
-          }
+          onClick={() => navigate('/popular')}
         >
           Popular
         </Button>
@@ -105,7 +76,7 @@ const Menu = () => {
         style={{ position: "absolute", bottom: "30px", width: "100%" }}
       >
         <Button
-          className="centered block box-shadow"
+          className="centered block box-shadow primary"
           backgroundColor="var(--white)"
           color="var(--blue)"
         >

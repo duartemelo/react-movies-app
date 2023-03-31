@@ -9,3 +9,18 @@
   color: var(--white);
   transition-duration: 0.3s;
 }
+
+.default-button:not(.no-animate):hover{
+  color: var(--blue);
+  background-color: var(--white);
+}
+
+.primary{
+  background-color: var(--white);
+  color: var(--blue);
+}
+
+.primary:not(.no-animate):hover{
+  color: var(--white);
+  background-color: var(--blue);
+}

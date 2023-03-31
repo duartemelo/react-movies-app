@@ -4,8 +4,6 @@ import classes from "./Button.module.css";
 const Button = (props) => {
 
   const preStyleObj = {
-    backgroundColor: props.backgroundColor,
-    color: props.color,
     width: props.width,
     height: props.height,
     fontWeight: props.fontWeight,
@@ -14,22 +12,22 @@ const Button = (props) => {
 
   const [styleObj, setStyleObj] = useState(preStyleObj);
 
-  const handleMouseEnter = () => {
-    setStyleObj((prevState) => {
-      return {...prevState, backgroundColor: props.color, color: props.backgroundColor}
-    })
-  };
-
-  const handleMouseLeave = () => {
-    setStyleObj(preStyleObj);
-  };
+  const getClasses = () => {
+    let classNames = `${props.className} ${classes["default-button"]}`;
+    if (props.className.includes('primary')){
+      classNames += ` ${classes.primary}`
+    }
+    if (props.className.includes('no-animate')){
+      classNames += ` ${classes['no-animate']}`
+    }
+    return classNames;
+  }
 
   return (
     <button
-      className={`${props.className} ${classes["default-button"]}`}
+      className={getClasses()}
       style={styleObj}
-      onMouseEnter={props.className.includes('active') ? null : handleMouseEnter}
-      onMouseLeave={props.className.includes('active') ? null : handleMouseLeave}
+      onClick={props.onClick}
     >
       {props.children}
     </button>

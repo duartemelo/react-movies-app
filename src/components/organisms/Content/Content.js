@@ -2,14 +2,18 @@ import React, { useEffect, useState } from "react";
 import ContentItem from "../ContentItem/ContentItem";
 import classes from "./Content.module.css";
 import { getTrendingFilms } from "../../../api/api";
+import { useLocation } from "react-router-dom";
 
 const Content = () => {
   const [loading, setLoading] = useState(true);
   const [films, setFilms] = useState([]);
   const [error, setError] = useState('');
 
+  const location = useLocation();
+
 
   useEffect(() => {
+    console.log(location.pathname);
     console.log("get film");
     getTrendingFilms(1).then((response) => {
       setError('');
@@ -19,13 +23,8 @@ const Content = () => {
       setError("There was an error gathering information.")
     }).finally(() => {
       setLoading(false);
-    })
-
-
-    // getFilm().then((response) => {
-    //   console.log(response.data);
-    // })
-  }, [])
+    });
+  }, [location])
 
   if (loading) {
     // TODO: make loadingPage component
