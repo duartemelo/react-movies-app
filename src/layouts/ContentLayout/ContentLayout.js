@@ -9,9 +9,6 @@ const ContentLayout = (props) => {
     <React.Fragment>
       <Menu />
       <div className={classes["right-container"]}>
-        <Nav>
-          <Input placeholder="Search for a movie..." />
-        </Nav>
         {props.children}
       </div>
     </React.Fragment>
