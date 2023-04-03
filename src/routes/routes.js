@@ -17,6 +17,7 @@ const AppRoutes = () => {
         >
           <Route path="/trending" element={<Content />}/>
           <Route path="/popular" element={<Content />}/>
+          <Route path="/top-rated" element={<Content />}/>
         </Route>
       </Routes>
     </BrowserRouter>

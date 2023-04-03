@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ImageContainer from "../../atoms/ImageContainer/ImageContainer";
 import MenuSection from "../../molecules/MenuSection/MenuSection";
 import classes from "./Menu.module.css";
@@ -7,10 +7,50 @@ import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import Divider from "../../atoms/Divider/Divider";
 import Button from "../../atoms/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
+import { getGenres } from "../../../api/api";
 
 const Menu = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const [genreButtons, setGenreButtons] = useState([]);
+
+  const discoverButtons = [
+    {
+      section: "popular",
+      link: "/popular",
+      text: "Popular",
+    },
+    {
+      section: "trending",
+      link: "/trending",
+      text: "Trending",
+    },
+    {
+      section: "top-rated",
+      link: "/top-rated",
+      text: "Top Rated",
+    },
+  ];
+
+  useEffect(() => {
+    getGenres().then((response) => {
+      setGenreButtons(response.data.genres.map(genre => ({
+        section: genre.name.toLowerCase(),
+        link: `/genre-${genre.name.toLowerCase()}`,
+        text: genre.name
+      })))
+      console.log(genreButtons);
+    });
+  }, []);
+
+  // const genreButtons = [
+  //   //TODO: Get Genres from API, here and in routes.js
+  //   {
+  //     section: "Action",
+  //     link: "/genre-action",
+  //     text: "Action",
+  //   },
+  // ];
 
   const getButtonClasses = (buttonText, classNames) => {
     if (location.pathname.replace("/", "") === buttonText.toLowerCase()) {
@@ -52,31 +92,47 @@ const Menu = () => {
         >
           Discover
         </IsolatedText>
-        <Button
-          className={getButtonClasses(
-            "Trending",
-            "centered block mt-1 box-shadow"
-          )}
-          
-          onClick={() => navigate('/trending')}
+        {discoverButtons.map((button) => (
+          <Button
+            key={button.section}
+            className={getButtonClasses(
+              button.section,
+              "centered block mt-1 box-shadow"
+            )}
+            onClick={() => navigate(button.link)}
+          >
+            {button.text}
+          </Button>
+        ))}
+      </MenuSection>
+      <MenuSection>
+        <IsolatedText
+          className="mt-3 centered"
+          width="130px"
+          display="block"
+          color="#fff"
+          fontSize="12px"
         >
-          Trending
-        </Button>
-        <Button
-          className={getButtonClasses(
-            "Popular",
-            "centered block mt-1 box-shadow"
-          )}
-          onClick={() => navigate('/popular')}
-        >
-          Popular
-        </Button>
+          Genres
+        </IsolatedText>
+        {genreButtons.map((button) => (
+          <Button
+            key={button.section}
+            className={getButtonClasses(
+              button.section,
+              "centered block mt-1 box-shadow"
+            )}
+            onClick={() => navigate(button.link)}
+          >
+            {button.text}
+          </Button>
+        ))}
       </MenuSection>
       <MenuSection
-        style={{ position: "absolute", bottom: "30px", width: "100%" }}
+        
       >
         <Button
-          className="centered block box-shadow primary"
+          className="centered block box-shadow primary mt-3 mb-2"
           backgroundColor="var(--white)"
           color="var(--blue)"
         >

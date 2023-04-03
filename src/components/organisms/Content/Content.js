@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ContentItem from "../ContentItem/ContentItem";
 import classes from "./Content.module.css";
-import { getPopularFilms, getTrendingFilms } from "../../../api/api";
+import { getPopularFilms, getTopRatedFilms, getTrendingFilms } from "../../../api/api";
 import { useLocation } from "react-router-dom";
 import SpinnerContainer from "../../molecules/SpinnerContainer/SpinnerContainer";
 import Nav from "../../molecules/Nav/Nav";
@@ -19,6 +19,8 @@ const Content = () => {
       handleGetPopularFilms();
     } else if (location.pathname === "/trending") {
       handleGetTrendingFilms();
+    } else if (location.pathname ==="/top-rated"){
+      handleGetTopRatedFilms();
     }
   }, [location]);
 
@@ -46,13 +48,26 @@ const Content = () => {
         console.log(response.data);
         setFilms(response.data.results);
       })
-      .catch((err) => {
+      .catch(() => {
         setError("There was an error gathering information.");
       })
       .finally(() => {
         setLoading(false);
       });
   };
+
+  const handleGetTopRatedFilms = () => {
+    setLoading(true);
+    getTopRatedFilms(1).then((response) => {
+      setError("");
+      console.log(response.data);
+      setFilms(response.data.results);
+    }).catch(() => {
+      setError("There was an error gathering information.")
+    }).finally(() => {
+      setLoading(false);
+    })
+  }
 
   if (loading) {
     return <SpinnerContainer />;
