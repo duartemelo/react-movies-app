@@ -55,7 +55,6 @@ const Content = () => {
   };
 
   if (loading) {
-    // TODO: fix on styling and margin bug
     return <SpinnerContainer />;
   }
 
@@ -69,6 +68,7 @@ const Content = () => {
       key={film.id}
       title={film.title}
       rating={film.vote_average}
+      vote_count={film.vote_count}
       imageSource={"https://image.tmdb.org/t/p/w342" + film.poster_path}
     />
   ));

@@ -8,8 +8,8 @@ const myStyles = {
   itemShapes: RoundedStar,
   activeFillColor: '#ebc500',
   itemStrokeWidth: 2,
+  activeStrokeColor: '#ebc500',
   inactiveStrokeColor: '#ebc500'
-
 }
 
 const RatingText = (props) => {
