@@ -35,11 +35,11 @@ const Menu = () => {
   useEffect(() => {
     getGenres().then((response) => {
       setGenreButtons(response.data.genres.map(genre => ({
+        id: genre.id,
         section: genre.name.toLowerCase(),
         link: `/genre-${genre.name.toLowerCase()}`,
         text: genre.name
       })))
-      console.log(genreButtons);
     });
   }, []);
 

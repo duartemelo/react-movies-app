@@ -8,6 +8,9 @@ import Nav from "../../molecules/Nav/Nav";
 import Input from "../../atoms/Input/Input";
 
 const Content = () => {
+  // TODO: REFACTOR: handle lots of genres + discover section
+  // make something like a container 
+
   const [loading, setLoading] = useState(true);
   const [films, setFilms] = useState([]);
   const [error, setError] = useState("");
@@ -29,7 +32,6 @@ const Content = () => {
     getPopularFilms(1)
       .then((response) => {
         setError("");
-        console.log(response.data);
         setFilms(response.data.results);
       })
       .catch((err) => {
@@ -45,7 +47,6 @@ const Content = () => {
     getTrendingFilms(1)
       .then((response) => {
         setError("");
-        console.log(response.data);
         setFilms(response.data.results);
       })
       .catch(() => {
@@ -60,7 +61,6 @@ const Content = () => {
     setLoading(true);
     getTopRatedFilms(1).then((response) => {
       setError("");
-      console.log(response.data);
       setFilms(response.data.results);
     }).catch(() => {
       setError("There was an error gathering information.")

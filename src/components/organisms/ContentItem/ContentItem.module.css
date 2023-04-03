@@ -1,4 +1,5 @@
 .content-item{
   flex-basis: 25%;   /* <-- Added in lieu of the width */
   position: relative;
+  cursor: pointer;
 }
