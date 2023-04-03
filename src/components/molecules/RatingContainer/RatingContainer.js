@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import RatingText from "../../atoms/RatingText/RatingText";
 import classes from "./RatingContainer.module.css";
 
-const RatingContainer = (props) => {
-  const [toolTipStatus, setToolTipStatus] = useState(true);
+const RatingContainer = React.forwardRef((props, ref) => {
   return (
-    <div
+    <div ref={ref}
       className={`${props.className} ${classes.container}`}
       onMouseEnter={props.onMouseEnter}
       onMouseLeave={props.onMouseLeave}
@@ -13,6 +12,6 @@ const RatingContainer = (props) => {
       <RatingText rating={props.rating} />
     </div>
   );
-};
+});
 
 export default RatingContainer;

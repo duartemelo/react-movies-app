@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ImageContainer from "../../atoms/ImageContainer/ImageContainer";
 import TextContainer from "../../molecules/TextContainer/TextContainer";
 import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import classes from "./ContentItem.module.css";
-import RatingText from "../../atoms/RatingText/RatingText";
 import RatingContainer from "../../molecules/RatingContainer/RatingContainer";
 import Tooltip from "../../atoms/Tooltip/Tooltip";
 
 const ContentItem = (props) => {
+  const myRef = useRef();
   const [toolTipStatus, setToolTipStatus] = useState(false);
+  const [ratingContainerY, setRatingContainerY] = useState(0);
+
+  const getPosition = () => {
+    const y = myRef.current.offsetTop;
+    setRatingContainerY(y);
+  };
+
+
+  useEffect(() => {
+    getPosition();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", getPosition);
+  }, []);
 
   const ratingDivide = () => {
     let rating = props.rating;
@@ -45,7 +60,7 @@ const ContentItem = (props) => {
         >
           {props.title}
         </IsolatedText>
-        <RatingContainer
+        <RatingContainer ref={myRef}
           rating={ratingDivide()}
           className="mt-05"
           onMouseEnter={handleRatingContainerMouseEnter}
@@ -59,6 +74,7 @@ const ContentItem = (props) => {
           opacity: !toolTipStatus ? "0" : "1",
           transition: "all .2s",
           visibility: !toolTipStatus ? "hidden" : "visible",
+          top: ratingContainerY - 32
         }}
       />
     </div>
