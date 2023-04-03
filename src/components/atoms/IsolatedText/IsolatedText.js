@@ -8,7 +8,8 @@ const IsolatedText = (props) => {
     width: props.width,
     display: props.display,
     paddingLeft: props.paddingLeft,
-    paddingRight: props.paddingRight
+    paddingRight: props.paddingRight,
+    letterSpacing: props.letterSpacing
   };
 
   return(

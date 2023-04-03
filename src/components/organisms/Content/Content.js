@@ -15,8 +15,6 @@ const Content = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log(location.pathname);
-    console.log("get film");
     if (location.pathname === "/popular") {
       handleGetPopularFilms();
     } else if (location.pathname === "/trending") {
@@ -25,6 +23,7 @@ const Content = () => {
   }, [location]);
 
   const handleGetPopularFilms = () => {
+    setLoading(true);
     getPopularFilms(1)
       .then((response) => {
         setError("");
@@ -40,6 +39,7 @@ const Content = () => {
   };
 
   const handleGetTrendingFilms = () => {
+    setLoading(true);
     getTrendingFilms(1)
       .then((response) => {
         setError("");
@@ -67,7 +67,8 @@ const Content = () => {
   const renderedFilms = films.map((film) => (
     <ContentItem
       key={film.id}
-      text={film.original_title}
+      title={film.title}
+      rating={film.vote_average}
       imageSource={"https://image.tmdb.org/t/p/w342" + film.poster_path}
     />
   ));

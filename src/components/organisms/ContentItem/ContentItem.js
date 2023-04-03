@@ -3,8 +3,15 @@ import ImageContainer from "../../atoms/ImageContainer/ImageContainer";
 import TextContainer from "../../molecules/TextContainer/TextContainer";
 import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import classes from "./ContentItem.module.css";
+import Rating from "../../atoms/Rating/RatingText";
 
 const ContentItem = (props) => {
+  const ratingDivide = () => {
+    let rating = props.rating;
+    rating = Math.round(rating)/2;
+    return rating;
+  }
+
   return (
     <div className={`${classes["content-item"]} mt-3`}>
       <ImageContainer
@@ -24,8 +31,12 @@ const ContentItem = (props) => {
           paddingLeft="15px"
           paddingRight="15px"
         >
-          {props.text}
+          {props.title}
         </IsolatedText>
+        {/*TODO: Make a rating container and deal with hover there, and pass styles to there */}
+        <div style={{color: "#EBC500", marginLeft: 'auto', marginRight: 'auto', width: 'fit-content'}} className="mt-05"> 
+          <Rating rating={ratingDivide()}/>
+        </div>
       </TextContainer>
     </div>
   );
