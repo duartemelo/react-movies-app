@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ContentItem from "../ContentItem/ContentItem";
 import classes from "./Content.module.css";
-import { getPopularFilms, getTopRatedFilms, getTrendingFilms } from "../../../api/api";
-import { useLocation } from "react-router-dom";
+import { getFilms } from "../../../api/api";
+import {useNavigate } from "react-router-dom";
 import SpinnerContainer from "../../molecules/SpinnerContainer/SpinnerContainer";
 import Nav from "../../molecules/Nav/Nav";
 import Input from "../../atoms/Input/Input";
 
-const Content = () => {
+const Content = (props) => {
   // TODO: REFACTOR: handle lots of genres + discover section
   // make something like a container 
 
@@ -15,21 +15,15 @@ const Content = () => {
   const [films, setFilms] = useState([]);
   const [error, setError] = useState("");
 
-  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === "/popular") {
-      handleGetPopularFilms();
-    } else if (location.pathname === "/trending") {
-      handleGetTrendingFilms();
-    } else if (location.pathname ==="/top-rated"){
-      handleGetTopRatedFilms();
-    }
-  }, [location]);
+    handleGetFilms(props.url);
+  }, [navigate]);
 
-  const handleGetPopularFilms = () => {
+  const handleGetFilms = (url, page) => {
     setLoading(true);
-    getPopularFilms(1)
+    getFilms(url, page)
       .then((response) => {
         setError("");
         setFilms(response.data.results);
@@ -40,33 +34,6 @@ const Content = () => {
       .finally(() => {
         setLoading(false);
       });
-  };
-
-  const handleGetTrendingFilms = () => {
-    setLoading(true);
-    getTrendingFilms(1)
-      .then((response) => {
-        setError("");
-        setFilms(response.data.results);
-      })
-      .catch(() => {
-        setError("There was an error gathering information.");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const handleGetTopRatedFilms = () => {
-    setLoading(true);
-    getTopRatedFilms(1).then((response) => {
-      setError("");
-      setFilms(response.data.results);
-    }).catch(() => {
-      setError("There was an error gathering information.")
-    }).finally(() => {
-      setLoading(false);
-    })
   }
 
   if (loading) {

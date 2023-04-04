@@ -43,15 +43,6 @@ const Menu = () => {
     });
   }, []);
 
-  // const genreButtons = [
-  //   //TODO: Get Genres from API, here and in routes.js
-  //   {
-  //     section: "Action",
-  //     link: "/genre-action",
-  //     text: "Action",
-  //   },
-  // ];
-
   const getButtonClasses = (buttonText, classNames) => {
     if (location.pathname.replace("/", "") === buttonText.toLowerCase()) {
       return `${classNames} primary no-animate`;

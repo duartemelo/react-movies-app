@@ -1,10 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import ContentLayout from "../layouts/ContentLayout/ContentLayout";
 import Content from "../components/organisms/Content/Content";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import { getGenres } from "../api/api";
 
 const AppRoutes = () => {
+  const [genreButtons, setGenreButtons] = useState([]);
+
+  const discoverButtons = [
+    {
+      section: "popular",
+      link: "/popular",
+      text: "Popular",
+      apiUrl: "/movie/popular"
+    },
+    {
+      section: "trending",
+      link: "/trending",
+      text: "Trending",
+      apiUrl: "/trending/movie/week"
+    },
+    {
+      section: "top-rated",
+      link: "/top-rated",
+      text: "Top Rated",
+      apiUrl: "/movie/top_rated"
+    },
+  ];
+
+  useEffect(() => {
+    // TODO: handle apiUrl 
+    getGenres().then((response) => {
+      setGenreButtons(response.data.genres.map(genre => ({
+        id: genre.id,
+        section: genre.name.toLowerCase(),
+        link: `/genre-${genre.name.toLowerCase()}`,
+        text: genre.name
+      })))
+    });
+  }, []);
+
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -15,9 +53,9 @@ const AppRoutes = () => {
             </ContentLayout>
           }
         >
-          <Route path="/trending" element={<Content />}/>
-          <Route path="/popular" element={<Content />}/>
-          <Route path="/top-rated" element={<Content />}/>
+          {discoverButtons.map((button) => (
+            <Route path={button.link} element={<Content url={button.apiUrl}/>} />
+          ))}
         </Route>
       </Routes>
     </BrowserRouter>
