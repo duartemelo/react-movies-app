@@ -43,8 +43,8 @@ const Menu = () => {
     });
   }, []);
 
-  const getButtonClasses = (buttonText, classNames) => {
-    if (location.pathname.replace("/", "") === buttonText.toLowerCase()) {
+  const getButtonClasses = (buttonLink, classNames) => {
+    if (location.pathname === buttonLink.toLowerCase()) {
       return `${classNames} primary no-animate`;
     } else {
       return classNames;
@@ -87,7 +87,7 @@ const Menu = () => {
           <Button
             key={button.section}
             className={getButtonClasses(
-              button.section,
+              button.link,
               "centered block mt-1 box-shadow"
             )}
             onClick={() => navigate(button.link)}
@@ -110,7 +110,7 @@ const Menu = () => {
           <Button
             key={button.section}
             className={getButtonClasses(
-              button.section,
+              button.link,
               "centered block mt-1 box-shadow"
             )}
             onClick={() => navigate(button.link)}

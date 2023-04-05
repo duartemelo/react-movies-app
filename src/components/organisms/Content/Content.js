@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import ContentItem from "../ContentItem/ContentItem";
 import classes from "./Content.module.css";
-import { getFilms } from "../../../api/api";
+import { getFilms, getFilmsByGenre } from "../../../api/api";
 import {useNavigate } from "react-router-dom";
 import SpinnerContainer from "../../molecules/SpinnerContainer/SpinnerContainer";
 import Nav from "../../molecules/Nav/Nav";
 import Input from "../../atoms/Input/Input";
 
 const Content = (props) => {
-  // TODO: REFACTOR: handle lots of genres + discover section
-  // make something like a container 
-
   const [loading, setLoading] = useState(true);
   const [films, setFilms] = useState([]);
   const [error, setError] = useState("");
@@ -18,12 +15,32 @@ const Content = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    handleGetFilms(props.url);
-  }, [navigate]);
+    if (props.url){
+      handleGetFilms(props.url);
+    } else if (props.genreId){
+      handleGetFilmsByGenre(props.genreId);
+    }
+    
+  }, [props, navigate]);
 
   const handleGetFilms = (url, page) => {
     setLoading(true);
     getFilms(url, page)
+      .then((response) => {
+        setError("");
+        setFilms(response.data.results);
+      })
+      .catch((err) => {
+        setError("There was an error gathering information.");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }
+
+  const handleGetFilmsByGenre = (genreId, page) => {
+    setLoading(true);
+    getFilmsByGenre(genreId, page)
       .then((response) => {
         setError("");
         setFilms(response.data.results);
