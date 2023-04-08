@@ -17,34 +17,38 @@ const Menu = () => {
   const discoverButtons = [
     {
       section: "popular",
-      link: "/popular",
+      link: "/popular/1",
       text: "Popular",
     },
     {
       section: "trending",
-      link: "/trending",
+      link: "/trending/1",
       text: "Trending",
     },
     {
       section: "top-rated",
-      link: "/top-rated",
+      link: "/top-rated/1",
       text: "Top Rated",
     },
   ];
 
   useEffect(() => {
     getGenres().then((response) => {
-      setGenreButtons(response.data.genres.map(genre => ({
-        id: genre.id,
-        section: genre.name.toLowerCase(),
-        link: `/genre-${genre.name.toLowerCase()}`,
-        text: genre.name
-      })))
+      setGenreButtons(
+        response.data.genres.map((genre) => ({
+          id: genre.id,
+          section: genre.name.toLowerCase(),
+          link: `/genre-${genre.name.toLowerCase()}/1`,
+          text: genre.name,
+        }))
+      );
     });
   }, []);
 
   const getButtonClasses = (buttonLink, classNames) => {
-    if (location.pathname === buttonLink.toLowerCase()) {
+    if (
+      location.pathname.split("/", 2).join("/") === buttonLink.toLowerCase().split("/", 2).join("/")
+    ) {
       return `${classNames} primary no-animate`;
     } else {
       return classNames;
@@ -119,9 +123,7 @@ const Menu = () => {
           </Button>
         ))}
       </MenuSection>
-      <MenuSection
-        
-      >
+      <MenuSection>
         <Button
           className="centered block box-shadow primary mt-3 mb-2"
           backgroundColor="var(--white)"

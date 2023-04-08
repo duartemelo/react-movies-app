@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ContentItem from "../ContentItem/ContentItem";
 import classes from "./Content.module.css";
 import { getFilms, getFilmsByGenre } from "../../../api/api";
-import {useNavigate } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import SpinnerContainer from "../../molecules/SpinnerContainer/SpinnerContainer";
 import Nav from "../../molecules/Nav/Nav";
 import Input from "../../atoms/Input/Input";
@@ -11,14 +11,15 @@ const Content = (props) => {
   const [loading, setLoading] = useState(true);
   const [films, setFilms] = useState([]);
   const [error, setError] = useState("");
+  let {page} = useParams();
 
   const navigate = useNavigate();
 
   useEffect(() => {
     if (props.url){
-      handleGetFilms(props.url);
+      handleGetFilms(props.url, page);
     } else if (props.genreId){
-      handleGetFilmsByGenre(props.genreId);
+      handleGetFilmsByGenre(props.genreId, page);
     }
     
   }, [props, navigate]);
