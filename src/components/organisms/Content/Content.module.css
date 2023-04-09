@@ -16,6 +16,7 @@
   margin-bottom: 20px;
   font-size: 12px;
   gap: 5px;
+  padding: 0px;
 }
 
 .pagination .page-num {
@@ -33,4 +34,10 @@
 .pagination .active{
   background-color: var(--blue);
   color: var(--white);
+}
+
+@media only screen and (min-width: 1262px) {
+  .pagination{
+    padding-right: 50px;
+  } 
 }
