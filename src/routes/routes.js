@@ -53,10 +53,10 @@ const AppRoutes = () => {
           }
         >
           {discoverButtons.map((button) => (
-            <Route key={button.link} path={`${button.link}/:page`} element={<Content url={button.apiUrl}/>} />
+            <Route key={button.link} path={`${button.link}/:page`} element={<Content apiUrl={button.apiUrl} pageUrl={button.link}/>} />
           ))}
           {genreButtons.map((button) => (
-            <Route key={button.link} path={`${button.link}/:page`} element={<Content genreId={button.id}/>} />
+            <Route key={button.link} path={`${button.link}/:page`} element={<Content genreId={button.id} pageUrl={button.link} />} />
           ))}
         </Route>
       </Routes>

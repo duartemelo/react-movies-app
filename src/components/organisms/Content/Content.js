@@ -6,6 +6,7 @@ import {useNavigate, useParams } from "react-router-dom";
 import SpinnerContainer from "../../molecules/SpinnerContainer/SpinnerContainer";
 import Nav from "../../molecules/Nav/Nav";
 import Input from "../../atoms/Input/Input";
+import ReactPaginate from "react-paginate";
 
 const Content = (props) => {
   const [loading, setLoading] = useState(true);
@@ -16,8 +17,8 @@ const Content = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (props.url){
-      handleGetFilms(props.url, page);
+    if (props.apiUrl){
+      handleGetFilms(props.apiUrl, page);
     } else if (props.genreId){
       handleGetFilmsByGenre(props.genreId, page);
     }
@@ -54,6 +55,10 @@ const Content = (props) => {
       });
   }
 
+  const handlePageClick = (event) => {
+    navigate(`${props.pageUrl}/${event.selected+1}`);
+  }
+
   if (loading) {
     return <SpinnerContainer />;
   }
@@ -64,6 +69,7 @@ const Content = (props) => {
   }
 
   const renderedFilms = films.map((film) => (
+    /*     TODO: fix films that dont have image, check genre_fantasy/499 -> poster_path: null   */
     <ContentItem
       key={film.id}
       title={film.title}
@@ -81,6 +87,21 @@ const Content = (props) => {
       <div className={`${classes["content-container"]} mt-4`}>
         {renderedFilms}
       </div>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="next >"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={500}
+        previousLabel="< previous"
+        renderOnZeroPageCount={null}
+        containerClassName={classes.pagination}
+        pageLinkClassName={classes['page-num']}
+        previousLinkClassName={classes['page-num']}
+        nextLinkClassName={classes['page-num']}
+        activeLinkClassName={classes.active}
+        forcePage={page-1}
+      />
     </React.Fragment>
   );
 };
