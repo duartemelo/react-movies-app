@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./Button.module.css";
 
 const Button = (props) => {
@@ -9,8 +9,6 @@ const Button = (props) => {
     fontWeight: props.fontWeight,
     fontSize: props.fontSize,
   }
-
-  const [styleObj, setStyleObj] = useState(preStyleObj);
 
   const getClasses = () => {
     let classNames = `${props.className} ${classes["default-button"]}`;
@@ -26,7 +24,7 @@ const Button = (props) => {
   return (
     <button
       className={getClasses()}
-      style={styleObj}
+      style={preStyleObj}
       onClick={props.onClick}
     >
       {props.children}

@@ -1,5 +1,4 @@
 import React from "react";
-import {Star, StarFill} from "react-bootstrap-icons";
 
 import { Rating, RoundedStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';

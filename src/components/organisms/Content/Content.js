@@ -16,14 +16,17 @@ const Content = (props) => {
 
   const navigate = useNavigate();
 
+  const {apiUrl} = props;
+  const {genreId} = props;
+
   useEffect(() => {
-    if (props.apiUrl){
-      handleGetFilms(props.apiUrl, page);
-    } else if (props.genreId){
-      handleGetFilmsByGenre(props.genreId, page);
+    if (apiUrl){
+      handleGetFilms(apiUrl, page);
+    } else if (genreId){
+      handleGetFilmsByGenre(genreId, page);
     }
     
-  }, [props, navigate]);
+  }, [apiUrl, genreId, page]);
 
   const handleGetFilms = (url, page) => {
     setLoading(true);
