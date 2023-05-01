@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import ContentItem from "../ContentItem/ContentItem";
 import classes from "./Content.module.css";
 import { getFilms, getFilmsByGenre } from "../../../api/api";
-import {useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SpinnerContainer from "../../molecules/SpinnerContainer/SpinnerContainer";
 import Nav from "../../molecules/Nav/Nav";
 import Input from "../../atoms/Input/Input";
@@ -12,20 +12,19 @@ const Content = (props) => {
   const [loading, setLoading] = useState(true);
   const [films, setFilms] = useState([]);
   const [error, setError] = useState("");
-  let {page} = useParams();
+  let { page } = useParams();
 
   const navigate = useNavigate();
 
-  const {apiUrl} = props;
-  const {genreId} = props;
+  const { apiUrl } = props;
+  const { genreId } = props;
 
   useEffect(() => {
-    if (apiUrl){
+    if (apiUrl) {
       handleGetFilms(apiUrl, page);
-    } else if (genreId){
+    } else if (genreId) {
       handleGetFilmsByGenre(genreId, page);
     }
-    
   }, [apiUrl, genreId, page]);
 
   const handleGetFilms = (url, page) => {
@@ -41,7 +40,7 @@ const Content = (props) => {
       .finally(() => {
         setLoading(false);
       });
-  }
+  };
 
   const handleGetFilmsByGenre = (genreId, page) => {
     setLoading(true);
@@ -56,11 +55,11 @@ const Content = (props) => {
       .finally(() => {
         setLoading(false);
       });
-  }
+  };
 
   const handlePageClick = (event) => {
-    navigate(`${props.pageUrl}/${event.selected+1}`);
-  }
+    navigate(`${props.pageUrl}/${event.selected + 1}`);
+  };
 
   if (loading) {
     return <SpinnerContainer />;
@@ -72,7 +71,6 @@ const Content = (props) => {
   }
 
   const renderedFilms = films.map((film) => (
-    /*     TODO: fix films that dont have image, check genre_fantasy/499 -> poster_path: null   */
     <ContentItem
       key={film.id}
       title={film.title}
@@ -92,18 +90,18 @@ const Content = (props) => {
       </div>
       <ReactPaginate
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel=">>"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={500}
-        previousLabel="< previous"
+        previousLabel="<<"
         renderOnZeroPageCount={null}
         containerClassName={classes.pagination}
-        pageLinkClassName={classes['page-num']}
-        previousLinkClassName={classes['page-num']}
-        nextLinkClassName={classes['page-num']}
+        pageLinkClassName={classes["page-num"]}
+        previousLinkClassName={classes["page-num"]}
+        nextLinkClassName={classes["page-num"]}
         activeLinkClassName={classes.active}
-        forcePage={page-1}
+        forcePage={page - 1}
       />
     </React.Fragment>
   );

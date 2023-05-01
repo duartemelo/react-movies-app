@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import ImageContainer from "../../atoms/ImageContainer/ImageContainer";
+import NoImage from "../../atoms/NoImage/NoImage";
+import Image from "../../atoms/Image/Image";
 import TextContainer from "../../molecules/TextContainer/TextContainer";
 import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import classes from "./ContentItem.module.css";
@@ -15,7 +16,6 @@ const ContentItem = (props) => {
     const y = myRef.current.offsetTop;
     setRatingContainerY(y);
   };
-
 
   useEffect(() => {
     getPosition();
@@ -41,15 +41,27 @@ const ContentItem = (props) => {
 
   return (
     <div className={`${classes["content-item"]} mt-3`}>
-      <ImageContainer
-        imageSrc={props.imageSource}
-        alt="Content Image"
-        borderRadius="5px"
-        className="box-shadow pos-relative"
-        width="200px"
-        height="265px"
-        zIndex="999"
-      />
+      {!props.imageSource.includes("null") ? (
+        <Image
+          imageSrc={props.imageSource}
+          alt="Content Image"
+          borderRadius="5px"
+          className="box-shadow pos-relative"
+          width="200px"
+          height="265px"
+          zIndex="999"
+        />
+      ) : (
+        <NoImage
+          className="box-shadow pos-relative"
+          width="200px"
+          height="265px"
+          borderRadius="5px"
+          zIndex="999"
+          backgroundColor="#1F287E"
+        />
+      )}
+
       <TextContainer>
         <IsolatedText
           className="centered-text mt-1"
@@ -60,7 +72,8 @@ const ContentItem = (props) => {
         >
           {props.title}
         </IsolatedText>
-        <RatingContainer ref={myRef}
+        <RatingContainer
+          ref={myRef}
           rating={ratingDivide()}
           className="mt-05"
           onMouseEnter={handleRatingContainerMouseEnter}
@@ -74,7 +87,7 @@ const ContentItem = (props) => {
           opacity: !toolTipStatus ? "0" : "1",
           transition: "all .2s",
           visibility: !toolTipStatus ? "hidden" : "visible",
-          top: ratingContainerY - 32
+          top: ratingContainerY - 32,
         }}
       />
     </div>

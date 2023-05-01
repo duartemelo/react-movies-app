@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ImageContainer from "../../atoms/ImageContainer/ImageContainer";
+import Image from "../../atoms/Image/Image";
 import MenuSection from "../../molecules/MenuSection/MenuSection";
 import classes from "./Menu.module.css";
 import image from "../../../assets/img/profile-image.jpg";
@@ -47,7 +47,8 @@ const Menu = () => {
 
   const getButtonClasses = (buttonLink, classNames) => {
     if (
-      location.pathname.split("/", 2).join("/") === buttonLink.toLowerCase().split("/", 2).join("/")
+      location.pathname.split("/", 2).join("/") ===
+      buttonLink.toLowerCase().split("/", 2).join("/")
     ) {
       return `${classNames} primary no-animate`;
     } else {
@@ -58,7 +59,7 @@ const Menu = () => {
   return (
     <div className={classes["menu-container"]}>
       <MenuSection className={"mt-4"}>
-        <ImageContainer
+        <Image
           imageSrc={image}
           alt="Profile image"
           width="130px"

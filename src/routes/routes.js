@@ -55,8 +55,8 @@ const AppRoutes = () => {
           {discoverButtons.map((button) => (
             <Route key={button.link} path={`${button.link}/:page`} element={<Content apiUrl={button.apiUrl} pageUrl={button.link}/>} />
           ))}
-          {genreButtons.map((button) => (
-            <Route key={button.link} path={`${button.link}/:page`} element={<Content genreId={button.id} pageUrl={button.link} />} />
+          {genreButtons.map((genre) => (
+            <Route key={genre.link} path={`${genre.link}/:page`} element={<Content genreId={genre.id} pageUrl={genre.link} />} />
           ))}
         </Route>
       </Routes>

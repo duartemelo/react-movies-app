@@ -1,12 +1,12 @@
 import React from "react";
-import classes from "./ImageContainer.module.css";
+import classes from "./Image.module.css";
 
-const ImageContainer = (props) => {
+const Image = (props) => {
   const styleObj = {
     width: props.width,
     height: props.height,
     borderRadius: props.borderRadius,
-    zIndex: props.zIndex
+    zIndex: props.zIndex,
   };
 
   return (
@@ -19,4 +19,4 @@ const ImageContainer = (props) => {
   );
 };
 
-export default ImageContainer;
+export default Image;
