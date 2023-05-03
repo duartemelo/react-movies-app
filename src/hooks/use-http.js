@@ -28,10 +28,10 @@ const useHttp = () => {
         data: requestConfig.body ? JSON.stringify(requestConfig.body) : null,
         params: requestConfig.params ? requestConfig.params : null,
       });
-      const data = response.data; // maybe is response.data.json()
+      const data = response.data;
       applyData(data);
     } catch (err) {
-      setError(err.message || "Something went wrong!"); // check if its write
+      setError(err.message || "Something went wrong!");
     }
     setIsLoading(false);
   }, []);
