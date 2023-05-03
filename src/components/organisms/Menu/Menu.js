@@ -7,12 +7,13 @@ import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import Divider from "../../atoms/Divider/Divider";
 import Button from "../../atoms/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
-import { getGenres } from "../../../api/api";
+import useHttp from "../../../hooks/use-http";
 
 const Menu = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [genreButtons, setGenreButtons] = useState([]);
+  const { sendRequest: fetchFilms } = useHttp();
 
   const discoverButtons = [
     {
@@ -33,9 +34,9 @@ const Menu = () => {
   ];
 
   useEffect(() => {
-    getGenres().then((response) => {
+    fetchFilms({ url: "genre/movie/list" }, (data) => {
       setGenreButtons(
-        response.data.genres.map((genre) => ({
+        data.genres.map((genre) => ({
           id: genre.id,
           section: genre.name.toLowerCase(),
           link: `/genre-${genre.name.toLowerCase()}/1`,
@@ -43,7 +44,7 @@ const Menu = () => {
         }))
       );
     });
-  }, []);
+  }, [fetchFilms]);
 
   const getButtonClasses = (buttonLink, classNames) => {
     if (

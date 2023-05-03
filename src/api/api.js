@@ -1,3 +1,5 @@
+// NOT BEING USED ATM, PASSED TO A HOOK (USE HTTP)
+
 import axios from "axios";
 
 export const api = axios.create({
@@ -18,8 +20,10 @@ export const getGenres = () => {
 };
 
 export const getFilmsByGenre = (genre_id, page) => {
-  return api.get("/discover/movie", {params: {page: page, with_genres: genre_id, sort_by: 'popularity.desc'}})
-}
+  return api.get("/discover/movie", {
+    params: { page: page, with_genres: genre_id, sort_by: "popularity.desc" },
+  });
+};
 
 export const getFilm = (id) => {
   // not done

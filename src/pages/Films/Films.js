@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import ContentItem from "../ContentItem/ContentItem";
-import classes from "./Content.module.css";
-import { getFilms, getFilmsByGenre } from "../../../api/api";
+import ContentItem from "../../components/organisms/ContentItem/ContentItem";
+import classes from "./Films.module.css";
 import { useNavigate, useParams } from "react-router-dom";
-import SpinnerContainer from "../../molecules/SpinnerContainer/SpinnerContainer";
-import Nav from "../../molecules/Nav/Nav";
-import Input from "../../atoms/Input/Input";
+import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
+import Nav from "../../components/molecules/Nav/Nav";
+import Input from "../../components/atoms/Input/Input";
 import ReactPaginate from "react-paginate";
+import Error from "../../components/molecules/Error/Error";
+import useHttp from "../../hooks/use-http";
 
-const Content = (props) => {
-  const [loading, setLoading] = useState(true);
+const Films = (props) => {
+  const { isLoading, error, sendRequest: fetchFilms } = useHttp();
   const [films, setFilms] = useState([]);
-  const [error, setError] = useState("");
   let { page } = useParams();
 
   const navigate = useNavigate();
@@ -21,53 +21,36 @@ const Content = (props) => {
 
   useEffect(() => {
     if (apiUrl) {
-      handleGetFilms(apiUrl, page);
+      fetchFilms({ url: apiUrl, params: { page: page } }, (data) => {
+        setFilms(data.results);
+      });
     } else if (genreId) {
-      handleGetFilmsByGenre(genreId, page);
+      fetchFilms(
+        {
+          url: "/discover/movie",
+          params: {
+            page: page,
+            with_genres: genreId,
+            sort_by: "popularity.desc",
+          },
+        },
+        (data) => {
+          setFilms(data.results);
+        }
+      );
     }
-  }, [apiUrl, genreId, page]);
-
-  const handleGetFilms = (url, page) => {
-    setLoading(true);
-    getFilms(url, page)
-      .then((response) => {
-        setError("");
-        setFilms(response.data.results);
-      })
-      .catch((err) => {
-        setError("There was an error gathering information.");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
-
-  const handleGetFilmsByGenre = (genreId, page) => {
-    setLoading(true);
-    getFilmsByGenre(genreId, page)
-      .then((response) => {
-        setError("");
-        setFilms(response.data.results);
-      })
-      .catch((err) => {
-        setError("There was an error gathering information.");
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+  }, [apiUrl, genreId, page, fetchFilms]);
 
   const handlePageClick = (event) => {
     navigate(`${props.pageUrl}/${event.selected + 1}`);
   };
 
-  if (loading) {
+  if (isLoading) {
     return <SpinnerContainer />;
   }
 
-  if (error !== "") {
-    // TODO: make error component
-    return <h1>Error</h1>;
+  if (error !== null) {
+    return <Error>There was an error gathering films.</Error>;
   }
 
   const renderedFilms = films.map((film) => (
@@ -107,4 +90,4 @@ const Content = (props) => {
   );
 };
 
-export default Content;
+export default Films;
