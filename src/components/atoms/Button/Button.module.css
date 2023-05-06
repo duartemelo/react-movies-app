@@ -15,12 +15,12 @@
   background-color: var(--white);
 }
 
-.primary{
+.active{
   background-color: var(--white);
   color: var(--blue);
 }
 
-.primary:not(.no-animate):hover{
+.active:not(.no-animate):hover{
   color: var(--white);
   background-color: var(--blue);
 }

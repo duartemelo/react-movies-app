@@ -1,6 +1,7 @@
-:root{
-  --blue: #2C38A1;
-  --dark-blue: #1F287E;
+:root {
+  --blue: #2c38a1;
+  --dark-blue: #1f287e;
   --white: #fff;
   --menu-width: 262px;
+  --gray: #d9d9d9;
 }

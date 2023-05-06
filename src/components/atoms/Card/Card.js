@@ -1,0 +1,19 @@
+import classes from "./Card.module.css";
+
+const Card = (props) => {
+  const preStyleObj = {
+    maxWidth: props.maxWidth,
+    height: props.height,
+  };
+
+  let classNames = `${props.className} ${classes.card} box-shadow border-radius-5`;
+  return (
+    <div className={classes.parent}>
+      <div className={classNames} style={preStyleObj}>
+        {props.children}
+      </div>
+    </div>
+  );
+};
+
+export default Card;

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import ContentLayout from "../layouts/ContentLayout/ContentLayout";
+import AuthLayout from "../layouts/AuthLayout/AuthLayout";
 import Films from "../pages/Films/Films";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import useHttp from "../hooks/use-http";
+import Card from "../components/atoms/Card/Card";
+import Login from "../pages/Login/Login";
 
 const AppRoutes = () => {
   const [genreButtons, setGenreButtons] = useState([]);
@@ -67,6 +70,15 @@ const AppRoutes = () => {
               element={<Films genreId={genre.id} pageUrl={genre.link} />}
             />
           ))}
+        </Route>
+        <Route
+          element={
+            <AuthLayout>
+              <Outlet />
+            </AuthLayout>
+          }
+        >
+          <Route path="/login" element={<Login />}/>
         </Route>
       </Routes>
     </BrowserRouter>

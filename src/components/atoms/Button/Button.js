@@ -12,8 +12,8 @@ const Button = (props) => {
 
   const getClasses = () => {
     let classNames = `${props.className} ${classes["default-button"]}`;
-    if (props.className.includes('primary')){
-      classNames += ` ${classes.primary}`
+    if (props.className.includes('active')){
+      classNames += ` ${classes.active}`
     }
     if (props.className.includes('no-animate')){
       classNames += ` ${classes['no-animate']}`

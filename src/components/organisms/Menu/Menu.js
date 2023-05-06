@@ -51,7 +51,7 @@ const Menu = () => {
       location.pathname.split("/", 2).join("/") ===
       buttonLink.toLowerCase().split("/", 2).join("/")
     ) {
-      return `${classNames} primary no-animate`;
+      return `${classNames} active no-animate`;
     } else {
       return classNames;
     }
@@ -127,7 +127,7 @@ const Menu = () => {
       </MenuSection>
       <MenuSection>
         <Button
-          className="centered block box-shadow primary mt-3 mb-2"
+          className="centered block box-shadow active mt-3 mb-2"
           backgroundColor="var(--white)"
           color="var(--blue)"
         >
