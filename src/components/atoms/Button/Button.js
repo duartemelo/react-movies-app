@@ -26,6 +26,7 @@ const Button = (props) => {
       className={getClasses()}
       style={preStyleObj}
       onClick={props.onClick}
+      type={props.type}
     >
       {props.children}
     </button>
