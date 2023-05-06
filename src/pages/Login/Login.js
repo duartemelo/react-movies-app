@@ -7,7 +7,7 @@ import classes from "./Login.module.css";
 const Login = () => {
   return (
     <React.Fragment>
-      <IsolatedText color="var(--blue)" fontWeight="600" fontSize="20px">
+      <IsolatedText color="var(--blue)" fontWeight="700" fontSize="22px">
         React Movies App
       </IsolatedText>
       <Input placeholder="E-mail" className="mt-4" />

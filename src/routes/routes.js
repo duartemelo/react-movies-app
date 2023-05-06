@@ -5,8 +5,8 @@ import AuthLayout from "../layouts/AuthLayout/AuthLayout";
 import Films from "../pages/Films/Films";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import useHttp from "../hooks/use-http";
-import Card from "../components/atoms/Card/Card";
 import Login from "../pages/Login/Login";
+import image from "../assets/img/auth-background.jpg";
 
 const AppRoutes = () => {
   const [genreButtons, setGenreButtons] = useState([]);
@@ -73,12 +73,12 @@ const AppRoutes = () => {
         </Route>
         <Route
           element={
-            <AuthLayout>
+            <AuthLayout backgroundImage={image}>
               <Outlet />
             </AuthLayout>
           }
         >
-          <Route path="/login" element={<Login />}/>
+          <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -4,7 +4,13 @@ import Card from "../../components/atoms/Card/Card";
 const AuthLayout = (props) => {
   return (
     <React.Fragment>
-      <Card maxWidth="600px" height="500px">
+      <Card
+        maxWidth="600px"
+        height="500px"
+        backgroundImage={props.backgroundImage}
+      >
+        {" "}
+        {/* TODO: pass background image */}
         {props.children}
       </Card>
     </React.Fragment>
