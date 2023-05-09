@@ -8,7 +8,6 @@ import useFirebase from "../../hooks/use-firebase";
 import useInput from "../../hooks/use-input";
 
 const Login = () => {
-  // TODO: input validation! (in progress)
 
   // TODO: use isLoading for spinner inside LoginButton
   const { isLoading, error, login } = useFirebase();
@@ -59,7 +58,17 @@ const Login = () => {
           type="email"
           required
         />
-        {emailHasError && <p>Email can't be empty.</p>}
+        {emailHasError && (
+          <IsolatedText
+            color="var(--red)"
+            fontWeight="600"
+            fontSize="12px"
+            paddingLeft="5px"
+            className="mt-05"
+          >
+            Email can't be empty.
+          </IsolatedText>
+        )}
         <Input
           placeholder="Password"
           className="mt-2"
@@ -69,8 +78,28 @@ const Login = () => {
           type="password"
           required
         />
-        {passwordHasError && <p>Password can't be empty.</p>}
-        {error && <p>{errorContent(error.errorCode)}</p>}
+        {passwordHasError && (
+          <IsolatedText
+            color="var(--red)"
+            fontWeight="600"
+            fontSize="12px"
+            paddingLeft="5px"
+            className="mt-05"
+          >
+            Password can't be empty.
+          </IsolatedText>
+        )}
+        {error && (
+          <IsolatedText
+            color="var(--red)"
+            fontWeight="600"
+            fontSize="12px"
+            paddingLeft="5px"
+            className="mt-05"
+          >
+            {errorContent(error.errorCode)}
+          </IsolatedText>
+        )}
         <div className={classes["action-container"]}>
           <Button className="secondary" type="submit">
             Login
