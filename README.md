@@ -2,7 +2,7 @@
 
 Movies App made in ReactJS while I was taking a Udemy React Course
 
-## API Key
+## .env file
 
 Add a .env file in the root directory with your API Key and Firebase Keys, like this:  
 REACT_APP_API_KEY = 'KEY'  
