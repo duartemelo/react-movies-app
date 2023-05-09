@@ -8,6 +8,7 @@ import Divider from "../../atoms/Divider/Divider";
 import Button from "../../atoms/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
+import { logout } from "../../../services/auth";
 
 const Menu = () => {
   const location = useLocation();
@@ -55,6 +56,11 @@ const Menu = () => {
     } else {
       return classNames;
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
   };
 
   return (
@@ -130,6 +136,7 @@ const Menu = () => {
           className="centered block box-shadow active mt-3 mb-2"
           backgroundColor="var(--white)"
           color="var(--blue)"
+          onClick={handleLogout}
         >
           Logout
         </Button>

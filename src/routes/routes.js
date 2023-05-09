@@ -7,6 +7,7 @@ import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import useHttp from "../hooks/use-http";
 import Login from "../pages/Login/Login";
 import image from "../assets/img/auth-background.jpg";
+import PrivateLayout from "../layouts/PrivateLayout/PrivateLayout";
 
 const AppRoutes = () => {
   const [genreButtons, setGenreButtons] = useState([]);
@@ -51,9 +52,11 @@ const AppRoutes = () => {
       <Routes>
         <Route
           element={
-            <ContentLayout>
-              <Outlet />
-            </ContentLayout>
+            <PrivateLayout>
+              <ContentLayout>
+                <Outlet />
+              </ContentLayout>
+            </PrivateLayout>
           }
         >
           {discoverButtons.map((button) => (

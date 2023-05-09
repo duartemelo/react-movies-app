@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import IsolatedText from "../../components/atoms/IsolatedText/IsolatedText";
 import Input from "../../components/atoms/Input/Input";
 import Button from "../../components/atoms/Button/Button";
 import classes from "./Login.module.css";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import useFirebase from "../../hooks/use-firebase";
 
 const Login = () => {
   // TODO: input validation!
@@ -12,25 +12,22 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  // TODO: use isLoading for spinner inside LoginButton
+  const { isLoading, error, login } = useFirebase();
 
-    // TODO:  pass to hook!
+  const navigate = useNavigate();
+
+  const handleLogin = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Login successful
-        const user = userCredential.user;
-        console.log("Logged in as", user.email);
-      })
-      .catch((error) => {
-        // Login failed
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(error.code);
-        console.log(errorMessage);
-        // setError(errorMessage);
-      });
+    login(email, password, (userCredential) => {
+      navigate("/popular/1");
+    });
   };
+
+  const errorContent = (errorCode) =>
+    errorCode.includes("not-found") || errorCode.includes("wrong-password")
+      ? "Invalid credentials."
+      : "There was an error, try again later.";
 
   return (
     <React.Fragment>
@@ -54,6 +51,8 @@ const Login = () => {
           type="password"
           required
         />
+        {/* TODO: styling! */}
+        {error && <p>{errorContent(error.errorCode)}</p>}
         <div className={classes["action-container"]}>
           <Button className="secondary" type="submit">
             Login

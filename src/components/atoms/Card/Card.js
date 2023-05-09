@@ -15,7 +15,6 @@ const Card = (props) => {
         backgroundSize: "cover",
       }}
     >
-      {/* TODO: set background image to parent */}
       <div className={classNames} style={preStyleObj}>
         {props.children}
       </div>

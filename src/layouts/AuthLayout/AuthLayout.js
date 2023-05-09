@@ -9,8 +9,6 @@ const AuthLayout = (props) => {
         height="500px"
         backgroundImage={props.backgroundImage}
       >
-        {" "}
-        {/* TODO: pass background image */}
         {props.children}
       </Card>
     </React.Fragment>
