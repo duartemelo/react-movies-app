@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import IsolatedText from "../../components/atoms/IsolatedText/IsolatedText";
 import Input from "../../components/atoms/Input/Input";
@@ -6,12 +6,18 @@ import Button from "../../components/atoms/Button/Button";
 import classes from "./Login.module.css";
 import useFirebase from "../../hooks/use-firebase";
 import useInput from "../../hooks/use-input";
+import useValidateAccess from "../../hooks/use-validate-access";
+import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
 
 const Login = () => {
-
   // TODO: use isLoading for spinner inside LoginButton
   const { isLoading, error, login } = useFirebase();
   const navigate = useNavigate();
+
+  const isValid = useValidateAccess();
+  if (isValid) {
+    navigate("/popular/1");
+  }
 
   const {
     value: email,
@@ -42,6 +48,10 @@ const Login = () => {
     errorCode.includes("not-found") || errorCode.includes("wrong-password")
       ? "Invalid credentials."
       : "There was an error, try again later.";
+
+  if (!!isValid) {
+    return <SpinnerContainer />;
+  }
 
   return (
     <React.Fragment>
