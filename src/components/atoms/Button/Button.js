@@ -2,24 +2,24 @@ import React from "react";
 import classes from "./Button.module.css";
 
 const Button = (props) => {
-
   const preStyleObj = {
     width: props.width,
     height: props.height,
     fontWeight: props.fontWeight,
     fontSize: props.fontSize,
-  }
+    paddingLeft: props.paddingLeft,
+  };
 
   const getClasses = () => {
     let classNames = `${props.className} ${classes["default-button"]}`;
-    if (props.className.includes('active')){
-      classNames += ` ${classes.active}`
+    if (props.className.includes("active")) {
+      classNames += ` ${classes.active}`;
     }
-    if (props.className.includes('no-animate')){
-      classNames += ` ${classes['no-animate']}`
+    if (props.className.includes("no-animate")) {
+      classNames += ` ${classes["no-animate"]}`;
     }
     return classNames;
-  }
+  };
 
   return (
     <button

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import IsolatedText from "../../components/atoms/IsolatedText/IsolatedText";
 import Input from "../../components/atoms/Input/Input";
@@ -8,16 +8,19 @@ import useFirebase from "../../hooks/use-firebase";
 import useInput from "../../hooks/use-input";
 import useValidateAccess from "../../hooks/use-validate-access";
 import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
+import Spinner from "../../components/atoms/Spinner/Spinner";
 
 const Login = () => {
-  // TODO: use isLoading for spinner inside LoginButton
   const { isLoading, error, login } = useFirebase();
   const navigate = useNavigate();
 
   const isValid = useValidateAccess();
-  if (isValid) {
-    navigate("/popular/1");
-  }
+
+  useEffect(() => {
+    if (isValid) {
+      navigate("/popular/1");
+    }
+  }, [isValid, navigate]);
 
   const {
     value: email,
@@ -111,8 +114,22 @@ const Login = () => {
           </IsolatedText>
         )}
         <div className={classes["action-container"]}>
-          <Button className="secondary" type="submit">
-            Login
+          <Button
+            className="secondary"
+            type="submit"
+            paddingLeft={isLoading ? "0px" : null}
+          >
+            {isLoading ? (
+              <Spinner
+                width="10px"
+                height="10px"
+                border="5px solid #eee"
+                borderTop="5px solid var(--blue)"
+                className="centered block"
+              />
+            ) : (
+              "Login"
+            )}
           </Button>
           <Button className="active" type="button">
             Register
