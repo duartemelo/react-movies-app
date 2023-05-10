@@ -3,7 +3,13 @@ import React, { useEffect, useState } from "react";
 import ContentLayout from "../layouts/ContentLayout/ContentLayout";
 import AuthLayout from "../layouts/AuthLayout/AuthLayout";
 import Films from "../pages/Films/Films";
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from "react-router-dom";
 import useHttp from "../hooks/use-http";
 import Login from "../pages/Login/Login";
 import image from "../assets/img/auth-background.jpg";
@@ -50,6 +56,7 @@ const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Navigate to="/login" />}></Route>
         <Route
           element={
             <PrivateLayout>

@@ -8,7 +8,6 @@ import useFirebase from "../../hooks/use-firebase";
 import useInput from "../../hooks/use-input";
 import useValidateAccess from "../../hooks/use-validate-access";
 import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
-import Spinner from "../../components/atoms/Spinner/Spinner";
 
 const Login = () => {
   const { isLoading, error, login } = useFirebase();
