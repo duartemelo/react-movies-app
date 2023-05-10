@@ -114,22 +114,8 @@ const Login = () => {
           </IsolatedText>
         )}
         <div className={classes["action-container"]}>
-          <Button
-            className="secondary"
-            type="submit"
-            paddingLeft={isLoading ? "0px" : null}
-          >
-            {isLoading ? (
-              <Spinner
-                width="10px"
-                height="10px"
-                border="5px solid #eee"
-                borderTop="5px solid var(--blue)"
-                className="centered block"
-              />
-            ) : (
-              "Login"
-            )}
+          <Button className="secondary" type="submit" loading={isLoading}>
+            Login
           </Button>
           <Button className="active" type="button">
             Register

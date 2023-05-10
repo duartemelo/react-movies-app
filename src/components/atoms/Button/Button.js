@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Button.module.css";
+import Spinner from "../Spinner/Spinner";
 
 const Button = (props) => {
   const preStyleObj = {
@@ -9,6 +10,10 @@ const Button = (props) => {
     fontSize: props.fontSize,
     paddingLeft: props.paddingLeft,
   };
+
+  if (props.loading === true) {
+    preStyleObj.paddingLeft = "0px";
+  }
 
   const getClasses = () => {
     let classNames = `${props.className} ${classes["default-button"]}`;
@@ -28,7 +33,17 @@ const Button = (props) => {
       onClick={props.onClick}
       type={props.type}
     >
-      {props.children}
+      {props.loading === true ? (
+        <Spinner
+          width="10px"
+          height="10px"
+          border="5px solid #eee"
+          borderTop="5px solid var(--blue)"
+          className="centered block"
+        />
+      ) : (
+        props.children
+      )}
     </button>
   );
 };
