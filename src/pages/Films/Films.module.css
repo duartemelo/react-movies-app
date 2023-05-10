@@ -42,3 +42,25 @@
     padding-right: 50px;
   }
 }
+
+/* TODO: fix!! */
+
+.paginate-buttons-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.justify-space-between {
+  justify-content: space-between;
+}
+
+.justify-end {
+  justify-content: end;
+}
+
+@media only screen and (min-width: 1150px) {
+  .paginate-buttons-container {
+    width: calc(100% - 50px);
+  }
+}

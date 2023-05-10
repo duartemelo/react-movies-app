@@ -5,9 +5,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
 import Nav from "../../components/molecules/Nav/Nav";
 import Input from "../../components/atoms/Input/Input";
-import ReactPaginate from "react-paginate";
 import Error from "../../components/molecules/Error/Error";
 import useHttp from "../../hooks/use-http";
+import Button from "../../components/atoms/Button/Button";
 
 const Films = (props) => {
   const { isLoading, error, sendRequest: fetchFilms } = useHttp();
@@ -41,8 +41,12 @@ const Films = (props) => {
     }
   }, [apiUrl, genreId, page, fetchFilms]);
 
-  const handlePageClick = (event) => {
-    navigate(`${props.pageUrl}/${event.selected + 1}`);
+  const handlePreviousPageClick = () => {
+    navigate(`${props.pageUrl}/${parseInt(page) - 1}`);
+  };
+
+  const handleNextPageClick = () => {
+    navigate(`${props.pageUrl}/${parseInt(page) + 1}`);
   };
 
   if (isLoading) {
@@ -70,22 +74,25 @@ const Films = (props) => {
       </Nav>
       <div className={`${classes["content-container"]} mt-4`}>
         {renderedFilms}
+        <div
+          className={`${classes["paginate-buttons-container"]} ${
+            page > 1 ? classes["justify-space-between"] : classes["justify-end"]
+          } mt-4`}
+        >
+          {page > 1 && (
+            <Button
+              className="default-button"
+              onClick={handlePreviousPageClick}
+            >
+              Previous page
+            </Button>
+          )}
+
+          <Button className="default-button" onClick={handleNextPageClick}>
+            Next page
+          </Button>
+        </div>
       </div>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel=">>"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={500}
-        previousLabel="<<"
-        renderOnZeroPageCount={null}
-        containerClassName={classes.pagination}
-        pageLinkClassName={classes["page-num"]}
-        previousLinkClassName={classes["page-num"]}
-        nextLinkClassName={classes["page-num"]}
-        activeLinkClassName={classes.active}
-        forcePage={page - 1}
-      />
     </React.Fragment>
   );
 };
