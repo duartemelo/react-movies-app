@@ -35,10 +35,9 @@ const authSlice = createSlice({
     },
     setAuthInfo(state, action) {
       // state = {...action.payload}; (?)
-
-      state.email = action.payload.email;
-      state.name = action.payload.name;
-      state.photo = action.payload.photo;
+      state.email = action.payload.email != null ? action.payload.email : state.email;
+      state.name = action.payload.name != null ? action.payload.name : state.name;
+      state.photo = action.payload.photo != null ? action.payload.photo : state.photo;
     },
   },
 });

@@ -9,12 +9,14 @@ import Button from "../../atoms/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
 import { logout } from "../../../services/auth";
+import { useSelector } from "react-redux";
 
 const Menu = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [genreButtons, setGenreButtons] = useState([]);
   const { sendRequest: fetchFilms } = useHttp();
+  const name = useSelector((state) => state.auth.name);
 
   const discoverButtons = [
     {
@@ -81,7 +83,7 @@ const Menu = () => {
           fontSize="14px"
           centered
         >
-          Duarte Melo
+          {name}
         </IsolatedText>
       </MenuSection>
       <Divider width="130px" className="mt-2 centered" />

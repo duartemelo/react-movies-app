@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { getUid } from "../services/auth";
 import { useDispatch } from "react-redux";
 import { authActions } from "../store/slices/auth-slice";
+import { fetchProfileData } from "../store/actions/auth-actions";
 
 const useValidateAccess = () => {
   const dispatch = useDispatch();
@@ -14,12 +15,11 @@ const useValidateAccess = () => {
 
   useEffect(() => {
     if (!uid) {
-      dispatch(authActions.logout());
       setIsValid(false);
       return;
     }
     dispatch(authActions.login(uid));
-    // TODO: dispatch do fetch Profile Data
+    dispatch(fetchProfileData());
     setIsValid(true);
   }, [uid, navigate, dispatch]);
 

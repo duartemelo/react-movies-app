@@ -65,7 +65,7 @@ const Register = () => {
     const formIsValid =
       nameIsValid && emailIsValid && passwordIsValid && confirmPasswordIsValid;
     if (formIsValid) {
-      dispatch(register(email, password));
+      dispatch(register(name, email, password));
     }
   };
 
