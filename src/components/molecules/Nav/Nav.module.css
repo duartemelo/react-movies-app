@@ -1,5 +1,25 @@
-.nav-container{
+.nav-container {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto;
+  display: flex;
+}
+
+@media only screen and (max-width: 1400px) {
+  .nav-container {
+    max-width: 800px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .nav-container {
+    max-width: 600px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .nav-container {
+    max-width: 400px;
+    justify-content: center;
+  }
 }

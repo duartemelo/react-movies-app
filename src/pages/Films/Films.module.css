@@ -4,8 +4,29 @@
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+  column-gap: 50px;
+  row-gap: 30px;
   justify-content: space-between;
   padding-bottom: 30px;
+}
+
+@media only screen and (max-width: 1400px) {
+  .content-container {
+    max-width: 800px;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .content-container {
+    max-width: 600px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .content-container {
+    max-width: 400px;
+    justify-content: center;
+  }
 }
 
 .pagination {
@@ -43,8 +64,6 @@
   }
 }
 
-/* TODO: fix!! */
-
 .paginate-buttons-container {
   width: 100%;
   display: flex;
@@ -57,10 +76,4 @@
 
 .justify-end {
   justify-content: end;
-}
-
-@media only screen and (min-width: 1150px) {
-  .paginate-buttons-container {
-    width: calc(100% - 50px);
-  }
 }
