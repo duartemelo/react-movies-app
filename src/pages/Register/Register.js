@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import IsolatedText from "../../components/atoms/IsolatedText/IsolatedText";
 import Input from "../../components/atoms/Input/Input";
 import Button from "../../components/atoms/Button/Button";
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../store/actions/auth-actions";
 
 const Register = () => {
+  const locState = useLocation(); // location state
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.auth.isLoading);
   const error = useSelector((state) => state.auth.error);
@@ -18,6 +19,8 @@ const Register = () => {
   const navigate = useNavigate();
 
   const isValid = useValidateAccess();
+
+  const initialEmail = locState.state !== null ? locState.state.email : "";
 
   useEffect(() => {
     if (isValid) {
@@ -39,7 +42,7 @@ const Register = () => {
     hasError: emailHasError,
     valueChangeHandler: emailChanged,
     inputBlurHandler: emailBlur,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim() !== "", initialEmail);
 
   const {
     value: password,
@@ -67,8 +70,7 @@ const Register = () => {
   };
 
   const handleLoginClick = () => {
-    // TODO: pass email
-    navigate("/login");
+    navigate("/login", { state: { email: email } });
   };
 
   const errorContent = (errorCode) =>
