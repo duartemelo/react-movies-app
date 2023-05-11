@@ -1,12 +1,12 @@
 import React from "react";
 import useValidateAccess from "../../hooks/use-validate-access";
-import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
+import { Navigate } from "react-router-dom";
 
 const PrivateLayout = (props) => {
   const isValid = useValidateAccess();
 
   if (!isValid) {
-    return <SpinnerContainer />;
+    return <Navigate to={"/login"} />;
   }
 
   return <React.Fragment>{props.children}</React.Fragment>;

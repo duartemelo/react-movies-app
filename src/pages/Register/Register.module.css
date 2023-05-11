@@ -1,0 +1,11 @@
+.action-container {
+  max-width: 327px;
+  width: 100%;
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+form {
+  width: min-content;
+}

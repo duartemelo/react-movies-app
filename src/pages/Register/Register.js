@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import IsolatedText from "../../components/atoms/IsolatedText/IsolatedText";
 import Input from "../../components/atoms/Input/Input";
 import Button from "../../components/atoms/Button/Button";
-import classes from "./Login.module.css";
+import classes from "./Register.module.css";
 import useInput from "../../hooks/use-input";
 import useValidateAccess from "../../hooks/use-validate-access";
 import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/actions/auth-actions";
+import { register } from "../../store/actions/auth-actions";
 
-const Login = () => {
+const Register = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector((state) => state.auth.isLoading);
   const error = useSelector((state) => state.auth.error);
@@ -24,6 +24,14 @@ const Login = () => {
       navigate("/popular/1");
     }
   }, [isValid, navigate]);
+
+  const {
+    value: name,
+    isValid: nameIsValid,
+    hasError: nameHasError,
+    valueChangeHandler: nameChanged,
+    inputBlurHandler: nameBlur,
+  } = useInput((value) => value.trim() !== "");
 
   const {
     value: email,
@@ -41,16 +49,26 @@ const Login = () => {
     inputBlurHandler: passwordBlur,
   } = useInput((value) => value.trim() !== "");
 
-  const handleLogin = (e) => {
+  const {
+    value: confirmPassword,
+    isValid: confirmPasswordIsValid,
+    hasError: confirmPasswordHasError,
+    valueChangeHandler: confirmPasswordChanged,
+    inputBlurHandler: confirmPasswordBlur,
+  } = useInput((value) => value === password);
+
+  const handleRegister = (e) => {
     e.preventDefault();
-    if (emailIsValid && passwordIsValid) {
-      dispatch(login(email, password));
+    const formIsValid =
+      nameIsValid && emailIsValid && passwordIsValid && confirmPasswordIsValid;
+    if (formIsValid) {
+      dispatch(register(email, password));
     }
   };
 
-  const handleRegisterClick = () => {
+  const handleLoginClick = () => {
     // TODO: pass email
-    navigate("/register");
+    navigate("/login");
   };
 
   const errorContent = (errorCode) =>
@@ -67,10 +85,21 @@ const Login = () => {
       <IsolatedText color="var(--blue)" fontWeight="700" fontSize="22px">
         React Movies App
       </IsolatedText>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleRegister}>
+        <Input
+          placeholder="Name"
+          className="mt-4"
+          value={name}
+          onChange={nameChanged}
+          onBlur={nameBlur}
+          type="text"
+          hasError={nameHasError}
+          errorMessage={"Name can't be empty."}
+          required
+        />
         <Input
           placeholder="E-mail"
-          className="mt-4"
+          className="mt-2"
           value={email}
           onChange={emailChanged}
           onBlur={emailBlur}
@@ -90,6 +119,17 @@ const Login = () => {
           errorMessage={"Password can't be empty."}
           required
         />
+        <Input
+          placeholder="Confirm password"
+          className="mt-2"
+          value={confirmPassword}
+          onChange={confirmPasswordChanged}
+          onBlur={confirmPasswordBlur}
+          type="password"
+          hasError={confirmPasswordHasError}
+          errorMessage={"Passwords must match."}
+          required
+        />
         {error && (
           <IsolatedText
             color="var(--red)"
@@ -103,14 +143,10 @@ const Login = () => {
         )}
         <div className={classes["action-container"]}>
           <Button className="secondary" type="submit" loading={isLoading}>
-            Login
-          </Button>
-          <Button
-            className="active"
-            type="button"
-            onClick={handleRegisterClick}
-          >
             Register
+          </Button>
+          <Button className="active" type="button" onClick={handleLoginClick}>
+            Login
           </Button>
         </div>
       </form>
@@ -118,4 +154,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

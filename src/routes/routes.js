@@ -12,6 +12,7 @@ import {
 } from "react-router-dom";
 import useHttp from "../hooks/use-http";
 import Login from "../pages/Login/Login";
+import Register from "../pages/Register/Register";
 import image from "../assets/img/auth-background.jpg";
 import PrivateLayout from "../layouts/PrivateLayout/PrivateLayout";
 
@@ -89,6 +90,7 @@ const AppRoutes = () => {
           }
         >
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
     </BrowserRouter>

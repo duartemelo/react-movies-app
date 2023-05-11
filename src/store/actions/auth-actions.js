@@ -1,5 +1,8 @@
 import { authActions } from "../slices/auth-slice";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../firebase/firebase_conf";
 import { setUid } from "../../services/auth";
 
@@ -11,6 +14,27 @@ export const login = (email, password) => {
         setUid(userCredential.user.uid);
       })
       .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        dispatch(authActions.setError({ errorCode, errorMessage }));
+      })
+      .finally(() => {
+        dispatch(authActions.setIsLoading(false));
+      });
+  };
+};
+
+export const register = (email, password) => {
+  return async (dispatch) => {
+    dispatch(authActions.setIsLoading(true));
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        const uid = user.uid;
+        setUid(uid); // TODO: change, dont log in directly! missing photo and name!!
+      })
+      .catch((error) => {
+        console.log(error);
         const errorCode = error.code;
         const errorMessage = error.message;
         dispatch(authActions.setError({ errorCode, errorMessage }));

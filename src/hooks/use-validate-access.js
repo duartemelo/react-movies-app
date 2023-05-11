@@ -15,7 +15,6 @@ const useValidateAccess = () => {
   useEffect(() => {
     if (!uid) {
       dispatch(authActions.logout());
-      navigate("/login");
       setIsValid(false);
       return;
     }
