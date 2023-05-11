@@ -4,13 +4,17 @@ import IsolatedText from "../../components/atoms/IsolatedText/IsolatedText";
 import Input from "../../components/atoms/Input/Input";
 import Button from "../../components/atoms/Button/Button";
 import classes from "./Login.module.css";
-import useFirebase from "../../hooks/use-firebase";
 import useInput from "../../hooks/use-input";
 import useValidateAccess from "../../hooks/use-validate-access";
 import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../store/actions/auth-actions";
 
 const Login = () => {
-  const { isLoading, error, login } = useFirebase();
+  const dispatch = useDispatch();
+  const isLoading = useSelector((state) => state.auth.isLoading);
+  const error = useSelector((state) => state.auth.error);
+
   const navigate = useNavigate();
 
   const isValid = useValidateAccess();
@@ -40,9 +44,7 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     if (emailIsValid && passwordIsValid) {
-      login(email, password, () => {
-        navigate("/popular/1");
-      });
+      dispatch(login(email, password));
     }
   };
 

@@ -1,11 +1,11 @@
-export const setIsLoggedIn = (token) => {
-  localStorage.setItem("isLoggedIn", token);
+export const setUid = (token) => {
+  localStorage.setItem("uid", token);
 };
 
-export const getIsLoggedIn = () => {
-  return localStorage.getItem("isLoggedIn");
+export const getUid = () => {
+  return localStorage.getItem("uid");
 };
 
 export const logout = () => {
-  localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("uid");
 };
