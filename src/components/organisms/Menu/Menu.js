@@ -50,10 +50,17 @@ const Menu = () => {
   }, [fetchFilms]);
 
   const getButtonClasses = (buttonLink, classNames) => {
-    if (
-      location.pathname.split("/", 2).join("/") ===
-      buttonLink.toLowerCase().split("/", 2).join("/")
-    ) {
+    // buttonLink without page "/1 or /2 or /30" and with spaces replaced with "%20"
+    const finalButtonLink = buttonLink
+      .replace(" ", "%20")
+      .toLowerCase()
+      .split("/", 2)
+      .join("/");
+
+    // locationLink without page
+    const finalLocationLink = location.pathname.split("/", 2).join("/");
+
+    if (finalLocationLink === finalButtonLink) {
       return `${classNames} active no-animate`;
     } else {
       return classNames;
