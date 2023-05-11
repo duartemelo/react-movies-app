@@ -1,6 +1,12 @@
 # react-movies-app
 
-Movies App made in ReactJS while I was taking a Udemy React Course
+Movies App made in ReactJS while I was taking a Udemy React Course.  
+Currently **under development.**
+
+## Some printscreens
+
+![Login](./other/readme_img/Login.png)
+![Films](./other/readme_img/Films.png)
 
 ## .env file
 
