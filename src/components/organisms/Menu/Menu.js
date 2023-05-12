@@ -10,7 +10,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
 import { logout } from "../../../services/auth";
 import { useSelector } from "react-redux";
-import Spinner from "../../atoms/Spinner/Spinner";
 
 const Menu = () => {
   const location = useLocation();

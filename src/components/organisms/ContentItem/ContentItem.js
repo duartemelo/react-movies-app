@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import NoImage from "../../atoms/NoImage/NoImage";
 import Image from "../../atoms/Image/Image";
 import TextContainer from "../../molecules/TextContainer/TextContainer";
 import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
@@ -41,8 +40,7 @@ const ContentItem = (props) => {
 
   return (
     <div className={`${classes["content-item"]} mt-3`}>
-      {!props.imageSource.includes("null") ? (
-        <Image
+      <Image
           imageSrc={props.imageSource}
           alt="Content Image"
           borderRadius="5px"
@@ -51,16 +49,6 @@ const ContentItem = (props) => {
           height="265px"
           zIndex="999"
         />
-      ) : (
-        <NoImage
-          className="box-shadow pos-relative"
-          width="200px"
-          height="265px"
-          borderRadius="5px"
-          zIndex="999"
-          backgroundColor="#1F287E"
-        />
-      )}
 
       <TextContainer>
         <IsolatedText
