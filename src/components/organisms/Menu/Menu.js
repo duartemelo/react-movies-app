@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
 import { logout } from "../../../services/auth";
 import { useSelector } from "react-redux";
+import Spinner from "../../atoms/Spinner/Spinner";
 
 const Menu = () => {
   const location = useLocation();
@@ -81,7 +82,6 @@ const Menu = () => {
           width="130px"
           height="130px"
           borderRadius="5px"
-          centered
           className="centered box-shadow"
         />
         <IsolatedText
@@ -89,7 +89,7 @@ const Menu = () => {
           color="var(--white)"
           fontWeight="500"
           fontSize="14px"
-          centered
+          checkForLoading={true}
         >
           {name}
         </IsolatedText>
