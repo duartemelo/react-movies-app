@@ -79,6 +79,7 @@ const Menu = () => {
           imageSrc={image}
           alt="Profile image"
           width="130px"
+          height="130px"
           borderRadius="5px"
           centered
           className="centered box-shadow"
