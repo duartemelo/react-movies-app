@@ -9,11 +9,13 @@ import Button from "../../atoms/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
 import { logout } from "../../../services/auth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../../../store/slices/auth-slice";
 
 const Menu = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [genreButtons, setGenreButtons] = useState([]);
   const { sendRequest: fetchFilms } = useHttp();
   const name = useSelector((state) => state.auth.name);
@@ -68,6 +70,7 @@ const Menu = () => {
   };
 
   const handleLogout = () => {
+    dispatch(authActions.logout());
     logout();
     navigate("/login");
   };

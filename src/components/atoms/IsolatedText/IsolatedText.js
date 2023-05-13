@@ -1,5 +1,4 @@
 import React from "react";
-import Spinner from "../Spinner/Spinner";
 
 const IsolatedText = (props) => {
   const styleObj = {
@@ -15,17 +14,7 @@ const IsolatedText = (props) => {
 
   return (
     <p className={props.className} style={styleObj}>
-      {props.checkForLoading && props.children === null ? (
-        <Spinner
-          width="10px"
-          height="10px"
-          border="5px solid #eee"
-          borderTop="5px solid var(--blue)"
-          className="centered block"
-        />
-      ) : (
-        props.children
-      )}
+      {props.children}
     </p>
   );
 };

@@ -2,27 +2,29 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { getUid } from "../services/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "../store/slices/auth-slice";
 import { fetchProfileData } from "../store/actions/auth-actions";
 
 const useValidateAccess = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const loggedIn = useSelector((state) => state.auth.loggedIn);
   const uid = getUid();
 
   const [isValid, setIsValid] = useState(!!uid);
 
   useEffect(() => {
-    if (!uid) {
-      setIsValid(false);
-      return;
+    if (!loggedIn) {
+      if (!uid) {
+        setIsValid(false);
+        return;
+      }
+      dispatch(authActions.login(uid));
+      dispatch(fetchProfileData());
+      setIsValid(true);
     }
-    dispatch(authActions.login(uid));
-    dispatch(fetchProfileData());
-    setIsValid(true);
-  }, [uid, navigate, dispatch]);
-
+  }, [loggedIn, uid, navigate, dispatch]);
   return isValid;
 };
 
