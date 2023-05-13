@@ -70,8 +70,8 @@ const Menu = () => {
   };
 
   const handleLogout = () => {
-    dispatch(authActions.logout());
-    logout();
+    dispatch(authActions.logout()); // REDUX
+    logout(); // localStorage
     navigate("/login");
   };
 

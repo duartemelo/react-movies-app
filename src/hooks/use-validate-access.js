@@ -15,7 +15,7 @@ const useValidateAccess = () => {
   const [isValid, setIsValid] = useState(!!uid);
 
   useEffect(() => {
-    if (!loggedIn) {
+    if (!loggedIn) { // if loggedIn === false on redux variable -> (used this to avoid checking localStorage if is was already checked)
       if (!uid) {
         setIsValid(false);
         return;
