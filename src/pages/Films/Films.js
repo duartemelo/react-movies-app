@@ -9,10 +9,19 @@ import Error from "../../components/molecules/Error/Error";
 import useHttp from "../../hooks/use-http";
 import Button from "../../components/molecules/Button/Button";
 
+/*
+TODO:
+reorganize code, put fetchFilms code in functions
+fix next page with search
+
+*/
+
 const Films = (props) => {
   const { isLoading, error, sendRequest: fetchFilms } = useHttp();
   const [films, setFilms] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   let { page } = useParams();
+  const [searchTimer, setSearchTimer] = useState(null);
 
   const navigate = useNavigate();
 
@@ -49,6 +58,56 @@ const Films = (props) => {
     navigate(`${props.pageUrl}/${parseInt(page) + 1}`);
   };
 
+  const handleSearchSubmit = (value) => {
+    if (value !== "") {
+      fetchFilms(
+        {
+          url: "/search/movie",
+          params: {
+            query: value,
+            page: page,
+          },
+        },
+        (data) => {
+          setFilms(data.results);
+        }
+      );
+    } else {
+      if (apiUrl) {
+        fetchFilms({ url: apiUrl, params: { page: page } }, (data) => {
+          setFilms(data.results);
+        });
+      } else if (genreId) {
+        fetchFilms(
+          {
+            url: "/discover/movie",
+            params: {
+              page: page,
+              with_genres: genreId,
+              sort_by: "popularity.desc",
+            },
+          },
+          (data) => {
+            setFilms(data.results);
+          }
+        );
+      }
+    }
+  };
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+
+    if (searchTimer) {
+      clearTimeout(searchTimer);
+    }
+    const newTimer = setTimeout(() => {
+      handleSearchSubmit(event.target.value);
+    }, 500);
+
+    setSearchTimer(newTimer);
+  };
+
   if (isLoading) {
     return <SpinnerContainer />;
   }
@@ -70,7 +129,11 @@ const Films = (props) => {
   return (
     <React.Fragment>
       <Nav>
-        <Input placeholder="Search for a movie..." />
+        <Input
+          placeholder="Search for a movie..."
+          value={searchQuery}
+          onChange={handleSearchInputChange}
+        />
       </Nav>
       <div className={`${classes["content-container"]} mt-4`}>
         {renderedFilms}
