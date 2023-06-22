@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Input.module.css";
-import IsolatedText from "../IsolatedText/IsolatedText";
+import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 
 const Input = (props) => {
   const classNames = `${props.className} ${classes["search-bar"]}`;

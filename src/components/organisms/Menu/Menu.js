@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Image from "../../atoms/Image/Image";
-import MenuSection from "../../molecules/MenuSection/MenuSection";
+import Image from "../../molecules/Image/Image";
+import MenuSection from "../../atoms/MenuSection/MenuSection";
 import classes from "./Menu.module.css";
 import image from "../../../assets/img/profile-image.jpg";
 import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import Divider from "../../atoms/Divider/Divider";
-import Button from "../../atoms/Button/Button";
+import Button from "../../molecules/Button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
 import useHttp from "../../../hooks/use-http";
 import { logout } from "../../../services/auth";

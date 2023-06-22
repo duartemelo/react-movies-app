@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import Image from "../../atoms/Image/Image";
-import TextContainer from "../../molecules/TextContainer/TextContainer";
+import Image from "../../molecules/Image/Image";
+import TextContainer from "../../atoms/TextContainer/TextContainer";
 import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import classes from "./ContentItem.module.css";
 import RatingContainer from "../../molecules/RatingContainer/RatingContainer";

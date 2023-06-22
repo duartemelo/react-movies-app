@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import IsolatedText from "../../components/atoms/IsolatedText/IsolatedText";
-import Input from "../../components/atoms/Input/Input";
-import Button from "../../components/atoms/Button/Button";
+import Input from "../../components/molecules/Input/Input";
+import Button from "../../components/molecules/Button/Button";
 import classes from "./Register.module.css";
 import useInput from "../../hooks/use-input";
 import useValidateAccess from "../../hooks/use-validate-access";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import classes from "./Image.module.css";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../../atoms/Spinner/Spinner";
 import nothingImage from "../../../assets/img/undraw_not_found_re_bh2e.svg";
 
 const Image = (props) => {

@@ -3,11 +3,11 @@ import ContentItem from "../../components/organisms/ContentItem/ContentItem";
 import classes from "./Films.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
-import Nav from "../../components/molecules/Nav/Nav";
-import Input from "../../components/atoms/Input/Input";
+import Nav from "../../components/atoms/Nav/Nav";
+import Input from "../../components/molecules/Input/Input";
 import Error from "../../components/molecules/Error/Error";
 import useHttp from "../../hooks/use-http";
-import Button from "../../components/atoms/Button/Button";
+import Button from "../../components/molecules/Button/Button";
 
 const Films = (props) => {
   const { isLoading, error, sendRequest: fetchFilms } = useHttp();

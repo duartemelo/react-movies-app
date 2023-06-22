@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Button.module.css";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../../atoms/Spinner/Spinner";
 
 const Button = (props) => {
   const preStyleObj = {
