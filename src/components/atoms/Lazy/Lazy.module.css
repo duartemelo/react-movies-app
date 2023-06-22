@@ -1,0 +1,16 @@
+.lazy {
+  background-color: var(--gray);
+  animation: gradientAnimation 1.5s infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-color: var(--gray);
+  }
+  50% {
+    background-color: var(--dark-gray);
+  }
+  100% {
+    background-color: var(--gray);
+  }
+}

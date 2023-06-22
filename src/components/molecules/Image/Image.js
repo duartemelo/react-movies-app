@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import classes from "./Image.module.css";
-import Spinner from "../../atoms/Spinner/Spinner";
 import nothingImage from "../../../assets/img/undraw_not_found_re_bh2e.svg";
+import Lazy from "../../atoms/Lazy/Lazy";
 
 const Image = (props) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
 
   const styleObj = {
@@ -12,16 +12,26 @@ const Image = (props) => {
     height: props.height,
     borderRadius: props.borderRadius,
     zIndex: props.zIndex,
-    display: !loading ? "none" : "block",
+    display: loading ? "none" : "block",
     objectFit: error ? "contain" : "cover",
   };
 
   return (
     <div
       className={`${props.className} ${classes["image-container"]}`}
-      style={{ width: styleObj.width, height: styleObj.height }}
+      style={{
+        width: styleObj.width,
+        height: styleObj.height,
+        borderRadius: styleObj.borderRadius,
+      }}
     >
-      {!loading && <Spinner />}
+      {loading && (
+        <Lazy
+          width={styleObj.width}
+          height={styleObj.height}
+          borderRadius={styleObj.borderRadius}
+        />
+      )}
       <img
         error={error ? 1 : 0}
         src={props.imageSrc}
@@ -33,7 +43,7 @@ const Image = (props) => {
         }}
         alt={props.alt}
         style={styleObj}
-        onLoad={() => setLoading(true)}
+        onLoad={() => setLoading(false)}
         className={classes["image"]}
       />
     </div>
