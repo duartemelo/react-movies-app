@@ -5,6 +5,7 @@ import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import classes from "./ContentItem.module.css";
 import RatingContainer from "../../molecules/RatingContainer/RatingContainer";
 import Tooltip from "../../atoms/Tooltip/Tooltip";
+import PropTypes from "prop-types";
 
 const ContentItem = (props) => {
   const myRef = useRef();
@@ -81,5 +82,13 @@ const ContentItem = (props) => {
     </div>
   );
 };
+
+ContentItem.propTypes = {
+  imageSource: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  vote_count: PropTypes.number.isRequired,
+};
+
 
 export default ContentItem;

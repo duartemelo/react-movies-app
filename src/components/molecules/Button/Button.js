@@ -1,6 +1,7 @@
 import React from "react";
 import classes from "./Button.module.css";
 import Spinner from "../../atoms/Spinner/Spinner";
+import PropTypes from "prop-types";
 
 const Button = (props) => {
   const preStyleObj = {
@@ -46,6 +47,19 @@ const Button = (props) => {
       )}
     </button>
   );
+};
+
+Button.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+  fontWeight: PropTypes.string,
+  fontSize: PropTypes.string,
+  paddingLeft: PropTypes.string,
+  loading: PropTypes.bool,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+  type: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default Button;

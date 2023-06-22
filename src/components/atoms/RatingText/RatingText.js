@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Rating, RoundedStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
@@ -18,5 +19,9 @@ const RatingText = (props) => {
     </React.Fragment>
   )
 }
+
+RatingText.propTypes = {
+  rating: PropTypes.number.isRequired,
+};
 
 export default RatingText;

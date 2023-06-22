@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./Spinner.module.css";
+import PropTypes from "prop-types";
 
 const Spinner = (props) => {
   const preStyleObj = {
@@ -14,6 +15,14 @@ const Spinner = (props) => {
       style={preStyleObj}
     ></div>
   );
+};
+
+Spinner.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+  border: PropTypes.string,
+  borderTop: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default Spinner;

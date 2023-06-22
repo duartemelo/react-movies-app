@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import classes from "./Image.module.css";
 import nothingImage from "../../../assets/img/undraw_not_found_re_bh2e.svg";
 import Lazy from "../../atoms/Lazy/Lazy";
+import PropTypes from "prop-types";
 
 const Image = (props) => {
   const [loading, setLoading] = useState(true);
@@ -48,6 +49,16 @@ const Image = (props) => {
       />
     </div>
   );
+};
+
+Image.propTypes = {
+  width: PropTypes.string,
+  height: PropTypes.string,
+  borderRadius: PropTypes.string,
+  zIndex: PropTypes.number,
+  className: PropTypes.string,
+  imageSrc: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
 };
 
 export default Image;

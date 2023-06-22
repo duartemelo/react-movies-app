@@ -1,4 +1,5 @@
 import classes from "./Card.module.css";
+import PropTypes from "prop-types";
 
 const Card = (props) => {
   const preStyleObj = {
@@ -20,6 +21,14 @@ const Card = (props) => {
       </div>
     </div>
   );
+};
+
+Card.propTypes = {
+  maxWidth: PropTypes.string,
+  height: PropTypes.string,
+  className: PropTypes.string,
+  backgroundImage: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default Card;
