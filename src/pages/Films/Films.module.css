@@ -6,7 +6,7 @@
   flex-wrap: wrap;
   column-gap: 50px;
   row-gap: 30px;
-  justify-content: space-between;
+  justify-content: start;
   padding-bottom: 30px;
 }
 

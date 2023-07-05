@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ContentItem from "../../components/organisms/ContentItem/ContentItem";
 import classes from "./Films.module.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -8,13 +8,6 @@ import Input from "../../components/molecules/Input/Input";
 import Error from "../../components/molecules/Error/Error";
 import useHttp from "../../hooks/use-http";
 import Button from "../../components/molecules/Button/Button";
-
-/*
-TODO:
-reorganize code, put fetchFilms code in functions
-fix next page with search
-
-*/
 
 const Films = (props) => {
   const { isLoading, error, sendRequest: fetchFilms } = useHttp();
@@ -28,27 +21,50 @@ const Films = (props) => {
   const { apiUrl } = props;
   const { genreId } = props;
 
-  useEffect(() => {
-    if (apiUrl) {
-      fetchFilms({ url: apiUrl, params: { page: page } }, (data) => {
-        setFilms(data.results);
-      });
-    } else if (genreId) {
-      fetchFilms(
-        {
-          url: "/discover/movie",
-          params: {
-            page: page,
-            with_genres: genreId,
-            sort_by: "popularity.desc",
+  const getFilms = useCallback(
+    (searchValue) => {
+      if (searchValue !== "") {
+        fetchFilms(
+          {
+            url: "/search/movie",
+            params: {
+              query: searchValue,
+              page: page,
+            },
           },
-        },
-        (data) => {
-          setFilms(data.results);
+          (data) => {
+            setFilms(data.results);
+          }
+        );
+      } else {
+        if (apiUrl) {
+          fetchFilms({ url: apiUrl, params: { page: page } }, (data) => {
+            setFilms(data.results);
+          });
+        } else if (genreId) {
+          fetchFilms(
+            {
+              url: "/discover/movie",
+              params: {
+                page: page,
+                with_genres: genreId,
+                sort_by: "popularity.desc",
+              },
+            },
+            (data) => {
+              setFilms(data.results);
+            }
+          );
         }
-      );
-    }
-  }, [apiUrl, genreId, page, fetchFilms]);
+      }
+    },
+    [apiUrl, fetchFilms, genreId, page]
+  );
+
+  useEffect(() => {
+    setSearchQuery("");
+    getFilms("");
+  }, [getFilms]);
 
   const handlePreviousPageClick = () => {
     navigate(`${props.pageUrl}/${parseInt(page) - 1}`);
@@ -58,43 +74,6 @@ const Films = (props) => {
     navigate(`${props.pageUrl}/${parseInt(page) + 1}`);
   };
 
-  const handleSearchSubmit = (value) => {
-    if (value !== "") {
-      fetchFilms(
-        {
-          url: "/search/movie",
-          params: {
-            query: value,
-            page: page,
-          },
-        },
-        (data) => {
-          setFilms(data.results);
-        }
-      );
-    } else {
-      if (apiUrl) {
-        fetchFilms({ url: apiUrl, params: { page: page } }, (data) => {
-          setFilms(data.results);
-        });
-      } else if (genreId) {
-        fetchFilms(
-          {
-            url: "/discover/movie",
-            params: {
-              page: page,
-              with_genres: genreId,
-              sort_by: "popularity.desc",
-            },
-          },
-          (data) => {
-            setFilms(data.results);
-          }
-        );
-      }
-    }
-  };
-
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
 
@@ -102,7 +81,7 @@ const Films = (props) => {
       clearTimeout(searchTimer);
     }
     const newTimer = setTimeout(() => {
-      handleSearchSubmit(event.target.value);
+      getFilms(event.target.value);
     }, 500);
 
     setSearchTimer(newTimer);
