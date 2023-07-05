@@ -10,6 +10,8 @@ const Button = (props) => {
     fontWeight: props.fontWeight,
     fontSize: props.fontSize,
     paddingLeft: props.paddingLeft,
+    color: props.color,
+    backgroundColor: props.backgroundColor,
   };
 
   if (props.loading === true) {
@@ -55,6 +57,8 @@ Button.propTypes = {
   fontWeight: PropTypes.string,
   fontSize: PropTypes.string,
   paddingLeft: PropTypes.string,
+  color: PropTypes.string,
+  backgroundColor: PropTypes.string,
   loading: PropTypes.bool,
   className: PropTypes.string,
   onClick: PropTypes.func,

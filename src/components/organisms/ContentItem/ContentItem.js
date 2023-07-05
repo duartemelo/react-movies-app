@@ -50,7 +50,6 @@ const ContentItem = (props) => {
         className="box-shadow pos-relative"
         width="200px"
         height="265px"
-        zIndex={999}
       />
 
       <TextContainer>

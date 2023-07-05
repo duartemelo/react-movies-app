@@ -2,3 +2,7 @@
   margin-left: var(--menu-width);
   margin-top: 40px;
 }
+
+.small-screen{
+  margin-left: var(--mobile-menu-width);
+}
