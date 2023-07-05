@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ContentItem from "../../components/organisms/ContentItem/ContentItem";
 import classes from "./Films.module.css";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,34 +12,59 @@ import Button from "../../components/molecules/Button/Button";
 const Films = (props) => {
   const { isLoading, error, sendRequest: fetchFilms } = useHttp();
   const [films, setFilms] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   let { page } = useParams();
+  const [searchTimer, setSearchTimer] = useState(null);
 
   const navigate = useNavigate();
 
   const { apiUrl } = props;
   const { genreId } = props;
 
-  useEffect(() => {
-    if (apiUrl) {
-      fetchFilms({ url: apiUrl, params: { page: page } }, (data) => {
-        setFilms(data.results);
-      });
-    } else if (genreId) {
-      fetchFilms(
-        {
-          url: "/discover/movie",
-          params: {
-            page: page,
-            with_genres: genreId,
-            sort_by: "popularity.desc",
+  const getFilms = useCallback(
+    (searchValue) => {
+      if (searchValue !== "") {
+        fetchFilms(
+          {
+            url: "/search/movie",
+            params: {
+              query: searchValue,
+              page: page,
+            },
           },
-        },
-        (data) => {
-          setFilms(data.results);
+          (data) => {
+            setFilms(data.results);
+          }
+        );
+      } else {
+        if (apiUrl) {
+          fetchFilms({ url: apiUrl, params: { page: page } }, (data) => {
+            setFilms(data.results);
+          });
+        } else if (genreId) {
+          fetchFilms(
+            {
+              url: "/discover/movie",
+              params: {
+                page: page,
+                with_genres: genreId,
+                sort_by: "popularity.desc",
+              },
+            },
+            (data) => {
+              setFilms(data.results);
+            }
+          );
         }
-      );
-    }
-  }, [apiUrl, genreId, page, fetchFilms]);
+      }
+    },
+    [apiUrl, fetchFilms, genreId, page]
+  );
+
+  useEffect(() => {
+    setSearchQuery("");
+    getFilms("");
+  }, [getFilms]);
 
   const handlePreviousPageClick = () => {
     navigate(`${props.pageUrl}/${parseInt(page) - 1}`);
@@ -47,6 +72,19 @@ const Films = (props) => {
 
   const handleNextPageClick = () => {
     navigate(`${props.pageUrl}/${parseInt(page) + 1}`);
+  };
+
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+
+    if (searchTimer) {
+      clearTimeout(searchTimer);
+    }
+    const newTimer = setTimeout(() => {
+      getFilms(event.target.value);
+    }, 500);
+
+    setSearchTimer(newTimer);
   };
 
   if (isLoading) {
@@ -70,7 +108,11 @@ const Films = (props) => {
   return (
     <React.Fragment>
       <Nav>
-        <Input placeholder="Search for a movie..." />
+        <Input
+          placeholder="Search for a movie..."
+          value={searchQuery}
+          onChange={handleSearchInputChange}
+        />
       </Nav>
       <div className={`${classes["content-container"]} mt-4`}>
         {renderedFilms}

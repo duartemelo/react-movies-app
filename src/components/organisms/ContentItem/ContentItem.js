@@ -42,14 +42,14 @@ const ContentItem = (props) => {
   return (
     <div className={`${classes["content-item"]} mt-3`}>
       <Image
-          imageSrc={props.imageSource}
-          alt="Content Image"
-          borderRadius="5px"
-          className="box-shadow pos-relative"
-          width="200px"
-          height="265px"
-          zIndex="999"
-        />
+        imageSrc={props.imageSource}
+        alt="Content Image"
+        borderRadius="5px"
+        className="box-shadow pos-relative"
+        width="200px"
+        height="265px"
+        zIndex={999}
+      />
 
       <TextContainer>
         <IsolatedText
@@ -77,6 +77,7 @@ const ContentItem = (props) => {
           transition: "all .2s",
           visibility: !toolTipStatus ? "hidden" : "visible",
           top: ratingContainerY - 32,
+          fontWeight: 500,
         }}
       />
     </div>
@@ -89,6 +90,5 @@ ContentItem.propTypes = {
   rating: PropTypes.number.isRequired,
   vote_count: PropTypes.number.isRequired,
 };
-
 
 export default ContentItem;
