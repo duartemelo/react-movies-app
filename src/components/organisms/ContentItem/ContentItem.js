@@ -13,8 +13,10 @@ const ContentItem = (props) => {
   const [ratingContainerY, setRatingContainerY] = useState(0);
 
   const getPosition = () => {
-    const y = myRef.current.offsetTop;
-    setRatingContainerY(y);
+    if (myRef.current) {
+      const y = myRef.current.offsetTop;
+      setRatingContainerY(y);
+    }
   };
 
   useEffect(() => {
