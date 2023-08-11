@@ -87,14 +87,6 @@ const Films = (props) => {
     setSearchTimer(newTimer);
   };
 
-  if (isLoading) {
-    return <SpinnerContainer />;
-  }
-
-  if (error !== null) {
-    return <Error>There was an error gathering films.</Error>;
-  }
-
   const renderedFilms = films.map((film) => (
     <ContentItem
       key={film.id}
@@ -114,27 +106,33 @@ const Films = (props) => {
           onChange={handleSearchInputChange}
         />
       </Nav>
-      <div className={`${classes["content-container"]} mt-4`}>
-        {renderedFilms}
-        <div
-          className={`${classes["paginate-buttons-container"]} ${
-            page > 1 ? classes["justify-space-between"] : classes["justify-end"]
-          } mt-4`}
-        >
-          {page > 1 && (
-            <Button
-              className="default-button"
-              onClick={handlePreviousPageClick}
-            >
-              Previous page
-            </Button>
-          )}
+      {isLoading && <SpinnerContainer />}
+      {error !== null && <Error>There was an error gathering films.</Error>}
+      {!isLoading && error === null && (
+        <div className={`${classes["content-container"]} mt-4`}>
+          {renderedFilms}
+          <div
+            className={`${classes["paginate-buttons-container"]} ${
+              page > 1
+                ? classes["justify-space-between"]
+                : classes["justify-end"]
+            } mt-4`}
+          >
+            {page > 1 && (
+              <Button
+                className="default-button"
+                onClick={handlePreviousPageClick}
+              >
+                Previous page
+              </Button>
+            )}
 
-          <Button className="default-button" onClick={handleNextPageClick}>
-            Next page
-          </Button>
+            <Button className="default-button" onClick={handleNextPageClick}>
+              Next page
+            </Button>
+          </div>
         </div>
-      </div>
+      )}
     </React.Fragment>
   );
 };
