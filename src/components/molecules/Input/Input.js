@@ -4,7 +4,7 @@ import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import PropTypes from "prop-types";
 
 const Input = (props) => {
-  const classNames = `${props.className} ${classes["search-bar"]}`;
+  const classNames = `${props.className} ${classes["input"]}`;
   return (
     <React.Fragment>
       <input
