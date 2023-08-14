@@ -8,7 +8,17 @@
   overflow-x: hidden;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  z-index: 2;
+}
+
+.backdrop {
+  top: 0;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  height: 100%;
   z-index: 1;
+  backdrop-filter: blur(8px);
 }
 
 .small-screen {
@@ -29,8 +39,30 @@
   }
 }
 
+@keyframes slide-animation-reversed {
+  from {
+    margin-left: 0;
+  }
+  to {
+    margin-left: calc(var(--mobile-menu-width) - var(--menu-width));
+  }
+}
+
 .slide-in {
   animation-name: slide-animation;
   animation-duration: 0.5s;
   animation-timing-function: ease;
+}
+
+.slide-out {
+  animation-name: slide-animation-reversed;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+}
+
+.close-menu {
+  position: absolute;
+  display: block;
+  top: 5px;
+  right: 0px;
 }

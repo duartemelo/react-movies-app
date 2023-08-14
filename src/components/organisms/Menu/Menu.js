@@ -1,26 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
 import classes from "./Menu.module.css";
+
 import MenuSection from "../../atoms/MenuSection/MenuSection";
 import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
 import Divider from "../../atoms/Divider/Divider";
 import Image from "../../molecules/Image/Image";
 import Button from "../../molecules/Button/Button";
+
 import image from "../../../assets/img/profile-image.jpg";
+
 import { logout } from "../../../services/auth";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+
 import useHttp from "../../../hooks/use-http";
 import { authActions } from "../../../store/slices/auth-slice";
 
-import { BiMenu } from "react-icons/bi";
-
-/*
-TODO: close menu button style
-close menu button animation
-when expanding mobile menu, blur the rest of the layout
-when clicking on the blur area, close the menu
-when clicking a button on the mobile menu, close it
-*/
+import { BiLeftArrowAlt, BiMenu } from "react-icons/bi";
 
 const Menu = (props) => {
   const location = useLocation();
@@ -28,6 +25,7 @@ const Menu = (props) => {
   const dispatch = useDispatch();
   const [genreButtons, setGenreButtons] = useState([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuClosing, setMobileMenuClosing] = useState(false);
   const { sendRequest: fetchFilms } = useHttp();
   const name = useSelector((state) => state.auth.name);
 
@@ -86,116 +84,147 @@ const Menu = (props) => {
     navigate("/login");
   };
 
-  return (
-    <div
-      className={`${classes["menu-container"]} ${
-        props.isMobile && !mobileMenuOpen ? classes["small-screen"] : ""
-      } ${mobileMenuOpen ? classes["slide-in"] : ""}`}
-    >
-      {props.isMobile && !mobileMenuOpen ? (
-        <>
-          <MenuSection className={"mt-4"}>
-            <Button
-              className="active centered-text no-animate"
-              width="40px"
-              height="40px"
-              paddingLeft="0"
-              backgroundColor={"var(--dark-blue"}
-              color="white"
-              fontSize="25px"
-              onClick={() => setMobileMenuOpen(true)}
-            >
-              <BiMenu />
-            </Button>
-          </MenuSection>
-        </>
-      ) : (
-        <>
-          {props.isMobile && (
-            <Button className="active" onClick={() => setMobileMenuOpen(false)}>
-              close
-            </Button>
-          )}
+  const handleMobileMenuClose = () => {
+    setMobileMenuClosing(true);
+    setTimeout(() => {
+      setMobileMenuClosing(false);
+      setMobileMenuOpen(false);
+    }, 500);
+  };
 
-          <MenuSection className={"mt-4"}>
-            <Image
-              imageSrc={image}
-              alt="Profile image"
-              width="130px"
-              height="130px"
-              borderRadius="5px"
-              className="centered box-shadow"
-            />
-            <IsolatedText
-              className="mt-2 centered-text"
-              color="var(--white)"
-              fontWeight="500"
-              fontSize="14px"
-              checkForLoading={true}
-            >
-              {name}
-            </IsolatedText>
-          </MenuSection>
-          <Divider width="130px" className="mt-2 centered" />
-          <MenuSection>
-            <IsolatedText
-              className="mt-3 centered"
-              width="130px"
-              display="block"
-              color="#fff"
-              fontSize="12px"
-            >
-              Discover
-            </IsolatedText>
-            {discoverButtons.map((button) => (
+  const handleMobileMenuButtonClick = (buttonLink) => {
+    if (props.isMobile) {
+      handleMobileMenuClose();
+    }
+    navigate(buttonLink);
+  };
+
+  return (
+    <>
+      <div
+        className={`${classes["menu-container"]} ${
+          props.isMobile && !mobileMenuOpen ? classes["small-screen"] : ""
+        } ${mobileMenuOpen && !mobileMenuClosing ? classes["slide-in"] : ""}  ${
+          mobileMenuClosing ? classes["slide-out"] : ""
+        }`}
+      >
+        {props.isMobile && !mobileMenuOpen ? (
+          <>
+            <MenuSection className={"mt-4"}>
               <Button
-                key={button.section}
-                className={getButtonClasses(
-                  button.link,
-                  "centered block mt-1 box-shadow"
-                )}
-                onClick={() => navigate(button.link)}
+                className="active centered-text no-animate"
+                width="40px"
+                height="40px"
+                paddingLeft="0"
+                backgroundColor={"var(--dark-blue"}
+                color="white"
+                fontSize="25px"
+                onClick={() => setMobileMenuOpen(true)}
               >
-                {button.text}
+                <BiMenu />
               </Button>
-            ))}
-          </MenuSection>
-          <MenuSection>
-            <IsolatedText
-              className="mt-3 centered"
-              width="130px"
-              display="block"
-              color="#fff"
-              fontSize="12px"
-            >
-              Genres
-            </IsolatedText>
-            {genreButtons.map((button) => (
+            </MenuSection>
+          </>
+        ) : (
+          <>
+            {props.isMobile && (
               <Button
-                key={button.section}
-                className={getButtonClasses(
-                  button.link,
-                  "centered block mt-1 box-shadow"
-                )}
-                onClick={() => navigate(button.link)}
+                className={`active centered-text no-animate ${classes["close-menu"]}`}
+                width="40px"
+                height="40px"
+                paddingLeft="0"
+                backgroundColor={"var(--dark-blue"}
+                color="white"
+                fontSize="25px"
+                onClick={handleMobileMenuClose}
               >
-                {button.text}
+                <BiLeftArrowAlt />
               </Button>
-            ))}
-          </MenuSection>
-          <MenuSection>
-            <Button
-              className="centered block box-shadow active mt-3 mb-2"
-              backgroundColor="var(--white)"
-              color="var(--blue)"
-              onClick={handleLogout}
-            >
-              Logout
-            </Button>
-          </MenuSection>
-        </>
+            )}
+
+            <MenuSection className={"mt-4"}>
+              <Image
+                imageSrc={image}
+                alt="Profile image"
+                width="130px"
+                height="130px"
+                borderRadius="5px"
+                className="centered box-shadow"
+              />
+              <IsolatedText
+                className="mt-2 centered-text"
+                color="var(--white)"
+                fontWeight="500"
+                fontSize="14px"
+                checkForLoading={true}
+              >
+                {name}
+              </IsolatedText>
+            </MenuSection>
+            <Divider width="130px" className="mt-2 centered" />
+            <MenuSection>
+              <IsolatedText
+                className="mt-3 centered"
+                width="130px"
+                display="block"
+                color="#fff"
+                fontSize="12px"
+              >
+                Discover
+              </IsolatedText>
+              {discoverButtons.map((button) => (
+                <Button
+                  key={button.section}
+                  className={getButtonClasses(
+                    button.link,
+                    "centered block mt-1 box-shadow"
+                  )}
+                  onClick={() => handleMobileMenuButtonClick(button.link)}
+                >
+                  {button.text}
+                </Button>
+              ))}
+            </MenuSection>
+            <MenuSection>
+              <IsolatedText
+                className="mt-3 centered"
+                width="130px"
+                display="block"
+                color="#fff"
+                fontSize="12px"
+              >
+                Genres
+              </IsolatedText>
+              {genreButtons.map((button) => (
+                <Button
+                  key={button.section}
+                  className={getButtonClasses(
+                    button.link,
+                    "centered block mt-1 box-shadow"
+                  )}
+                  onClick={() => handleMobileMenuButtonClick(button.link)}
+                >
+                  {button.text}
+                </Button>
+              ))}
+            </MenuSection>
+            <MenuSection>
+              <Button
+                className="centered block box-shadow active mt-3 mb-2"
+                backgroundColor="var(--white)"
+                color="var(--blue)"
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            </MenuSection>
+          </>
+        )}
+      </div>
+      {props.isMobile && mobileMenuOpen && !mobileMenuClosing && (
+        <div className={classes.backdrop} onClick={handleMobileMenuClose}></div>
       )}
-    </div>
+    </>
   );
 };
 
