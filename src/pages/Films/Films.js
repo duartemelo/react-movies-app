@@ -1,13 +1,19 @@
 import React, { useCallback, useEffect, useState } from "react";
-import ContentItem from "../../components/organisms/ContentItem/ContentItem";
-import classes from "./Films.module.css";
+import { createPortal } from "react-dom";
 import { useNavigate, useParams } from "react-router-dom";
-import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
-import Nav from "../../components/atoms/Nav/Nav";
-import Input from "../../components/molecules/Input/Input";
-import Error from "../../components/molecules/Error/Error";
+
+import classes from "./Films.module.css";
+
 import useHttp from "../../hooks/use-http";
+
+import Nav from "../../components/atoms/Nav/Nav";
+import Modal from "../../components/atoms/Modal/Modal";
+import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
+import Input from "../../components/molecules/Input/Input";
 import Button from "../../components/molecules/Button/Button";
+import Error from "../../components/molecules/Error/Error";
+import ContentItem from "../../components/organisms/ContentItem/ContentItem";
+
 
 const Films = (props) => {
   const { isLoading, error, sendRequest: fetchFilms } = useHttp();
@@ -15,6 +21,7 @@ const Films = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   let { page } = useParams();
   const [searchTimer, setSearchTimer] = useState(null);
+  const [showModal, setShowModal] = useState(true);
 
   const navigate = useNavigate();
 
@@ -131,6 +138,13 @@ const Films = (props) => {
               Next page
             </Button>
           </div>
+          {showModal &&
+            createPortal(
+              <Modal onClose={() => setShowModal(false)}>
+                <h3>Modal content</h3>
+              </Modal>,
+              document.getElementById("portal-wrapper")
+            )}
         </div>
       )}
     </React.Fragment>

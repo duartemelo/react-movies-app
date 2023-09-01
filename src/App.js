@@ -5,7 +5,10 @@ import AppRoutes from "./routes/routes";
 function App() {
   return (
     <div className="App">
-      <AppRoutes />
+      <div id="portal-wrapper" />
+      <div id="content-wrapper">
+        <AppRoutes />
+      </div>
     </div>
   );
 }

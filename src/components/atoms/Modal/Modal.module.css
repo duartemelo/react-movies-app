@@ -1,0 +1,25 @@
+.modal {
+  position: fixed;
+  display: flex;
+  z-index: 3;
+  max-width: 1000px;
+  width: calc(100% - 48px);
+  padding: 24px;
+  height: 100px;
+  background-color: #fff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal > .close-button {
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+}

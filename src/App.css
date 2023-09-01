@@ -8,6 +8,11 @@
   pointer-events: none;
 }
 
+.blur {
+  filter: blur(4px);
+  overflow-y: hidden;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

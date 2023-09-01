@@ -1,8 +1,8 @@
-.right-container{
+.right-container {
   margin-left: var(--menu-width);
-  margin-top: 40px;
+  padding-top: 40px;
 }
 
-.small-screen{
+.small-screen {
   margin-left: var(--mobile-menu-width);
 }
