@@ -1,0 +1,13 @@
+.detail {
+  display: flex;
+  gap: 20px;
+}
+
+.detail h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.detail p {
+  margin-top: 10px;
+}
