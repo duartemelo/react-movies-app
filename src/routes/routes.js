@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from "react";
-
-import ContentLayout from "../layouts/ContentLayout/ContentLayout";
-import AuthLayout from "../layouts/AuthLayout/AuthLayout";
-import Films from "../pages/Films/Films";
 import {
   BrowserRouter,
   Navigate,
@@ -10,11 +6,18 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
+
 import useHttp from "../hooks/use-http";
+
+import ContentLayout from "../layouts/ContentLayout/ContentLayout";
+import AuthLayout from "../layouts/AuthLayout/AuthLayout";
+import PrivateLayout from "../layouts/PrivateLayout/PrivateLayout";
+
+import Films from "../pages/Films/Films";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+
 import image from "../assets/img/auth-background.jpg";
-import PrivateLayout from "../layouts/PrivateLayout/PrivateLayout";
 
 const AppRoutes = () => {
   const [genreButtons, setGenreButtons] = useState([]);

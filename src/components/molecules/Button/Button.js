@@ -38,10 +38,10 @@ const Button = (props) => {
     >
       {props.loading === true ? (
         <Spinner
-          width="10px"
-          height="10px"
-          border="5px solid #eee"
-          borderTop="5px solid var(--blue)"
+          width="15px"
+          height="15px"
+          border="2px solid #eee"
+          borderTop="2px solid var(--blue)"
           className="centered block"
         />
       ) : (
