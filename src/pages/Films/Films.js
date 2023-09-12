@@ -16,7 +16,7 @@ const Films = (props) => {
   const { isLoading, error, sendRequest: fetchFilms } = useHttp();
   const [films, setFilms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [maxPage, setMaxPage] = useState("");
+  const [maxPage, setMaxPage] = useState(null);
   let { page } = useParams();
   const [searchTimer, setSearchTimer] = useState(null);
 
@@ -45,6 +45,7 @@ const Films = (props) => {
         if (apiUrl) {
           fetchFilms({ url: apiUrl, params: { page: page } }, (data) => {
             setFilms(data.results);
+            setMaxPage(data.total_pages);
           });
         } else if (genreId) {
           fetchFilms(
@@ -58,6 +59,7 @@ const Films = (props) => {
             },
             (data) => {
               setFilms(data.results);
+              setMaxPage(data.total_pages);
             }
           );
         }
@@ -114,7 +116,10 @@ const Films = (props) => {
       </Nav>
       {isLoading && <SpinnerContainer />}
       {error !== null && <Error>There was an error gathering films.</Error>}
-      {!isLoading && error === null && (
+      {films.length === 0 && (
+        <Error>There are no films based on your search.</Error>
+      )}
+      {!isLoading && error === null && films.length > 0 && (
         <div className={`${classes["content-container"]} mt-4`}>
           {renderedFilms}
           <div
