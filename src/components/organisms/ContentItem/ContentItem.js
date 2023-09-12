@@ -1,35 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
-import Image from "../../molecules/Image/Image";
+import { useNavigate } from "react-router-dom";
+
 import TextContainer from "../../atoms/TextContainer/TextContainer";
 import Text from "../../atoms/Text/Text";
-import classes from "./ContentItem.module.css";
-import RatingContainer from "../../molecules/RatingContainer/RatingContainer";
 import Tooltip from "../../atoms/Tooltip/Tooltip";
-import PropTypes from "prop-types";
-import Modal from "../Modal/Modal";
-import FilmDetail from "../FilmDetail/FilmDetail";
+import Image from "../../molecules/Image/Image";
+import RatingContainer from "../../molecules/RatingContainer/RatingContainer";
 
-import usePortal from "../../../hooks/use-portal";
+import classes from "./ContentItem.module.css";
+
+import PropTypes from "prop-types";
 
 const ContentItem = (props) => {
   const myRef = useRef();
+  const navigate = useNavigate();
+
   const [toolTipStatus, setToolTipStatus] = useState(false);
   const [ratingContainerY, setRatingContainerY] = useState(0);
-  const [showDetails, setShowDetails] = useState(false);
-
-  const { portal, setPortalContent } = usePortal("portal-wrapper");
-
-  useEffect(() => {
-    if (showDetails) {
-      setPortalContent(
-        <Modal onClose={() => setShowDetails(false)}>
-          <FilmDetail filmId={props.filmId} />
-        </Modal>
-      );
-    } else {
-      setPortalContent(null);
-    }
-  }, [showDetails, props.filmId, setPortalContent]);
 
   const getPosition = () => {
     if (myRef.current) {
@@ -60,11 +47,15 @@ const ContentItem = (props) => {
     setToolTipStatus(false);
   };
 
+  const handleClickFilm = () => {
+    navigate(`/film/${props.filmId}`);
+  };
+
   return (
     <>
       <div
         className={`${classes["content-item"]} mt-3`}
-        onClick={() => setShowDetails(true)}
+        onClick={handleClickFilm}
       >
         <Image
           imageSrc={props.imageSource}
@@ -105,7 +96,6 @@ const ContentItem = (props) => {
           }}
         />
       </div>
-      {portal}
     </>
   );
 };

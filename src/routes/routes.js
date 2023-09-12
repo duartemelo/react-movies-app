@@ -16,6 +16,7 @@ import PrivateLayout from "../layouts/PrivateLayout/PrivateLayout";
 import Films from "../pages/Films/Films";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import Film from "../pages/Film.js/Film";
 
 import image from "../assets/img/auth-background.jpg";
 
@@ -84,6 +85,7 @@ const AppRoutes = () => {
               element={<Films genreId={genre.id} pageUrl={genre.link} />}
             />
           ))}
+          <Route path={'/film/:id'} element={<Film />}/>
         </Route>
         <Route
           element={

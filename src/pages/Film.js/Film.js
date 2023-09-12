@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import Text from "../../atoms/Text/Text";
-import Spinner from "../../atoms/Spinner/Spinner";
-import Image from "../../molecules/Image/Image";
-import Genre from "../../molecules/Genre/Genre";
+import Text from "../../components/atoms/Text/Text";
+import Spinner from "../../components/atoms/Spinner/Spinner";
+import Image from "../../components/molecules/Image/Image";
+import Genre from "../../components/molecules/Genre/Genre";
 
-import classes from "./FilmDetail.module.css";
+import classes from "./Film.module.css";
 
-import PropTypes from "prop-types";
-import useHttp from "../../../hooks/use-http";
+import useHttp from "../../hooks/use-http";
 
-const FilmDetail = (props) => {
+const Film = () => {
   const [loading, setLoading] = useState(true);
   const { sendRequest: fetchFilm } = useHttp(); // TODO: error handling, isLoading
   const [filmDetails, setFilmDetails] = useState({});
 
-  const { filmId } = props;
+  const { id: filmId } = useParams();
 
   useEffect(() => {
-    // console.log(filmId);
     fetchFilm({ url: `movie/${filmId}?language=en-US` }, (data) => {
       setFilmDetails(data);
       setLoading(false);
@@ -54,8 +53,4 @@ const FilmDetail = (props) => {
   );
 };
 
-FilmDetail.propTypes = {
-  filmId: PropTypes.number.isRequired,
-};
-
-export default FilmDetail;
+export default Film;

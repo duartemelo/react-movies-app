@@ -14,11 +14,12 @@ import ContentItem from "../../components/organisms/ContentItem/ContentItem";
 
 const Films = (props) => {
   const { isLoading, error, sendRequest: fetchFilms } = useHttp();
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [films, setFilms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(null);
-  const [searchParams, setSearchParams] = useSearchParams();
 
   const [searchTimer, setSearchTimer] = useState(null);
 
