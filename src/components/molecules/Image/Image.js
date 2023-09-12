@@ -19,7 +19,9 @@ const Image = (props) => {
 
   return (
     <div
-      className={`${props.className} ${classes["image-container"]}`}
+      className={`${props.className ? props.className : " "} ${
+        classes["image-container"]
+      }`}
       style={{
         width: styleObj.width,
         height: styleObj.height,

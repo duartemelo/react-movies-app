@@ -1,0 +1,11 @@
+.genre-wrapper {
+  background-color: var(--gray);
+  border-radius: 10px;
+  width: max-content;
+  padding: 1px 10px;
+  text-align: center;
+}
+
+.genre-wrapper > p {
+  margin: 0;
+}
