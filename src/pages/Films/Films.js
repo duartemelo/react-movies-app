@@ -16,6 +16,7 @@ const Films = (props) => {
   const { isLoading, error, sendRequest: fetchFilms } = useHttp();
   const [films, setFilms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [maxPage, setMaxPage] = useState("");
   let { page } = useParams();
   const [searchTimer, setSearchTimer] = useState(null);
 
@@ -37,6 +38,7 @@ const Films = (props) => {
           },
           (data) => {
             setFilms(data.results);
+            setMaxPage(data.total_pages);
           }
         );
       } else {
@@ -130,7 +132,7 @@ const Films = (props) => {
                 Previous page
               </Button>
             )}
-            {page < 500 && (
+            {page < 500 && page < maxPage && (
               <Button className="default-button" onClick={handleNextPageClick}>
                 Next page
               </Button>
