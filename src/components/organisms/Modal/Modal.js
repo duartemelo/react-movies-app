@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Button from "../../molecules/Button/Button";
 import classes from "./Modal.module.css";
 import PropTypes from "prop-types";
@@ -5,8 +6,15 @@ import PropTypes from "prop-types";
 import { BiX } from "react-icons/bi";
 
 const Modal = (props) => {
+  useEffect(() => {
+    document.body.classList.add("no-scroll");
 
-  // close modal then clicking on backdrop
+    return () => {
+      document.body.classList.remove("no-scroll");
+    };
+  }, []);
+
+  // close modal when clicking on backdrop
   const handleBackdropClick = (event) => {
     if (event.target.classList.contains(classes["backdrop-container"])) {
       props.onClose();
@@ -14,7 +22,10 @@ const Modal = (props) => {
   };
 
   return (
-    <div className={classes["backdrop-container"]} onClick={handleBackdropClick}>
+    <div
+      className={classes["backdrop-container"]}
+      onClick={handleBackdropClick}
+    >
       <div className={classes.modal}>
         <Button
           className={`active centered-text ${classes["close-button"]}`}

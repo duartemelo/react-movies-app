@@ -8,8 +8,7 @@
   pointer-events: none;
 }
 
-.blur {
-  filter: blur(4px);
+.no-scroll {
   overflow-y: hidden;
 }
 
