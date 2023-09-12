@@ -72,7 +72,7 @@ const ContentItem = (props) => {
           borderRadius="5px"
           className="box-shadow pos-relative"
           width="200px"
-          height="265px"
+          height="300px"
         />
 
         <TextContainer>
