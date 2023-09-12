@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import classes from "./Menu.module.css";
 
 import MenuSection from "../../atoms/MenuSection/MenuSection";
-import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
+import Text from "../../atoms/Text/Text";
 import Divider from "../../atoms/Divider/Divider";
 import Image from "../../molecules/Image/Image";
 import Button from "../../molecules/Button/Button";
@@ -151,7 +151,7 @@ const Menu = (props) => {
                 borderRadius="5px"
                 className="centered box-shadow"
               />
-              <IsolatedText
+              <Text
                 className="mt-2 centered-text"
                 color="var(--white)"
                 fontWeight="500"
@@ -159,11 +159,11 @@ const Menu = (props) => {
                 checkForLoading={true}
               >
                 {name}
-              </IsolatedText>
+              </Text>
             </MenuSection>
             <Divider width="130px" className="mt-2 centered" />
             <MenuSection>
-              <IsolatedText
+              <Text
                 className="mt-3 centered"
                 width="130px"
                 display="block"
@@ -171,7 +171,7 @@ const Menu = (props) => {
                 fontSize="12px"
               >
                 Discover
-              </IsolatedText>
+              </Text>
               {discoverButtons.map((button) => (
                 <Button
                   key={button.section}
@@ -186,7 +186,7 @@ const Menu = (props) => {
               ))}
             </MenuSection>
             <MenuSection>
-              <IsolatedText
+              <Text
                 className="mt-3 centered"
                 width="130px"
                 display="block"
@@ -194,7 +194,7 @@ const Menu = (props) => {
                 fontSize="12px"
               >
                 Genres
-              </IsolatedText>
+              </Text>
               {genreButtons.map((button) => (
                 <Button
                   key={button.section}

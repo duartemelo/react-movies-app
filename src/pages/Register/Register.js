@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import IsolatedText from "../../components/atoms/IsolatedText/IsolatedText";
+import Text from "../../components/atoms/Text/Text";
 import Input from "../../components/molecules/Input/Input";
 import Button from "../../components/molecules/Button/Button";
 import classes from "./Register.module.css";
@@ -84,9 +84,9 @@ const Register = () => {
 
   return (
     <React.Fragment>
-      <IsolatedText color="var(--blue)" fontWeight="700" fontSize="22px">
+      <Text as="h1" color="var(--blue)" fontWeight="700" fontSize="22px">
         React Movies App
-      </IsolatedText>
+      </Text>
       <form onSubmit={handleRegister}>
         <Input
           placeholder="Name"
@@ -133,7 +133,7 @@ const Register = () => {
           required
         />
         {error && (
-          <IsolatedText
+          <Text
             color="var(--red)"
             fontWeight="600"
             fontSize="12px"
@@ -141,7 +141,7 @@ const Register = () => {
             className="mt-05"
           >
             {errorContent(error.errorCode)}
-          </IsolatedText>
+          </Text>
         )}
         <div className={classes["action-container"]}>
           <Button className="secondary" type="submit" loading={isLoading}>

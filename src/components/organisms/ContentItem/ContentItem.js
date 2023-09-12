@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "../../molecules/Image/Image";
 import TextContainer from "../../atoms/TextContainer/TextContainer";
-import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
+import Text from "../../atoms/Text/Text";
 import classes from "./ContentItem.module.css";
 import RatingContainer from "../../molecules/RatingContainer/RatingContainer";
 import Tooltip from "../../atoms/Tooltip/Tooltip";
@@ -76,7 +76,7 @@ const ContentItem = (props) => {
         />
 
         <TextContainer>
-          <IsolatedText
+          <Text
             className="centered-text mt-1"
             fontSize="12px"
             fontWeight="600"
@@ -84,7 +84,7 @@ const ContentItem = (props) => {
             paddingRight="15px"
           >
             {props.title}
-          </IsolatedText>
+          </Text>
           <RatingContainer
             ref={myRef}
             rating={ratingDivide()}

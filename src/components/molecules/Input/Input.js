@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Input.module.css";
-import IsolatedText from "../../atoms/IsolatedText/IsolatedText";
+import Text from "../../atoms/Text/Text";
 import PropTypes from "prop-types";
 
 const Input = (props) => {
@@ -17,7 +17,7 @@ const Input = (props) => {
         required={props.required ? true : false}
       />
       {props.hasError && (
-        <IsolatedText
+        <Text
           color="var(--red)"
           fontWeight="600"
           fontSize="12px"
@@ -25,7 +25,7 @@ const Input = (props) => {
           className="mt-05"
         >
           {props.errorMessage}
-        </IsolatedText>
+        </Text>
       )}
     </React.Fragment>
   );

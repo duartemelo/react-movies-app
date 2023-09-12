@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const IsolatedText = (props) => {
+const Text = (props) => {
   const styleObj = {
     color: props.color,
     fontWeight: props.fontWeight,
@@ -13,14 +13,17 @@ const IsolatedText = (props) => {
     letterSpacing: props.letterSpacing,
   };
 
+  const Component = props.as || "p";
+
   return (
-    <p className={props.className} style={styleObj}>
+    <Component className={props.className} style={styleObj}>
       {props.children}
-    </p>
+    </Component>
   );
 };
 
-IsolatedText.propTypes = {
+Text.propTypes = {
+  as: PropTypes.string,
   color: PropTypes.string,
   fontWeight: PropTypes.string,
   fontSize: PropTypes.string,
@@ -33,4 +36,4 @@ IsolatedText.propTypes = {
   children: PropTypes.node,
 };
 
-export default IsolatedText;
+export default Text;
