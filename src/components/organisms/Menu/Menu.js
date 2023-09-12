@@ -26,7 +26,7 @@ const Menu = (props) => {
   const [genreButtons, setGenreButtons] = useState([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuClosing, setMobileMenuClosing] = useState(false);
-  const { sendRequest: fetchFilms } = useHttp();
+  const { sendRequest: fetchGenres } = useHttp();
   const name = useSelector((state) => state.auth.name);
 
   const discoverButtons = [
@@ -48,7 +48,7 @@ const Menu = (props) => {
   ];
 
   useEffect(() => {
-    fetchFilms({ url: "genre/movie/list" }, (data) => {
+    fetchGenres({ url: "genre/movie/list" }, (data) => {
       setGenreButtons(
         data.genres.map((genre) => ({
           id: genre.id,
@@ -58,7 +58,7 @@ const Menu = (props) => {
         }))
       );
     });
-  }, [fetchFilms]);
+  }, [fetchGenres]);
 
   const getButtonClasses = (buttonLink, classNames) => {
     // buttonLink without page "/1 or /2 or /30" and with spaces replaced with "%20"
@@ -116,7 +116,7 @@ const Menu = (props) => {
                 width="40px"
                 height="40px"
                 paddingLeft="0"
-                backgroundColor={"var(--dark-blue"}
+                backgroundColor={"var(--dark-blue)"}
                 color="white"
                 fontSize="25px"
                 onClick={() => setMobileMenuOpen(true)}

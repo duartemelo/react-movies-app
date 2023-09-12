@@ -1,15 +1,34 @@
+.back-button-wrapper {
+  width: 100%;
+  max-width: 1064px;
+  margin: 0 auto;
+  padding: 0px 32px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .wrapper {
   display: flex;
   gap: 20px;
+  max-width: 1064px;
+  padding: 0px 32px;
+  margin: 32px auto;
 }
 
-.right-side-wrapper > h2 {
+.right-side-wrapper > h2,
+h3,
+p {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.right-side-wrapper > p {
-  margin-top: 10px;
+.right-side-wrapper > h4 {
+  margin-top: 16px;
+  margin-bottom: 4px;
 }
 
 .spinner-container {
@@ -24,5 +43,34 @@
 .genres-wrapper {
   display: flex;
   gap: 8px;
+  margin-top: 8px;
+}
+
+.adult-genre > p {
+  color: var(--red) !important;
+}
+
+.cast-wrapper {
+  display: flex;
+  gap: 16px;
   margin-top: 10px;
+  max-width: 500px;
+  overflow: auto;
+  padding-bottom: 8px;
+}
+
+.cast-wrapper::-webkit-scrollbar {
+  height: 10px;
+}
+
+.cast-wrapper::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: var(--light-gray);
+}
+
+.cast-wrapper::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+  background-color: var(--gray);
 }
