@@ -73,14 +73,14 @@ const AppRoutes = () => {
           {discoverButtons.map((button) => (
             <Route
               key={button.link}
-              path={`${button.link}/:page`}
+              path={`${button.link}/`}
               element={<Films apiUrl={button.apiUrl} pageUrl={button.link} />}
             />
           ))}
           {genreButtons.map((genre) => (
             <Route
               key={genre.link}
-              path={`${genre.link}/:page`}
+              path={`${genre.link}/`}
               element={<Films genreId={genre.id} pageUrl={genre.link} />}
             />
           ))}

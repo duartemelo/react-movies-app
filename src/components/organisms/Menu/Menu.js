@@ -32,17 +32,17 @@ const Menu = (props) => {
   const discoverButtons = [
     {
       section: "popular",
-      link: "/popular/1",
+      link: "/popular/?page=1",
       text: "Popular",
     },
     {
       section: "trending",
-      link: "/trending/1",
+      link: "/trending/?page=1",
       text: "Trending",
     },
     {
       section: "top-rated",
-      link: "/top-rated/1",
+      link: "/top-rated/?page=1",
       text: "Top Rated",
     },
   ];
@@ -53,7 +53,7 @@ const Menu = (props) => {
         data.genres.map((genre) => ({
           id: genre.id,
           section: genre.name.toLowerCase(),
-          link: `/genre-${genre.name.toLowerCase()}/1`,
+          link: `/genre-${genre.name.toLowerCase()}/?page=1`,
           text: genre.name,
         }))
       );

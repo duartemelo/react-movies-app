@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import classes from "./Films.module.css";
 
@@ -16,17 +16,17 @@ const Films = (props) => {
   const { isLoading, error, sendRequest: fetchFilms } = useHttp();
   const [films, setFilms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(null);
-  let { page } = useParams();
-  const [searchTimer, setSearchTimer] = useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const navigate = useNavigate();
+  const [searchTimer, setSearchTimer] = useState(null);
 
   const { apiUrl } = props;
   const { genreId } = props;
 
   const getFilms = useCallback(
-    (searchValue) => {
+    (searchValue, page) => {
       if (searchValue !== "") {
         fetchFilms(
           {
@@ -65,20 +65,30 @@ const Films = (props) => {
         }
       }
     },
-    [apiUrl, fetchFilms, genreId, page]
+    [apiUrl, fetchFilms, genreId]
   );
 
   useEffect(() => {
-    setSearchQuery("");
-    getFilms("");
-  }, [getFilms]);
+    const search = searchParams.get("search") ?? "";
+    const page = searchParams.get("page") ?? "";
+
+    setSearchQuery(search);
+    setPage(page);
+    getFilms(search, page);
+  }, [searchParams, getFilms, setSearchParams]);
 
   const handlePreviousPageClick = () => {
-    navigate(`${props.pageUrl}/${parseInt(page) - 1}`);
+    setSearchParams({
+      page: Number(page) - 1,
+      ...(searchQuery && { search: searchQuery }),
+    });
   };
 
   const handleNextPageClick = () => {
-    navigate(`${props.pageUrl}/${parseInt(page) + 1}`);
+    setSearchParams({
+      page: Number(page) + 1,
+      ...(searchQuery && { search: searchQuery }),
+    });
   };
 
   const handleSearchInputChange = (event) => {
@@ -88,7 +98,10 @@ const Films = (props) => {
       clearTimeout(searchTimer);
     }
     const newTimer = setTimeout(() => {
-      getFilms(event.target.value);
+      setSearchParams({
+        page: 1,
+        ...(event.target.value && { search: event.target.value }),
+      });
     }, 500);
 
     setSearchTimer(newTimer);

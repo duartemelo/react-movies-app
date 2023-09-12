@@ -12,7 +12,7 @@ const Genre = (props) => {
         classes["genre-wrapper"]
       }`}
     >
-      <Text as="p" color="var(--blue)" fontSize={14} fontWeight={500}>
+      <Text as="p" color="var(--blue)" fontSize="14px" fontWeight="500">
         {props.children}
       </Text>
     </div>
