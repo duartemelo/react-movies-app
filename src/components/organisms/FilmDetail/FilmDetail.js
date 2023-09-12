@@ -36,6 +36,7 @@ const FilmDetail = (props) => {
       <Image
         width={"200px"}
         height={"250px"}
+        alt={filmDetails.original_title}
         imageSrc={"https://image.tmdb.org/t/p/w342" + filmDetails.poster_path}
       />
       <div>
