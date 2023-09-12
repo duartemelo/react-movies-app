@@ -130,10 +130,11 @@ const Films = (props) => {
                 Previous page
               </Button>
             )}
-
-            <Button className="default-button" onClick={handleNextPageClick}>
-              Next page
-            </Button>
+            {page < 500 && (
+              <Button className="default-button" onClick={handleNextPageClick}>
+                Next page
+              </Button>
+            )}
           </div>
         </div>
       )}
