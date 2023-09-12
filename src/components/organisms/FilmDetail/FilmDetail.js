@@ -36,11 +36,11 @@ const FilmDetail = (props) => {
       <Image
         width={"200px"}
         height={"250px"}
-        alt={filmDetails.original_title}
+        alt={filmDetails.title}
         imageSrc={"https://image.tmdb.org/t/p/w342" + filmDetails.poster_path}
       />
       <div>
-        <h1>{filmDetails.original_title}</h1>
+        <h1>{filmDetails.title}</h1>
         <p>{filmDetails.overview}</p>
       </div>
     </div>
