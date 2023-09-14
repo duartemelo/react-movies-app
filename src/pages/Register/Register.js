@@ -24,7 +24,7 @@ const Register = () => {
 
   useEffect(() => {
     if (isValid) {
-      navigate("/popular/1");
+      navigate("/popular");
     }
   }, [isValid, navigate]);
 
