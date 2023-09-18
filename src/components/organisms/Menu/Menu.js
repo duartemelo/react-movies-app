@@ -101,7 +101,7 @@ const Menu = (props) => {
 
   return (
     <>
-      <div
+      <nav
         className={`${classes["menu-container"]} ${
           props.isMobile && !mobileMenuOpen ? classes["small-screen"] : ""
         } ${mobileMenuOpen && !mobileMenuClosing ? classes["slide-in"] : ""}  ${
@@ -220,7 +220,7 @@ const Menu = (props) => {
             </MenuSection>
           </>
         )}
-      </div>
+      </nav>
       {props.isMobile && mobileMenuOpen && !mobileMenuClosing && (
         <div className={classes.backdrop} onClick={handleMobileMenuClose}></div>
       )}

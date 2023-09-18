@@ -15,7 +15,10 @@ const CastItem = (props) => {
   };
 
   return (
-    <Tooltip toolTipId={props.personId} toolTipText={props.personName}>
+    <Tooltip
+      toolTipId={props.personId.toString()}
+      toolTipText={props.personName}
+    >
       <div className={classes["image-wrapper"]} onClick={castItemClickHandler}>
         <Image
           key={props.personName}

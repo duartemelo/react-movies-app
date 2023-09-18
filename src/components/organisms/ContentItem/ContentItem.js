@@ -51,7 +51,7 @@ const ContentItem = (props) => {
             {props.title}
           </Text>
           <Tooltip
-            toolTipId={props.filmId}
+            toolTipId={props.filmId.toString()}
             toolTipText={`${props.rating} out of ${props.vote_count} votes`}
           >
             <RatingContainer rating={ratingDivide()} className="mt-05" />
