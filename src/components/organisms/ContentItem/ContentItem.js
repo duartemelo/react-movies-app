@@ -12,14 +12,10 @@ import classes from "./ContentItem.module.css";
 
 import PropTypes from "prop-types";
 
+import { ratingDivide } from "../../../utils/rating";
+
 const ContentItem = (props) => {
   const navigate = useNavigate();
-
-  const ratingDivide = () => {
-    let rating = props.rating;
-    rating = Math.round(rating) / 2;
-    return rating;
-  };
 
   const handleClickFilm = () => {
     navigate(`/film/${props.filmId}`);
@@ -54,7 +50,10 @@ const ContentItem = (props) => {
             toolTipId={props.filmId.toString()}
             toolTipText={`${props.rating} out of ${props.vote_count} votes`}
           >
-            <RatingContainer rating={ratingDivide()} className="mt-05" />
+            <RatingContainer
+              rating={ratingDivide(props.rating)}
+              className="mt-05"
+            />
           </Tooltip>
         </TextContainer>
       </div>

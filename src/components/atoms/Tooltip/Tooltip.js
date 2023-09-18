@@ -11,6 +11,7 @@ const Tooltip = (props) => {
         data-tooltip-id={props.toolTipId}
         data-tooltip-content={props.toolTipText}
         data-tooltip-place={props.toolTipPlace ? props.toolTipPlace : "top"}
+        className={props.wrapperClassName ? props.wrapperClassName : null}
       >
         {props.children}
       </div>
@@ -23,6 +24,7 @@ Tooltip.propTypes = {
   toolTipId: PropTypes.string.isRequired,
   toolTipText: PropTypes.string,
   toolTipPlace: PropTypes.string,
+  wrapperClassName: PropTypes.string,
   children: PropTypes.node,
 };
 

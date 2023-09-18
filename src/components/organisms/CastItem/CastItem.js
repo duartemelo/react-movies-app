@@ -23,8 +23,8 @@ const CastItem = (props) => {
         <Image
           key={props.personName}
           alt={props.personName}
-          width="60px"
-          height="60px"
+          width="70px"
+          height="70px"
           borderRadius="9999px"
           imageSrc={"https://image.tmdb.org/t/p/w342" + props.imagePath}
         />

@@ -3,23 +3,17 @@ import RatingText from "../../atoms/RatingText/RatingText";
 import classes from "./RatingContainer.module.css";
 import PropTypes from "prop-types";
 
-const RatingContainer = React.forwardRef((props, ref) => {
+const RatingContainer = (props) => {
   return (
-    <div ref={ref}
-      className={`${props.className} ${classes.container}`}
-      onMouseEnter={props.onMouseEnter}
-      onMouseLeave={props.onMouseLeave}
-    >
+    <div className={`${props.className} ${classes.container}`}>
       <RatingText rating={props.rating} />
     </div>
   );
-});
+};
 
 RatingContainer.propTypes = {
   className: PropTypes.string,
   rating: PropTypes.number,
-  onMouseEnter: PropTypes.func,
-  onMouseLeave: PropTypes.func,
 };
 
 export default RatingContainer;

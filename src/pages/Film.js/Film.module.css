@@ -19,16 +19,35 @@
   margin: 32px auto;
 }
 
-.right-side-wrapper > h2,
+.right-side-wrapper > h1,
 h3,
+h4,
 p {
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.right-side-wrapper > h4 {
-  margin-top: 16px;
+.right-side-wrapper > h2 {
+  margin-top: 4px;
+  margin-bottom: 0px;
+}
+
+.right-side-wrapper > .section-title {
+  margin-top: 20px;
   margin-bottom: 4px;
+}
+
+.rating-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.rating {
+  margin-left: 0;
+  margin-right: 4px;
+  max-width: fit-content;
+  cursor: default;
 }
 
 .spinner-container {
@@ -43,7 +62,7 @@ p {
 .genres-wrapper {
   display: flex;
   gap: 8px;
-  margin-top: 8px;
+  margin-top: 16px;
 }
 
 .adult-genre > p {
@@ -53,7 +72,7 @@ p {
 .cast-wrapper {
   display: flex;
   gap: 16px;
-  margin-top: 10px;
+  margin-top: 6px;
   max-width: 500px;
   overflow: auto;
   padding-bottom: 8px;
