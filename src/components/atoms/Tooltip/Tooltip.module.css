@@ -1,25 +1,12 @@
 .tooltip {
-  width: 150px;
-  background-color: var(--blue);
-  color: var(--white);
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 999;
-  left: 85.5px;
-  margin-left: -60px;
-  font-size: 12px;
-  transition: 0.3s;
-}
+  background-color: var(--blue) !important;
+  color: var(--white) !important;
 
-.tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: var(--blue) transparent transparent transparent;
+  padding: 5px 15px !important;
+  border-radius: 6px !important;
+
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px !important;
+  font-weight: 500;
 }

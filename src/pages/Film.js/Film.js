@@ -3,16 +3,19 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import Text from "../../components/atoms/Text/Text";
 import Spinner from "../../components/atoms/Spinner/Spinner";
+
 import Image from "../../components/molecules/Image/Image";
 import Genre from "../../components/molecules/Genre/Genre";
 import Button from "../../components/molecules/Button/Button";
+import Error from "../../components/molecules/Error/Error";
+
+import CastItem from "../../components/organisms/CastItem/CastItem";
 
 import classes from "./Film.module.css";
 
 import useHttp from "../../hooks/use-http";
 
 import { BiLeftArrowAlt } from "react-icons/bi";
-import Error from "../../components/molecules/Error/Error";
 
 const Film = () => {
   const navigate = useNavigate();
@@ -101,18 +104,17 @@ const Film = () => {
             Cast
           </Text>
           <div className={classes["cast-wrapper"]}>
-            {cast.map((person) => (
-              <Image
-                key={person.name}
-                alt={person.name}
-                width="60px"
-                height="60px"
-                borderRadius="9999px"
-                imageSrc={
-                  "https://image.tmdb.org/t/p/w342" + person.profile_path
-                }
-              />
-            ))}
+            {cast.map(
+              (person) =>
+                person.profile_path !== null && (
+                  <CastItem
+                    key={person.id}
+                    personId={person.id}
+                    personName={person.name}
+                    imagePath={person.profile_path}
+                  />
+                )
+            )}
           </div>
         </div>
       </div>

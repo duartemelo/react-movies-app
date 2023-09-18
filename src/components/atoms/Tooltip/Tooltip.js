@@ -2,15 +2,28 @@ import React from "react";
 import classes from "./Tooltip.module.css";
 import PropTypes from "prop-types";
 
+import { Tooltip as ReactTooltip } from "react-tooltip";
+
 const Tooltip = (props) => {
   return (
-    <span className={classes.tooltip} style={props.style}>{props.text}</span>
-  )
-}
+    <>
+      <div
+        data-tooltip-id={props.toolTipId}
+        data-tooltip-content={props.toolTipText}
+        data-tooltip-place={props.toolTipPlace ? props.toolTipPlace : "top"}
+      >
+        {props.children}
+      </div>
+      <ReactTooltip id={props.toolTipId} className={classes.tooltip} />
+    </>
+  );
+};
 
 Tooltip.propTypes = {
-  style: PropTypes.object,
-  text: PropTypes.string.isRequired,
+  toolTipId: PropTypes.string.isRequired,
+  toolTipText: PropTypes.string,
+  toolTipPlace: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default Tooltip;
