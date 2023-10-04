@@ -1,26 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Text from "../../atoms/Text/Text";
+import { BiHash } from "react-icons/bi";
 
 import classes from "./Genre.module.css";
 
 const Genre = (props) => {
   return (
-    <div
-      className={`${props.className ? props.className : ""} ${
+    <span
+      className={`${classes[props.theme]} ${props.className} ${
         classes["genre-wrapper"]
       }`}
     >
-      <Text as="p" color="var(--blue)" fontSize="14px" fontWeight="500">
-        {props.children}
-      </Text>
-    </div>
+      <BiHash />
+      {props.children}
+    </span>
   );
+};
+
+Genre.defaultProps = {
+  theme: "primary",
+  className: "",
 };
 
 Genre.propTypes = {
   children: PropTypes.string.isRequired,
+  theme: PropTypes.oneOf(["primary", "danger"]),
   className: PropTypes.string,
 };
 

@@ -1,13 +1,4 @@
-body {
-  background: linear-gradient(
-    to right,
-    rgb(55, 65, 81),
-    rgb(17, 24, 39),
-    rgb(0, 0, 0)
-  );
-}
-
-button {
+.pg-container > button, span {
   margin: 12px;
 }
 

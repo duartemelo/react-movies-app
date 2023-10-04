@@ -2,10 +2,11 @@ import Button from "../../components/molecules/Button/Button";
 import Text from "../../components/atoms/Text/Text";
 import classes from "./Playground.module.css";
 import Spinner from "../../components/atoms/Spinner/Spinner";
+import Genre from "../../components/molecules/Genre/Genre";
 
 const Playground = () => {
   return (
-    <>
+    <div className={classes["pg-container"]}>
       <Text as="h1" color="var(--white)">
         Component Playground
       </Text>
@@ -68,7 +69,14 @@ const Playground = () => {
       <Button size="lg" theme="primary" loading>
         IMDB
       </Button>
-    </>
+      <br />
+      <div style={{ display: "flex" }}>
+        <Genre>action</Genre>
+        <Genre>adventure</Genre>
+        <Genre>horror</Genre>
+        <Genre theme="danger">adult</Genre>
+      </div>
+    </div>
   );
 };
 

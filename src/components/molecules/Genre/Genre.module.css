@@ -1,11 +1,25 @@
 .genre-wrapper {
-  background-color: var(--gray);
-  border-radius: 10px;
-  width: max-content;
-  padding: 1px 10px;
+  font-size: 14px;
+  font-weight: var(--semi-bold);
+  padding: 6px 16px;
   text-align: center;
+  display: flex;
+  width: min-content;
+  align-items: center;
+  gap: 4px;
 }
 
-.genre-wrapper > p {
-  margin: 0;
+.genre-wrapper > svg {
+  width: 20px;
+  height: 20px;
+}
+
+.primary {
+  background-color: var(--blue-300);
+  color: var(--white);
+}
+
+.danger {
+  border: 2px solid var(--red);
+  color: var(--red);
 }
