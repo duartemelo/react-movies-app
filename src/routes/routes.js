@@ -18,6 +18,7 @@ import Person from "../pages/Person/Person";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Film from "../pages/Film/Film";
+import Playground from "../pages/Playground/Playground";
 
 import image from "../assets/img/auth-background.jpg";
 
@@ -63,6 +64,7 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />}></Route>
+        <Route path="/playground/" element={<Playground />} />
         <Route
           element={
             <PrivateLayout>
