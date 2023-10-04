@@ -4,47 +4,18 @@ import Spinner from "../../atoms/Spinner/Spinner";
 import PropTypes from "prop-types";
 
 const Button = (props) => {
-  const preStyleObj = {
-    width: props.width,
-    height: props.height,
-    fontWeight: props.fontWeight,
-    fontSize: props.fontSize,
-    paddingLeft: props.paddingLeft,
-    color: props.color,
-    backgroundColor: props.backgroundColor,
-  };
-
-  if (props.loading === true) {
-    preStyleObj.paddingLeft = "0px";
-  }
-
-  const getClasses = () => {
-    let classNames = `${props.className} ${classes["default-button"]}`;
-    if (props.className) {
-      if (props.className.includes("active")) {
-        classNames += ` ${classes.active}`;
-      }
-      if (props.className.includes("no-animate")) {
-        classNames += ` ${classes["no-animate"]}`;
-      }
-    }
-
-    return classNames;
-  };
+  let classNames = `${classes[props.theme]} ${classes[props.size]} ${
+    props.disabled ? classes.disabled : ""
+  } ${props.className}`;
 
   return (
-    <button
-      className={getClasses()}
-      style={preStyleObj}
-      onClick={props.onClick}
-      type={props.type}
-    >
+    <button className={classNames} onClick={props.onClick} type={props.type}>
       {props.loading === true ? (
         <Spinner
           width="15px"
           height="15px"
-          border="2px solid #eee"
-          borderTop="2px solid var(--blue)"
+          border="2px solid var(--white)"
+          borderTop="2px solid var(--blue-400)"
           className="centered block"
         />
       ) : (
@@ -54,14 +25,17 @@ const Button = (props) => {
   );
 };
 
+Button.defaultProps = {
+  theme: 'primary',
+  size: 'md',
+  disabled: false,
+  className: "",
+};
+
 Button.propTypes = {
-  width: PropTypes.string,
-  height: PropTypes.string,
-  fontWeight: PropTypes.string,
-  fontSize: PropTypes.string,
-  paddingLeft: PropTypes.string,
-  color: PropTypes.string,
-  backgroundColor: PropTypes.string,
+  theme: PropTypes.oneOf(["primary", "secondary", "tertiary"]),
+  size: PropTypes.oneOf(["sm", "md", "lg"]),
+  disabled: PropTypes.bool,
   loading: PropTypes.bool,
   className: PropTypes.string,
   onClick: PropTypes.func,

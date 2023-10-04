@@ -1,26 +1,40 @@
-.default-button{
-  background-color: var(--blue);
-  border-radius: 5px;
-  width: 110px;
-  height: 30px;
-  font-weight: 600;
-  padding-left: 20px;
+button {
+  font-weight: var(--medium);
+  color: var(--white);
+}
+
+.sm {
   font-size: 12px;
-  color: var(--white);
-  transition-duration: 0.3s;
+  padding: 8px 32px;
 }
 
-.default-button:not(.no-animate):hover{
-  color: var(--blue);
-  background-color: var(--white);
+.md {
+  font-size: 18px;
+  padding: 12px 48px;
 }
 
-.active{
-  background-color: var(--white);
-  color: var(--blue);
+.lg {
+  font-size: 24px;
+  padding: 16px 64px;
 }
 
-.active:not(.no-animate):hover{
-  color: var(--white);
-  background-color: var(--blue);
+.primary {
+  background-color: var(--blue-500);
+}
+
+.secondary {
+  background-color: var(--blue-300);
+}
+
+.tertiary {
+  border: 2px solid var(--white);
+}
+
+.tertiary.disabled {
+  border: 2px solid var(--dark-200);
+}
+
+.disabled {
+  color: var(--dark-200);
+  cursor: default;
 }

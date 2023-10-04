@@ -7,10 +7,10 @@
   }
 }
 .spinner {
-  width: 50px;
-  height: 50px;
-  border: 10px solid #eee; /* Light grey */
-  border-top: 10px solid var(--blue); /* Blue */
+  width: 40px;
+  height: 40px;
+  border: 5px solid var(--white);
+  border-top: 5px solid var(--blue-400);
   border-radius: 50%;
   animation: spinner-animation 1.5s linear infinite;
 }
