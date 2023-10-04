@@ -1,12 +1,18 @@
 :root {
-  --blue: #2c38a1;
-  --dark-blue: #1f287e;
-  --white: #fff;
+  --white: #ffff;
+  --dark-100: #c2c2;
+  --dark-200: #8888;
+  --dark-300: #5252;
+  --dark-400: #2222;
+
+  --blue-100: #516282;
+  --blue-200: #384968;
+  --blue-300: #1F324F;
+  --blue-400: #041D37;
+  --blue-500: #001226;
+
+  
   --menu-width: 262px;
   --mobile-menu-width: 40px;
-  --dark-gray: #4e4e4e;
-  --gray: #d9d9d9;
-  --light-gray: #f7f7f7;
-  --red: #b11b1b;
-  --dark-text: #222;
+
 }
