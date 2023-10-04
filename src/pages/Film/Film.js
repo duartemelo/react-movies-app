@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+import classes from "./Film.module.css";
+
+import useHttp from "../../hooks/use-http";
+
 import Text from "../../components/atoms/Text/Text";
 import Spinner from "../../components/atoms/Spinner/Spinner";
 
@@ -11,10 +15,6 @@ import Error from "../../components/molecules/Error/Error";
 import RatingContainer from "../../components/molecules/RatingContainer/RatingContainer";
 
 import CastItem from "../../components/organisms/CastItem/CastItem";
-
-import classes from "./Film.module.css";
-
-import useHttp from "../../hooks/use-http";
 
 import { BiLeftArrowAlt } from "react-icons/bi";
 
