@@ -71,7 +71,7 @@ const Films = (props) => {
 
   useEffect(() => {
     const search = searchParams.get("search") ?? "";
-    const page = searchParams.get("page") ?? "";
+    const page = searchParams.get("page") ?? 1;
 
     setSearchQuery(search);
     setPage(page);
