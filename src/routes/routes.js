@@ -16,7 +16,7 @@ import PrivateLayout from "../layouts/PrivateLayout/PrivateLayout";
 import Films from "../pages/Films/Films";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
-import Film from "../pages/Film.js/Film";
+import Film from "../pages/Film/Film";
 
 import image from "../assets/img/auth-background.jpg";
 
