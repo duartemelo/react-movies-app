@@ -125,7 +125,7 @@ const Film = () => {
           >
             Synopsis
           </Text>
-          <Text as="p" fontSize="16px" fontWeight={500}>
+          <Text as="p" fontSize="16px" fontWeight="500">
             {filmDetails.overview}
           </Text>
           <Text

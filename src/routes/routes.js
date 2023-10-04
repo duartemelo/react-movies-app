@@ -14,6 +14,7 @@ import AuthLayout from "../layouts/AuthLayout/AuthLayout";
 import PrivateLayout from "../layouts/PrivateLayout/PrivateLayout";
 
 import Films from "../pages/Films/Films";
+import Person from "../pages/Person/Person";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import Film from "../pages/Film/Film";
@@ -85,7 +86,8 @@ const AppRoutes = () => {
               element={<Films genreId={genre.id} pageUrl={genre.link} />}
             />
           ))}
-          <Route path={'/film/:id'} element={<Film />}/>
+          <Route path={"/film/:id"} element={<Film />} />
+          <Route path={"/person/:id"} element={<Person />} />
         </Route>
         <Route
           element={
