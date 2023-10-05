@@ -22,6 +22,12 @@ const Text = (props) => {
   );
 };
 
+Text.defaultProps = {
+  className: "",
+  as: "p",
+  color: "var(--white)",
+};
+
 Text.propTypes = {
   as: PropTypes.string,
   color: PropTypes.string,

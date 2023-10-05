@@ -3,6 +3,7 @@ import Text from "../../components/atoms/Text/Text";
 import classes from "./Playground.module.css";
 import Spinner from "../../components/atoms/Spinner/Spinner";
 import Genre from "../../components/molecules/Genre/Genre";
+import CastItem from "../../components/organisms/CastItem/CastItem";
 
 const Playground = () => {
   return (
@@ -75,6 +76,20 @@ const Playground = () => {
         <Genre>adventure</Genre>
         <Genre>horror</Genre>
         <Genre theme="danger">adult</Genre>
+      </div>
+      <div className={classes["cast-items-wrapper"]}>
+        <CastItem
+          className={classes["cast-item"]}
+          personId={2249745}
+          personName="Archie Madekwe"
+          imagePath="/tdTv1E3309yWTU9IdtdhZj1a1Zj.jpg"
+        />
+        <CastItem
+          className={classes["cast-item"]}
+          personId={2249745}
+          personName="David Harbour"
+          imagePath="/chPekukMF5SNnW6b22NbYPqAStr.jpg"
+        />
       </div>
     </div>
   );

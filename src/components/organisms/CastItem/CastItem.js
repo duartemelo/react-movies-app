@@ -1,42 +1,56 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import PropTypes from "prop-types";
-
-import classes from "./CastItem.module.css";
-
-import Tooltip from "../../atoms/Tooltip/Tooltip";
 
 import Image from "../../molecules/Image/Image";
 
+import classes from "./CastItem.module.css";
+
 const CastItem = (props) => {
   const navigate = useNavigate();
+  const [nameVisibility, setNameVisibility] = useState(false);
+
+  const nameList = props.personName.split(" ");
 
   const castItemClickHandler = () => {
     navigate(`/person/${props.personId}`);
   };
 
   return (
-    <Tooltip
-      toolTipId={props.personId.toString()}
-      toolTipText={props.personName}
+    <div
+      className={`${props.className} ${classes["image-wrapper"]}`}
+      onClick={castItemClickHandler}
+      onMouseEnter={() => setNameVisibility(true)}
+      onMouseLeave={() => setNameVisibility(false)}
     >
-      <div className={classes["image-wrapper"]} onClick={castItemClickHandler}>
-        <Image
-          key={props.personName}
-          alt={props.personName}
-          width="70px"
-          height="70px"
-          borderRadius="9999px"
-          imageSrc={"https://image.tmdb.org/t/p/w342" + props.imagePath}
-        />
-      </div>
-    </Tooltip>
+      {nameVisibility && (
+        <div className={classes["name-wrapper"]}>
+          {nameList.map((name) => (
+            <span className={classes["name"]}>{name}</span>
+          ))}
+        </div>
+      )}
+      <Image
+        key={props.personName}
+        alt={props.personName}
+        width="80px"
+        height="120px"
+        imageSrc={"https://image.tmdb.org/t/p/w342" + props.imagePath}
+      />
+    </div>
   );
+};
+
+CastItem.defaultProps = {
+  className: "",
 };
 
 CastItem.propTypes = {
   personId: PropTypes.number.isRequired,
   personName: PropTypes.string.isRequired,
   imagePath: PropTypes.string.isRequired,
+  className: PropTypes.string,
 };
 
 export default CastItem;

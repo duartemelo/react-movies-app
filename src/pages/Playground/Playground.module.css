@@ -1,7 +1,14 @@
-.pg-container > button, span {
+.pg-container > button,
+span {
   margin: 12px;
 }
 
 .spinner {
   margin: 12px;
+}
+
+.cast-items-wrapper {
+  margin: 12px;
+  display: flex;
+  gap: 8px;
 }

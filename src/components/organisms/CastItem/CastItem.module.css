@@ -1,3 +1,35 @@
-.image-wrapper{
+.image-wrapper {
+  position: relative;
+}
+
+.image-wrapper > div {
   cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+.image-wrapper:hover > div:not(.name-wrapper) {
+  filter: brightness(20%);
+}
+
+.name-wrapper {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  z-index: 3;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 70px;
+
+  display: flex;
+  flex-direction: column;
+
+  font-size: 10px;
+  font-weight: var(--semi-bold);
+}
+
+.name-wrapper > span {
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
 }
