@@ -113,6 +113,7 @@ const Films = (props) => {
       key={film.id}
       filmId={film.id}
       title={film.title}
+      genres={film.genre_ids}
       rating={film.vote_average}
       vote_count={film.vote_count}
       imageSource={"https://image.tmdb.org/t/p/w342" + film.poster_path}
