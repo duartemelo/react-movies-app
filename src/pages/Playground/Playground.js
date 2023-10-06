@@ -99,6 +99,7 @@ const Playground = () => {
         title="The Nun II"
         rating={7}
         vote_count={562}
+        genres={[28,12,35]}
       />
     </div>
   );
