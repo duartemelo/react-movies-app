@@ -1,64 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import TextContainer from "../../atoms/TextContainer/TextContainer";
-import Text from "../../atoms/Text/Text";
-import Tooltip from "../../atoms/Tooltip/Tooltip";
-
 import Image from "../../molecules/Image/Image";
-import RatingContainer from "../../molecules/RatingContainer/RatingContainer";
 
 import classes from "./ContentItem.module.css";
 
 import PropTypes from "prop-types";
 
-import { ratingDivide } from "../../../utils/rating";
+// import { ratingDivide } from "../../../utils/rating";
 
 const ContentItem = (props) => {
   const navigate = useNavigate();
+  const [infoVisibility, setInfoVisibility] = useState(false);
 
   const handleClickFilm = () => {
     navigate(`/film/${props.filmId}`);
   };
 
+  // TODO: receive genre ids, get their names with endpoint
+  // TODO: restyle RatingText
+
   return (
     <>
       <div
-        className={`${classes["content-item"]} mt-3`}
+        className={`${props.className} ${classes["content-item"]} mt-3`}
         onClick={handleClickFilm}
+        onMouseEnter={() => setInfoVisibility(true)}
+        onMouseLeave={() => setInfoVisibility(false)}
       >
+        {infoVisibility && (
+          <div className={classes["info-wrapper"]}>
+            <h3>{props.title}</h3>
+            <h4>Action, Fiction, Adventure, Test</h4>
+          </div>
+        )}
         <Image
           imageSrc={props.imageSource}
           alt="Content Image"
-          borderRadius="5px"
-          className="box-shadow pos-relative"
+          className="pos-relative"
           width="200px"
           height="300px"
         />
-
-        <TextContainer>
-          <Text
-            className="centered-text mt-1"
-            fontSize="12px"
-            fontWeight="600"
-            paddingLeft="15px"
-            paddingRight="15px"
-          >
-            {props.title}
-          </Text>
-          <Tooltip
-            toolTipId={props.filmId.toString()}
-            toolTipText={`${props.rating} out of ${props.vote_count} votes`}
-          >
-            <RatingContainer
-              rating={ratingDivide(props.rating)}
-              className="mt-05"
-            />
-          </Tooltip>
-        </TextContainer>
       </div>
     </>
   );
+};
+
+ContentItem.defaultProps = {
+  className: "",
 };
 
 ContentItem.propTypes = {
@@ -67,6 +56,7 @@ ContentItem.propTypes = {
   title: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   vote_count: PropTypes.number.isRequired,
+  className: PropTypes.string,
 };
 
 export default ContentItem;

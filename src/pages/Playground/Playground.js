@@ -4,6 +4,7 @@ import classes from "./Playground.module.css";
 import Spinner from "../../components/atoms/Spinner/Spinner";
 import Genre from "../../components/molecules/Genre/Genre";
 import CastItem from "../../components/organisms/CastItem/CastItem";
+import ContentItem from "../../components/organisms/ContentItem/ContentItem";
 
 const Playground = () => {
   return (
@@ -91,6 +92,14 @@ const Playground = () => {
           imagePath="/chPekukMF5SNnW6b22NbYPqAStr.jpg"
         />
       </div>
+      <ContentItem
+        className={classes["m-12"]}
+        filmId={968051}
+        imageSource="https://image.tmdb.org/t/p/w342/5gzzkR7y3hnY8AD1wXjCnVlHba5.jpg"
+        title="The Nun II"
+        rating={7}
+        vote_count={562}
+      />
     </div>
   );
 };

@@ -27,7 +27,9 @@ const CastItem = (props) => {
       {nameVisibility && (
         <div className={classes["name-wrapper"]}>
           {nameList.map((name) => (
-            <span className={classes["name"]}>{name}</span>
+            <span key={name} className={classes["name"]}>
+              {name}
+            </span>
           ))}
         </div>
       )}

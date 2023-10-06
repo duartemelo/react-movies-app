@@ -28,7 +28,7 @@
 }
 
 .name-wrapper > span {
-  color: #fff;
+  color: var(--white);
   overflow: hidden;
   text-overflow: ellipsis;
   margin: 0;
