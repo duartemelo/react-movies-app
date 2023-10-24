@@ -97,8 +97,8 @@ const Playground = () => {
         filmId={968051}
         imageSource="https://image.tmdb.org/t/p/w342/5gzzkR7y3hnY8AD1wXjCnVlHba5.jpg"
         title="The Nun II"
-        rating={7}
-        vote_count={562}
+        rating={7.5}
+        year={2020}
         genres={[28,12,35]}
       />
     </div>

@@ -5,11 +5,12 @@ import PropTypes from "prop-types";
 
 import useHttp from "../../../hooks/use-http";
 
+import Text from "../../atoms/Text/Text";
+
 import Image from "../../molecules/Image/Image";
 
 import classes from "./ContentItem.module.css";
-
-// import { ratingDivide } from "../../../utils/rating";
+import RatingText from "../../atoms/RatingText/RatingText";
 
 const ContentItem = (props) => {
   const navigate = useNavigate();
@@ -32,8 +33,6 @@ const ContentItem = (props) => {
     });
   }, [sendRequest, props.genres]);
 
-  // TODO: restyle RatingText
-
   return (
     <>
       <div
@@ -44,8 +43,12 @@ const ContentItem = (props) => {
       >
         {infoVisibility && (
           <div className={classes["info-wrapper"]}>
-            <h3>{props.title}</h3>
-            <h4>{genreString}</h4>
+            <Text as="h3">{props.title}</Text>
+            <Text as="h4">{genreString}</Text>
+            <div>
+              <RatingText rating={props.rating}/>
+              <Text as="h4">{props.year}</Text>
+            </div>
           </div>
         )}
         <Image
@@ -68,9 +71,9 @@ ContentItem.propTypes = {
   filmId: PropTypes.number.isRequired,
   imageSource: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  year: PropTypes.number.isRequired,
   genres: PropTypes.array.isRequired,
   rating: PropTypes.number.isRequired,
-  vote_count: PropTypes.number.isRequired,
   className: PropTypes.string,
 };
 

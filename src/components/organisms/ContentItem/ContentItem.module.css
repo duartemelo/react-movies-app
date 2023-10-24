@@ -46,3 +46,13 @@ h4 {
 .info-wrapper > h4 {
   font-weight: var(--medium);
 }
+
+.info-wrapper > div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.info-wrapper > div > h4 {
+  font-weight: var(--medium);
+}
