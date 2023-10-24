@@ -1,14 +1,15 @@
 import React from "react";
 import classes from "./Input.module.css";
-import Text from "../../atoms/Text/Text";
 import PropTypes from "prop-types";
 
+import { BiSearch } from "react-icons/bi";
+
 const Input = (props) => {
-  const classNames = `${props.className} ${classes["input"]}`;
+  const classNames = `${props.className} ${classes["input-container"]}`;
   return (
-    <React.Fragment>
+    <div className={classNames}>
       <input
-        className={classNames}
+        className={classes['input']}
         placeholder={props.placeholder}
         value={props.value}
         onChange={props.onChange}
@@ -16,18 +17,9 @@ const Input = (props) => {
         type={props.type}
         required={props.required ? true : false}
       />
-      {props.hasError && (
-        <Text
-          color="var(--red)"
-          fontWeight="600"
-          fontSize="12px"
-          paddingLeft="5px"
-          className="mt-05"
-        >
-          {props.errorMessage}
-        </Text>
-      )}
-    </React.Fragment>
+      <BiSearch />
+      
+    </div>
   );
 };
 
@@ -39,7 +31,6 @@ Input.propTypes = {
   onBlur: PropTypes.func,
   type: PropTypes.string,
   required: PropTypes.bool,
-  hasError: PropTypes.bool,
   errorMessage: PropTypes.string,
 };
 

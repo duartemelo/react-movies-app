@@ -5,6 +5,7 @@ import Spinner from "../../components/atoms/Spinner/Spinner";
 import Genre from "../../components/molecules/Genre/Genre";
 import CastItem from "../../components/organisms/CastItem/CastItem";
 import ContentItem from "../../components/organisms/ContentItem/ContentItem";
+import Input from "../../components/molecules/Input/Input";
 
 const Playground = () => {
   return (
@@ -99,8 +100,15 @@ const Playground = () => {
         title="The Nun II"
         rating={7.5}
         year={2020}
-        genres={[28,12,35]}
+        genres={[28, 12, 35]}
       />
+
+      <Input
+        className={classes["m-12"]}
+        placeholder={"Some random placeholder..."}
+      />
+
+      <div style={{ height: "100px" }} />
     </div>
   );
 };
