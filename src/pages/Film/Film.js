@@ -18,8 +18,6 @@ import CastItem from "../../components/organisms/CastItem/CastItem";
 
 import { BiLeftArrowAlt } from "react-icons/bi";
 
-import { ratingDivide } from "../../utils/rating";
-
 const Film = () => {
   const navigate = useNavigate();
   const { sendRequest, error } = useHttp();
@@ -109,7 +107,7 @@ const Film = () => {
 
           <div className={classes["rating-wrapper"]}>
             <RatingContainer
-              rating={ratingDivide(filmDetails.vote_average)}
+              rating={filmDetails.vote_average}
               className={classes.rating}
             />
             <Text as="p" fontSize="12px" color="var(--dark-gray)">

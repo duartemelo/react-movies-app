@@ -1,12 +1,24 @@
 .input-container {
-  background-color: var(--dark-400);
   display: flex;
   align-items: center;
   width: max-content;
-  font-size: 24px;
+  height: 38px;
+  font-size: 22px;
+  background-color: var(--dark-400);
+  color: var(--white);
+  padding: 0px 12px;
+  transition: color 0.3s, width 0.3s;
+  overflow: hidden;
+}
+
+.input-container.expanded {
   color: var(--dark-100);
-  padding: 4px 12px;
-  transition: color 0.3s;
+  width: 315px;
+  animation: slideIn 0.3s ease-in-out;
+}
+
+.input-container:not(.expanded) svg {
+  cursor: pointer;
 }
 
 .input-container:focus-within {
@@ -42,4 +54,13 @@
 
 *:focus {
   outline: none;
+}
+
+@keyframes slideIn {
+  from {
+    width: 50px;
+  }
+  to {
+    width: 315px;
+  }
 }

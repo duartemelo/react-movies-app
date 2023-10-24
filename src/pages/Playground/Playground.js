@@ -108,6 +108,12 @@ const Playground = () => {
         placeholder={"Some random placeholder..."}
       />
 
+      <Input
+        className={classes["m-12"]}
+        placeholder={"Some random placeholder..."}
+        defaultExpanded={true}
+      />
+
       <div style={{ height: "100px" }} />
     </div>
   );
