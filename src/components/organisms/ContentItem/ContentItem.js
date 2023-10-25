@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import PropTypes from "prop-types";
-
-import useHttp from "../../../hooks/use-http";
 
 import Text from "../../atoms/Text/Text";
 
@@ -14,24 +12,11 @@ import RatingText from "../../atoms/RatingText/RatingText";
 
 const ContentItem = (props) => {
   const navigate = useNavigate();
-  const { sendRequest } = useHttp();
   const [infoVisibility, setInfoVisibility] = useState(false);
-  const [genreString, setGenreString] = useState("");
 
   const handleClickFilm = () => {
     navigate(`/film/${props.filmId}`);
   };
-
-  useEffect(() => {
-    sendRequest({ url: "genre/movie/list?language=en-US" }, (data) => {
-      const selectedGenres = data.genres
-        .filter((genre) => props.genres.includes(genre.id))
-        .map((genre) => genre.name);
-
-      const generatedGenresString = selectedGenres.join(", ");
-      setGenreString(generatedGenresString);
-    });
-  }, [sendRequest, props.genres]);
 
   return (
     <>
@@ -44,7 +29,7 @@ const ContentItem = (props) => {
         {infoVisibility && (
           <div className={classes["info-wrapper"]}>
             <Text as="h3">{props.title}</Text>
-            <Text as="h4">{genreString}</Text>
+            <Text as="h4">{props.genres}</Text>
             <div>
               <RatingText rating={props.rating}/>
               <Text as="h4">{props.year}</Text>
@@ -71,8 +56,8 @@ ContentItem.propTypes = {
   filmId: PropTypes.number.isRequired,
   imageSource: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  year: PropTypes.number.isRequired,
-  genres: PropTypes.array.isRequired,
+  year: PropTypes.string.isRequired,
+  genres: PropTypes.string.isRequired,
   rating: PropTypes.number.isRequired,
   className: PropTypes.string,
 };

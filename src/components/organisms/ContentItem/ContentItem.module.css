@@ -21,7 +21,7 @@
   z-index: 3;
   white-space: nowrap;
   overflow: hidden;
-  max-width: 168px;
+  width: 168px;
 
   display: flex;
   flex-direction: column;

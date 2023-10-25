@@ -12,8 +12,10 @@ import Button from "../../components/molecules/Button/Button";
 import Error from "../../components/molecules/Error/Error";
 import ContentItem from "../../components/organisms/ContentItem/ContentItem";
 
+let availableGenres = [];
+
 const Films = (props) => {
-  const { isLoading, error, sendRequest: fetchFilms } = useHttp();
+  const { isLoading, error, sendRequest } = useHttp();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [films, setFilms] = useState([]);
@@ -27,9 +29,12 @@ const Films = (props) => {
   const { genreId } = props;
 
   const getFilms = useCallback(
-    (searchValue, page) => {
+    async (searchValue, page) => {
+      await sendRequest({ url: "genre/movie/list?language=en-US" }, (data) => {
+        availableGenres = data.genres;
+      });
       if (searchValue !== "") {
-        fetchFilms(
+        sendRequest(
           {
             url: "/search/movie",
             params: {
@@ -44,12 +49,12 @@ const Films = (props) => {
         );
       } else {
         if (apiUrl) {
-          fetchFilms({ url: apiUrl, params: { page: page } }, (data) => {
+          sendRequest({ url: apiUrl, params: { page: page } }, (data) => {
             setFilms(data.results);
             setMaxPage(data.total_pages);
           });
         } else if (genreId) {
-          fetchFilms(
+          sendRequest(
             {
               url: "/discover/movie",
               params: {
@@ -66,7 +71,7 @@ const Films = (props) => {
         }
       }
     },
-    [apiUrl, fetchFilms, genreId]
+    [apiUrl, sendRequest, genreId]
   );
 
   useEffect(() => {
@@ -108,12 +113,21 @@ const Films = (props) => {
     setSearchTimer(newTimer);
   };
 
+  const generateFilmGenresString = (genre_ids) => {
+    const selectedGenres = availableGenres
+        .filter((genre) => genre_ids.includes(genre.id))
+        .map((genre) => genre.name);
+
+      return selectedGenres.join(", ");
+  }
+
   const renderedFilms = films.map((film) => (
     <ContentItem
       key={film.id}
       filmId={film.id}
       title={film.title}
-      genres={film.genre_ids}
+      genres={generateFilmGenresString(film.genre_ids)}
+      year={film.release_date.split("-")[0]}
       rating={film.vote_average}
       vote_count={film.vote_count}
       imageSource={"https://image.tmdb.org/t/p/w342" + film.poster_path}
