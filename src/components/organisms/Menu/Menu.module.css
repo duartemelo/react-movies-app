@@ -1,17 +1,26 @@
 .menu-container {
-  background-color: var(--dark-blue);
-  width: var(--menu-width);
-  top: 0;
-  bottom: 0;
-  position: fixed;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-  z-index: 2;
+  width: 100%;
+  padding: 64px;
+  margin: 0 auto;
+  max-width: calc(1200px + (64px * 2));
+  height: 100px; /* remove */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: red; */
 }
 
-.backdrop {
+.menu-container > div {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.menu-container button {
+  padding: 0;
+}
+
+/* .backdrop {
   top: 0;
   bottom: 0;
   position: fixed;
@@ -19,36 +28,36 @@
   height: 100%;
   z-index: 1;
   backdrop-filter: blur(8px);
-}
+} */
 
-.small-screen {
+/* .small-screen {
   width: var(--mobile-menu-width);
-}
+} */
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.menu-container::-webkit-scrollbar {
+/* .menu-container::-webkit-scrollbar {
   display: none;
-}
+} */
 
-@keyframes slide-animation {
+/* @keyframes slide-animation {
   from {
     margin-left: calc(var(--mobile-menu-width) - var(--menu-width));
   }
   to {
     margin-left: 0;
   }
-}
+} */
 
-@keyframes slide-animation-reversed {
+/* @keyframes slide-animation-reversed {
   from {
     margin-left: 0;
   }
   to {
     margin-left: calc(var(--mobile-menu-width) - var(--menu-width));
   }
-}
+} */
 
-.slide-in {
+/* .slide-in {
   animation-name: slide-animation;
   animation-duration: 0.5s;
   animation-timing-function: ease;
@@ -58,11 +67,11 @@
   animation-name: slide-animation-reversed;
   animation-duration: 0.5s;
   animation-timing-function: ease;
-}
-
+} */
+/* 
 .close-menu {
   position: absolute;
   display: block;
   top: 5px;
   right: 0px;
-}
+} */

@@ -33,8 +33,8 @@ Button.defaultProps = {
 };
 
 Button.propTypes = {
-  theme: PropTypes.oneOf(["primary", "secondary", "tertiary"]),
-  size: PropTypes.oneOf(["sm", "md", "lg"]),
+  theme: PropTypes.oneOf(["primary", "secondary", "tertiary", "no-background"]),
+  size: PropTypes.oneOf(["sm", "md", "lg", "xl"]),
   disabled: PropTypes.bool,
   loading: PropTypes.bool,
   className: PropTypes.string,

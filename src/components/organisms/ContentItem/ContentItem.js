@@ -21,7 +21,7 @@ const ContentItem = (props) => {
   return (
     <>
       <div
-        className={`${props.className} ${classes["content-item"]} mt-3`}
+        className={`${props.className} ${classes["content-item"]}`}
         onClick={handleClickFilm}
         onMouseEnter={() => setInfoVisibility(true)}
         onMouseLeave={() => setInfoVisibility(false)}
@@ -31,7 +31,7 @@ const ContentItem = (props) => {
             <Text as="h3">{props.title}</Text>
             <Text as="h4">{props.genres}</Text>
             <div>
-              <RatingText rating={props.rating}/>
+              <RatingText rating={props.rating} />
               <Text as="h4">{props.year}</Text>
             </div>
           </div>

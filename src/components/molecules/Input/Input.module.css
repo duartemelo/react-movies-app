@@ -4,7 +4,6 @@
   width: max-content;
   height: 38px;
   font-size: 22px;
-  background-color: var(--dark-400);
   color: var(--white);
   padding: 0px 12px;
   transition: color 0.3s, width 0.3s;
@@ -12,6 +11,7 @@
 }
 
 .input-container.expanded {
+  background-color: var(--dark-400);
   color: var(--dark-100);
   width: 315px;
   animation: slideIn 0.3s ease-in-out;

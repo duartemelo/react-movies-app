@@ -10,17 +10,12 @@ import {
 import useHttp from "../hooks/use-http";
 
 import ContentLayout from "../layouts/ContentLayout/ContentLayout";
-import AuthLayout from "../layouts/AuthLayout/AuthLayout";
-import PrivateLayout from "../layouts/PrivateLayout/PrivateLayout";
 
 import Films from "../pages/Films/Films";
 import Person from "../pages/Person/Person";
-import Login from "../pages/Login/Login";
-import Register from "../pages/Register/Register";
 import Film from "../pages/Film/Film";
 import Playground from "../pages/Playground/Playground";
-
-import image from "../assets/img/auth-background.jpg";
+import NotFound from "../pages/NotFound/NotFound";
 
 const AppRoutes = () => {
   const [genreButtons, setGenreButtons] = useState([]);
@@ -63,15 +58,14 @@ const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />}></Route>
+        <Route path="/" element={<Navigate to="/popular" />}></Route>
+        <Route path="*" element={<NotFound />} />
         <Route path="/playground/" element={<Playground />} />
         <Route
           element={
-            <PrivateLayout>
-              <ContentLayout>
-                <Outlet />
-              </ContentLayout>
-            </PrivateLayout>
+            <ContentLayout>
+              <Outlet />
+            </ContentLayout>
           }
         >
           {discoverButtons.map((button) => (
@@ -90,16 +84,6 @@ const AppRoutes = () => {
           ))}
           <Route path={"/film/:id"} element={<Film />} />
           <Route path={"/person/:id"} element={<Person />} />
-        </Route>
-        <Route
-          element={
-            <AuthLayout backgroundImage={image}>
-              <Outlet />
-            </AuthLayout>
-          }
-        >
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
         </Route>
       </Routes>
     </BrowserRouter>

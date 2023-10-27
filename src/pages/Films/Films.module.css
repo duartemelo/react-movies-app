@@ -1,79 +1,32 @@
 .content-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
+}
+
+.films-container {
+  margin-top: 12px;
   display: flex;
   flex-wrap: wrap;
-  column-gap: 50px;
+  column-gap: 40px;
   row-gap: 30px;
   justify-content: space-between;
   padding-bottom: 30px;
 }
 
-@media only screen and (max-width: 1400px) {
-  .content-container {
-    max-width: 800px;
-  }
-}
-
-@media only screen and (max-width: 1200px) {
-  .content-container {
-    max-width: 600px;
-  }
-}
-
-@media only screen and (max-width: 1000px) {
-  .content-container {
-    max-width: 400px;
-    justify-content: center;
-  }
-}
-
-.pagination {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  font-size: 12px;
-  gap: 5px;
-  padding: 0px;
-}
-
-.pagination .page-num {
-  padding: 8px 15px;
-  cursor: pointer;
-  border-radius: 3px;
-  font-weight: 500;
-  transition: 0.3s;
-}
-
-.pagination .page-num:hover {
-  background-color: var(--blue);
-  color: var(--white);
-}
-
-.pagination .active {
-  background-color: var(--blue);
-  color: var(--white);
-}
-
-@media only screen and (min-width: 1262px) {
-  .pagination {
-    padding-right: 50px;
-  }
-}
-
 .paginate-buttons-container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
-}
-
-.justify-space-between {
-  justify-content: space-between;
-}
-
-.justify-end {
   justify-content: end;
+  gap: 12px;
+}
+
+@media only screen and (max-width: 600px) {
+  .paginate-buttons-container {
+    justify-content: center;
+  }
+  .films-container {
+    max-width: 400px;
+    justify-content: center;
+  }
 }

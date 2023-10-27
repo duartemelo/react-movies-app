@@ -15,9 +15,7 @@ const ContentLayout = (props) => {
         <>
           <Menu isMobile={size.width <= 768} />
           <div
-            className={`${classes["right-container"]} ${
-              size.width <= 768 ? classes["small-screen"] : ""
-            }`}
+            className={classes["content-container"]}
           >
             {props.children}
           </div>

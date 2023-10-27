@@ -5,9 +5,7 @@ import classes from "./Films.module.css";
 
 import useHttp from "../../hooks/use-http";
 
-import Nav from "../../components/atoms/Nav/Nav";
 import SpinnerContainer from "../../components/molecules/SpinnerContainer/SpinnerContainer";
-import Input from "../../components/molecules/Input/Input";
 import Button from "../../components/molecules/Button/Button";
 import Error from "../../components/molecules/Error/Error";
 import ContentItem from "../../components/organisms/ContentItem/ContentItem";
@@ -23,7 +21,7 @@ const Films = (props) => {
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(null);
 
-  const [searchTimer, setSearchTimer] = useState(null);
+  // const [searchTimer, setSearchTimer] = useState(null);
 
   const { apiUrl } = props;
   const { genreId } = props;
@@ -97,29 +95,29 @@ const Films = (props) => {
     });
   };
 
-  const handleSearchInputChange = (event) => {
-    setSearchQuery(event.target.value);
+  // const handleSearchInputChange = (event) => {
+  //   setSearchQuery(event.target.value);
 
-    if (searchTimer) {
-      clearTimeout(searchTimer);
-    }
-    const newTimer = setTimeout(() => {
-      setSearchParams({
-        page: 1,
-        ...(event.target.value && { search: event.target.value }),
-      });
-    }, 500);
+  //   if (searchTimer) {
+  //     clearTimeout(searchTimer);
+  //   }
+  //   const newTimer = setTimeout(() => {
+  //     setSearchParams({
+  //       page: 1,
+  //       ...(event.target.value && { search: event.target.value }),
+  //     });
+  //   }, 500);
 
-    setSearchTimer(newTimer);
-  };
+  //   setSearchTimer(newTimer);
+  // };
 
   const generateFilmGenresString = (genre_ids) => {
     const selectedGenres = availableGenres
-        .filter((genre) => genre_ids.includes(genre.id))
-        .map((genre) => genre.name);
+      .filter((genre) => genre_ids.includes(genre.id))
+      .map((genre) => genre.name);
 
-      return selectedGenres.join(", ");
-  }
+    return selectedGenres.join(", ");
+  };
 
   const renderedFilms = films.map((film) => (
     <ContentItem
@@ -136,42 +134,37 @@ const Films = (props) => {
 
   return (
     <React.Fragment>
-      <Nav>
+      {/* <Nav>
         <Input
           placeholder="Search for a movie..."
           value={searchQuery}
           onChange={handleSearchInputChange}
         />
-      </Nav>
+      </Nav> */}
       {isLoading && <SpinnerContainer />}
       {error !== null && <Error>There was an error gathering films.</Error>}
       {films.length === 0 && (
         <Error>There are no films based on your search.</Error>
       )}
       {!isLoading && error === null && films.length > 0 && (
-        <div className={`${classes["content-container"]} mt-4`}>
-          {renderedFilms}
-          <div
-            className={`${classes["paginate-buttons-container"]} ${
-              page > 1
-                ? classes["justify-space-between"]
-                : classes["justify-end"]
-            } mt-4`}
-          >
+        <div className={`${classes["content-container"]}`}>
+          <div className={`${classes["paginate-buttons-container"]}`}>
             {page > 1 && (
               <Button
-                className="default-button"
+                size="sm"
+                theme="primary"
                 onClick={handlePreviousPageClick}
               >
                 Previous page
               </Button>
             )}
             {page < 500 && page < maxPage && (
-              <Button className="default-button" onClick={handleNextPageClick}>
+              <Button size="sm" theme="primary" onClick={handleNextPageClick}>
                 Next page
               </Button>
             )}
           </div>
+          <div className={classes["films-container"]}>{renderedFilms}</div>
         </div>
       )}
     </React.Fragment>
