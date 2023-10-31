@@ -1,17 +1,37 @@
 import React, { useState } from "react";
-import classes from "./Input.module.css";
+
+import useFocus from "../../../hooks/use-focus";
+
 import PropTypes from "prop-types";
+
+import classes from "./Input.module.css";
 
 import { BiSearch } from "react-icons/bi";
 
+
+
 const Input = (props) => {
-  const [expanded, setExpanded] = useState(props.defaultExpanded ? props.defaultExpanded : false);
-  const classNames = `${classes["input-container"]} ${expanded ? classes["expanded"] : ''} ${props.className}`;
+  const [inputRef, setInputFocus] = useFocus();
+  const [expanded, setExpanded] = useState(
+    props.defaultExpanded ? props.defaultExpanded : false
+  );
+  const classNames = `${classes["input-container"]} ${
+    expanded ? classes["expanded"] : ""
+  } ${props.className}`;
+
+  const handleOnExpand = () => {
+    setExpanded(true);
+    setTimeout(() => {
+      setInputFocus();
+    }, 300);
+  };
+
   return (
     <div className={classNames}>
       {expanded && (
         <input
           className={classes["input"]}
+          ref={inputRef}
           placeholder={props.placeholder}
           value={props.value}
           onChange={props.onChange}
@@ -21,7 +41,7 @@ const Input = (props) => {
         />
       )}
 
-      <BiSearch onClick={() => setExpanded(true)}/>
+      <BiSearch onClick={handleOnExpand} />
     </div>
   );
 };
