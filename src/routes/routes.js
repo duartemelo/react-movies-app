@@ -82,6 +82,15 @@ const AppRoutes = () => {
               element={<Films genreId={genre.id} pageUrl={genre.link} />}
             />
           ))}
+        </Route>
+
+        <Route
+          element={
+            <ContentLayout isInsideContent={true}>
+              <Outlet />
+            </ContentLayout>
+          }
+        >
           <Route path={"/film/:id"} element={<Film />} />
           <Route path={"/person/:id"} element={<Person />} />
         </Route>

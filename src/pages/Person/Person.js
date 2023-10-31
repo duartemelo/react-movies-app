@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import classes from "./Person.module.css";
 
@@ -9,13 +9,9 @@ import Text from "../../components/atoms/Text/Text";
 import Spinner from "../../components/atoms/Spinner/Spinner";
 
 import Error from "../../components/molecules/Error/Error";
-import Button from "../../components/molecules/Button/Button";
 import Image from "../../components/molecules/Image/Image";
 
-import { BiLeftArrowAlt } from "react-icons/bi";
-
 const Person = () => {
-  const navigate = useNavigate();
   const { sendRequest, error } = useHttp();
 
   const [loading, setLoading] = useState(true);
@@ -48,20 +44,6 @@ const Person = () => {
 
   return (
     <>
-      <div className={classes["back-button-wrapper"]}>
-        <Button
-          className={`${classes["back-button"]} active centered-text no-animate`}
-          width="40px"
-          height="40px"
-          paddingLeft="0"
-          backgroundColor={"var(--gray)"}
-          color="var(--dark-text)"
-          fontSize="25px"
-          onClick={() => navigate(-1)}
-        >
-          <BiLeftArrowAlt />
-        </Button>
-      </div>
       <div className={classes.wrapper}>
         <Image
           width="300px"

@@ -13,7 +13,7 @@ const ContentLayout = (props) => {
         <Spinner />
       ) : (
         <>
-          <Menu isMobile={size.width <= 768} />
+          <Menu backButton={props.isInsideContent} isMobile={size.width <= 768} />
           <div
             className={classes["content-container"]}
           >

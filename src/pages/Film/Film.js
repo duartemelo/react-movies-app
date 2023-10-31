@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import classes from "./Film.module.css";
 
@@ -10,16 +10,12 @@ import Spinner from "../../components/atoms/Spinner/Spinner";
 
 import Image from "../../components/molecules/Image/Image";
 import Genre from "../../components/molecules/Genre/Genre";
-import Button from "../../components/molecules/Button/Button";
 import Error from "../../components/molecules/Error/Error";
 import RatingContainer from "../../components/molecules/RatingContainer/RatingContainer";
 
 import CastItem from "../../components/organisms/CastItem/CastItem";
 
-import { BiLeftArrowAlt } from "react-icons/bi";
-
 const Film = () => {
-  const navigate = useNavigate();
   const { sendRequest, error } = useHttp();
 
   const [loading, setLoading] = useState(true);
@@ -61,20 +57,6 @@ const Film = () => {
 
   return (
     <>
-      <div className={classes["back-button-wrapper"]}>
-        <Button
-          className={`${classes["back-button"]} active centered-text no-animate`}
-          width="40px"
-          height="40px"
-          paddingLeft="0"
-          backgroundColor={"var(--gray)"}
-          color="var(--dark-text)"
-          fontSize="25px"
-          onClick={() => navigate(-1)}
-        >
-          <BiLeftArrowAlt />
-        </Button>
-      </div>
       <div className={classes.wrapper}>
         <Image
           width="300px"

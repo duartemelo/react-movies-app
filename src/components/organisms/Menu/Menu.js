@@ -15,6 +15,7 @@ import Input from "../../molecules/Input/Input";
 import useHttp from "../../../hooks/use-http";
 
 import {
+  BiArrowBack,
   BiDotsHorizontalRounded,
   // BiLeftArrowAlt,
   BiMenu,
@@ -202,13 +203,24 @@ const Menu = (props) => {
   return (
     <nav className={classes["menu-container"]}>
       <div>
-        <Button
-          theme="no-background"
-          size="xl"
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          <BiMenu />
-        </Button>
+        {props.backButton ? (
+          <Button
+            theme="no-background"
+            size="xl"
+            onClick={() => navigate(-1)}
+          >
+            <BiArrowBack />
+          </Button>
+        ) : (
+          <Button
+            theme="no-background"
+            size="xl"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <BiMenu />
+          </Button>
+        )}
+
         <Link to="/popular">
           <Text as="h1" fontSize={"18px"} fontWeight="700">
             React Movies App
