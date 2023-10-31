@@ -86,6 +86,7 @@ const Menu = (props) => {
   
   const handleSearch = (event) => {
     dispatch(searchActions.search(event.target.value))
+    dispatch(searchActions.setDirty(true));
   }
 
   useEffect(() => {

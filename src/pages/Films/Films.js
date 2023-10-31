@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { searchActions } from "../../store/slices/search-slice";
 
 import classes from "./Films.module.css";
 
@@ -16,10 +18,12 @@ let availableGenres = [];
 let searchTimer = null;
 
 const Films = (props) => {
+  const dispatch = useDispatch();
   const { isLoading, error, sendRequest } = useHttp();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const searchValue = useSelector((state) => state.searchState.search);
+  const searchIsDirty = useSelector((state) => state.searchState.isDirty);
 
   const [films, setFilms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -76,6 +80,7 @@ const Films = (props) => {
   );
 
   const handlePreviousPageClick = () => {
+    dispatch(searchActions.setDirty(false));
     setSearchParams({
       page: Number(page) - 1,
       ...(searchQuery && { search: searchQuery }),
@@ -83,6 +88,7 @@ const Films = (props) => {
   };
 
   const handleNextPageClick = () => {
+    dispatch(searchActions.setDirty(false));
     setSearchParams({
       page: Number(page) + 1,
       ...(searchQuery && { search: searchQuery }),
@@ -90,21 +96,23 @@ const Films = (props) => {
   };
 
   useEffect(() => {
-    if (searchTimer) {
-      clearTimeout(searchTimer);
+    if (searchIsDirty) {
+      if (searchTimer) {
+        clearTimeout(searchTimer);
+      }
+
+      const newTimer = setTimeout(() => {
+        setSearchParams({
+          page: 1,
+          ...(searchValue && { search: searchValue }),
+        });
+      }, 500);
+
+      return () => {
+        clearTimeout(newTimer);
+      };
     }
-
-    const newTimer = setTimeout(() => {
-      setSearchParams({
-        page: 1,
-        ...(searchValue && { search: searchValue }),
-      });
-    }, 500);
-
-    return () => {
-      clearTimeout(newTimer);
-    };
-  }, [searchValue, setSearchParams]);
+  }, [searchValue, setSearchParams, searchIsDirty]);
 
   useEffect(() => {
     const search = searchParams.get("search") ?? "";

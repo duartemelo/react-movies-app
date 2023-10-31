@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialSearchState = {
   search: '',
+  isDirty: false,
 };
 
 const searchSlice = createSlice({
@@ -11,6 +12,9 @@ const searchSlice = createSlice({
     search(state, action) {
       state.search = action.payload;
     },
+    setDirty(state, action) {
+      state.isDirty = action.payload;
+    }
   },
 });
 
