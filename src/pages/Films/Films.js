@@ -80,6 +80,7 @@ const Films = (props) => {
   );
 
   const handlePreviousPageClick = () => {
+    // when changing between pages, set isDirty to false again
     dispatch(searchActions.setDirty(false));
     setSearchParams({
       page: Number(page) - 1,
@@ -88,6 +89,7 @@ const Films = (props) => {
   };
 
   const handleNextPageClick = () => {
+    // when changing between pages, set isDirty to false again
     dispatch(searchActions.setDirty(false));
     setSearchParams({
       page: Number(page) + 1,

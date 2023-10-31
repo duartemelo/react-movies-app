@@ -86,7 +86,7 @@ const Menu = (props) => {
   
   const handleSearch = (event) => {
     dispatch(searchActions.search(event.target.value))
-    dispatch(searchActions.setDirty(true));
+    dispatch(searchActions.setDirty(true)); // when "touching" the search input, set isDirty to true
   }
 
   useEffect(() => {

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialSearchState = {
-  search: '',
-  isDirty: false,
+  search: '', // search value
+  isDirty: false, // if the input has been "touched" or not
 };
 
 const searchSlice = createSlice({
@@ -13,7 +13,7 @@ const searchSlice = createSlice({
       state.search = action.payload;
     },
     setDirty(state, action) {
-      state.isDirty = action.payload;
+      state.isDirty = action.payload; // expects a boolean
     }
   },
 });
