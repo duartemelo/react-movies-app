@@ -20,6 +20,11 @@
   padding: 0;
 }
 
+.menu-container a {
+  color: inherit;
+  text-decoration: none;
+}
+
 /* .backdrop {
   top: 0;
   bottom: 0;

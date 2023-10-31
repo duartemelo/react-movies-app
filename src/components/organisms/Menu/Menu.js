@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { searchActions } from "../../../store/slices/search-slice";
@@ -20,14 +20,13 @@ import {
   BiMenu,
 } from "react-icons/bi";
 
-
 const Menu = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
-  const searchValue = useSelector(state => state.searchState.search);
-  
+  const searchValue = useSelector((state) => state.searchState.search);
+
   const [genreButtons, setGenreButtons] = useState([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuClosing, setMobileMenuClosing] = useState(false);
@@ -83,11 +82,11 @@ const Menu = (props) => {
     }
     navigate(buttonLink);
   };
-  
+
   const handleSearch = (event) => {
-    dispatch(searchActions.search(event.target.value))
+    dispatch(searchActions.search(event.target.value));
     dispatch(searchActions.setDirty(true)); // when "touching" the search input, set isDirty to true
-  }
+  };
 
   useEffect(() => {
     fetchGenres({ url: "genre/movie/list" }, (data) => {
@@ -210,9 +209,11 @@ const Menu = (props) => {
         >
           <BiMenu />
         </Button>
-        <Text as="h1" fontSize={"18px"} fontWeight="700">
-          React Movies App
-        </Text>
+        <Link to="/popular">
+          <Text as="h1" fontSize={"18px"} fontWeight="700">
+            React Movies App
+          </Text>
+        </Link>
       </div>
       <div>
         <Input
