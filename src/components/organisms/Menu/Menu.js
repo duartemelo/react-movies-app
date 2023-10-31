@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { useDispatch, useSelector } from "react-redux";
+import { searchActions } from "../../../store/slices/search-slice";
+
 import classes from "./Menu.module.css";
 
 // import MenuSection from "../../atoms/MenuSection/MenuSection";
@@ -17,9 +20,14 @@ import {
   BiMenu,
 } from "react-icons/bi";
 
+
 const Menu = (props) => {
+  const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
+
+  const searchValue = useSelector(state => state.searchState.search);
+  
   const [genreButtons, setGenreButtons] = useState([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuClosing, setMobileMenuClosing] = useState(false);
@@ -42,19 +50,6 @@ const Menu = (props) => {
       text: "Top Rated",
     },
   ];
-
-  useEffect(() => {
-    fetchGenres({ url: "genre/movie/list" }, (data) => {
-      setGenreButtons(
-        data.genres.map((genre) => ({
-          id: genre.id,
-          section: genre.name.toLowerCase(),
-          link: `/genre-${genre.name.toLowerCase()}/?page=1`,
-          text: genre.name,
-        }))
-      );
-    });
-  }, [fetchGenres]);
 
   const getButtonClasses = (buttonLink, classNames) => {
     // buttonLink without page "/1 or /2 or /30" and with spaces replaced with "%20"
@@ -88,6 +83,23 @@ const Menu = (props) => {
     }
     navigate(buttonLink);
   };
+  
+  const handleSearch = (event) => {
+    dispatch(searchActions.search(event.target.value))
+  }
+
+  useEffect(() => {
+    fetchGenres({ url: "genre/movie/list" }, (data) => {
+      setGenreButtons(
+        data.genres.map((genre) => ({
+          id: genre.id,
+          section: genre.name.toLowerCase(),
+          link: `/genre-${genre.name.toLowerCase()}/?page=1`,
+          text: genre.name,
+        }))
+      );
+    });
+  }, [fetchGenres]);
 
   // return (
   //   <>
@@ -197,7 +209,7 @@ const Menu = (props) => {
         >
           <BiMenu />
         </Button>
-        <Text as="h1" fontSize={18} fontWeight="700">
+        <Text as="h1" fontSize={"18px"} fontWeight="700">
           React Movies App
         </Text>
       </div>
@@ -205,8 +217,8 @@ const Menu = (props) => {
         <Input
           className={classes["menu-input"]}
           placeholder="Search for a movie..."
-          // value={searchQuery}
-          // onChange={handleSearchInputChange}
+          value={searchValue}
+          onChange={handleSearch}
         />
         <Button theme="no-background" size="xl">
           <BiDotsHorizontalRounded />

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import classes from "./Films.module.css";
 
@@ -12,16 +13,18 @@ import ContentItem from "../../components/organisms/ContentItem/ContentItem";
 
 let availableGenres = [];
 
+let searchTimer = null;
+
 const Films = (props) => {
   const { isLoading, error, sendRequest } = useHttp();
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchValue = useSelector((state) => state.searchState.search);
 
   const [films, setFilms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(null);
-
-  // const [searchTimer, setSearchTimer] = useState(null);
 
   const { apiUrl } = props;
   const { genreId } = props;
@@ -72,15 +75,6 @@ const Films = (props) => {
     [apiUrl, sendRequest, genreId]
   );
 
-  useEffect(() => {
-    const search = searchParams.get("search") ?? "";
-    const page = searchParams.get("page") ?? 1;
-
-    setSearchQuery(search);
-    setPage(page);
-    getFilms(search, page);
-  }, [searchParams, getFilms, setSearchParams]);
-
   const handlePreviousPageClick = () => {
     setSearchParams({
       page: Number(page) - 1,
@@ -95,21 +89,31 @@ const Films = (props) => {
     });
   };
 
-  // const handleSearchInputChange = (event) => {
-  //   setSearchQuery(event.target.value);
+  useEffect(() => {
+    if (searchTimer) {
+      clearTimeout(searchTimer);
+    }
 
-  //   if (searchTimer) {
-  //     clearTimeout(searchTimer);
-  //   }
-  //   const newTimer = setTimeout(() => {
-  //     setSearchParams({
-  //       page: 1,
-  //       ...(event.target.value && { search: event.target.value }),
-  //     });
-  //   }, 500);
+    const newTimer = setTimeout(() => {
+      setSearchParams({
+        page: 1,
+        ...(searchValue && { search: searchValue }),
+      });
+    }, 500);
 
-  //   setSearchTimer(newTimer);
-  // };
+    return () => {
+      clearTimeout(newTimer);
+    };
+  }, [searchValue, setSearchParams]);
+
+  useEffect(() => {
+    const search = searchParams.get("search") ?? "";
+    const page = searchParams.get("page") ?? 1;
+
+    setSearchQuery(search);
+    setPage(page);
+    getFilms(search, page);
+  }, [searchParams, getFilms, setSearchParams]);
 
   const generateFilmGenresString = (genre_ids) => {
     const selectedGenres = availableGenres
