@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+import { searchActions } from "../../../store/slices/search-slice";
+
 import PropTypes from "prop-types";
 
 import Text from "../../atoms/Text/Text";
@@ -12,9 +15,11 @@ import RatingText from "../../atoms/RatingText/RatingText";
 
 const ContentItem = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [infoVisibility, setInfoVisibility] = useState(false);
 
   const handleClickFilm = () => {
+    dispatch(searchActions.setDirty(false));
     navigate(`/film/${props.filmId}`);
   };
 

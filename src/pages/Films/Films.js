@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { searchActions } from "../../store/slices/search-slice";
 
@@ -15,15 +15,10 @@ import ContentItem from "../../components/organisms/ContentItem/ContentItem";
 
 let availableGenres = [];
 
-let searchTimer = null;
-
 const Films = (props) => {
   const dispatch = useDispatch();
   const { isLoading, error, sendRequest } = useHttp();
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const searchValue = useSelector((state) => state.searchState.search);
-  const searchIsDirty = useSelector((state) => state.searchState.isDirty);
 
   const [films, setFilms] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
@@ -96,25 +91,6 @@ const Films = (props) => {
       ...(searchQuery && { search: searchQuery }),
     });
   };
-
-  useEffect(() => {
-    if (searchIsDirty) {
-      if (searchTimer) {
-        clearTimeout(searchTimer);
-      }
-
-      const newTimer = setTimeout(() => {
-        setSearchParams({
-          page: 1,
-          ...(searchValue && { search: searchValue }),
-        });
-      }, 500);
-
-      return () => {
-        clearTimeout(newTimer);
-      };
-    }
-  }, [searchValue, setSearchParams, searchIsDirty]);
 
   useEffect(() => {
     const search = searchParams.get("search") ?? "";
