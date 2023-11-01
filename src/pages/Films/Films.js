@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { searchActions } from "../../store/slices/search-slice";
 
@@ -16,12 +16,12 @@ import ContentItem from "../../components/organisms/ContentItem/ContentItem";
 let availableGenres = [];
 
 const Films = (props) => {
+  const searchValue = useSelector((state) => state.searchState.search)
   const dispatch = useDispatch();
   const { isLoading, error, sendRequest } = useHttp();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [films, setFilms] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(null);
 
@@ -79,7 +79,7 @@ const Films = (props) => {
     dispatch(searchActions.setDirty(false));
     setSearchParams({
       page: Number(page) - 1,
-      ...(searchQuery && { search: searchQuery }),
+      ...(searchValue && { search: searchValue }),
     });
   };
 
@@ -88,7 +88,7 @@ const Films = (props) => {
     dispatch(searchActions.setDirty(false));
     setSearchParams({
       page: Number(page) + 1,
-      ...(searchQuery && { search: searchQuery }),
+      ...(searchValue && { search: searchValue }),
     });
   };
 
@@ -96,10 +96,9 @@ const Films = (props) => {
     const search = searchParams.get("search") ?? "";
     const page = searchParams.get("page") ?? 1;
 
-    setSearchQuery(search);
     setPage(page);
     getFilms(search, page);
-  }, [searchParams, getFilms, setSearchParams]);
+  }, [searchParams, getFilms]);
 
   const generateFilmGenresString = (genre_ids) => {
     const selectedGenres = availableGenres

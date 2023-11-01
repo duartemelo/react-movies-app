@@ -221,7 +221,7 @@ const Menu = (props) => {
           </Button>
         )}
 
-        <Link to="/popular">
+        <Link to={'/popular/'}>
           <Text as="h1" fontSize={"18px"} fontWeight="700">
             React Movies App
           </Text>
@@ -231,6 +231,7 @@ const Menu = (props) => {
         <Input
           className={classes["menu-input"]}
           placeholder="Search for a movie..."
+          defaultExpanded={searchValue !== ''}
           value={searchValue}
           onChange={handleSearch}
         />
